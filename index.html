@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title> Clover. - Task List</title>
+        <title> Clover - Task List</title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,900;1,400&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
         <link rel="icon" href="icon.png" type="image/x-icon">
@@ -22,17 +22,20 @@
             <input id="plannerInput" class="merriweather-font planner-input input" placeholder="add a new planner" onkeydown="addPlanners()">
         </div>
 
-        <p id="taskSidebar" style="display:none;"> </p>
-
         <div class="main" id="calendar">                
-            <h3 class="montserrat-font" id="mainDate"> </h3>
+            <!-- <h3 class="montserrat-font" id="mainDate"> </h3> -->
 
-            <table class="merriweather-font task-list" id="taskSection"> </table>
+            <div class="background">             
+                <table class="merriweather-font task-list" id="taskSection"> </table>
+            </div>
              
             <nav>
                 <input id="taskInput" class="merriweather-font input" placeholder="add a new task or else..." onkeydown="addTasks()">
             </nav>
         </div>
+        
+        <p id="taskSidebar" style="display:none;"> </p>
+
     </body> 
 </html>
 
