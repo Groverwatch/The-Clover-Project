@@ -199,23 +199,41 @@ function getDaysInMonth(year, month) {
     return new Date(year, month, 0).getDate();
 }
 
+let count = 0;
+
 // Shows a calendar for the current day in the sidebar. Clearly a work in progress :(
+function previous() {
+    count++;
+    displayCalendar('days'); 
+}
+
+function next() {
+    count--;
+    displayCalendar('days'); 
+}
+
 function displayCalendar(section) {
     var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     
-    const daysToNewMonth = getFirstDayOfMonth(date.getFullYear(), date.getMonth());
-    const daysInMonth = getDaysInMonth(date.getFullYear(), date.getMonth());
+    console.log(count);
+    // if (count == 1) {
+    //     console.log("test");
+    // }
+    // const daysToNewMonth = getFirstDayOfMonth(date.getFullYear(), date.getMonth());
+    // const daysInMonth = getDaysInMonth(date.getFullYear(), date.getMonth());
+    const daysToNewMonth = getFirstDayOfMonth(date.getFullYear()-count, date.getMonth()-count);
+    const daysInMonth = getDaysInMonth(date.getFullYear()-count, date.getMonth()-count);
     
     var html = ""; 
     
-    document.getElementById("sidebarDate").innerHTML = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+    document.getElementById("sidebarDate").innerHTML = months[date.getMonth()-count] + " " + date.getFullYear();
     // document.getElementById("mainDate").innerHTML = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
     for (i = 0; i < days.length; i++) {
         html +=  "<p>" + days[i][0] + "</p>";
     }
 
-    for (i = 1; i < daysToNewMonth; i++) {
+    for (i = 2; i < daysToNewMonth; i++) {
         html +=  "<p> </p>";
     }
 
