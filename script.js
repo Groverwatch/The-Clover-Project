@@ -3,6 +3,8 @@ var html = "";
 var planners = [];
 var tasks = [];
 var checkboxes = [];
+var date = new Date();
+
 
 // This is a template for the tasks added through the task input in the main section.
 function Task(taskName, plannerName, dueDate, noOfSteps, description) {
@@ -46,7 +48,9 @@ function displayPlanners() {
     loadPlanners();
     html = "";
 
-    for (i = 0; i < planners.length; i++) {
+    planners[0] = "";
+
+    for (i = 1; i < planners.length; i++) {
         html += '<tr>' +
                     '<td style="width: 0.1%;">' +
                         '<input type="checkbox" id = "checkbox_' + i + '"value="' + planners[i] + '" onclick="sortTasks(this)" checked>' +
@@ -73,7 +77,7 @@ function displayTasks() {
                     // '<td >' +
                     '<td onclick="displayTaskSideBar(this)" id="' + i + '" value="' + i + '">' +
                         '<p id ="' + i  + '" style="font-weight: 900; width: 900px;">' + tasks[i].taskName + '</p>' +
-                        '<p>' + tasks[i].plannerName + ' | ' + tasks[i].dueDate + " | " + tasks[i].description + " | " + tasks[i].noOfSteps + '</p>' +
+                        '<p> <img src="images/planner.png" style="width:15px;"> ' + tasks[i].plannerName + ' <img src="images/calendar.png" style="width:15px";> ' + tasks[i].dueDate + ' <img src="images/notes.png" style="width:15px";> ' + tasks[i].description + ' <img src="images/steps.png" style="width:15px";> ' + tasks[i].noOfSteps + '</p>' +
                     '</td>' +
                 '</tr>';
 
@@ -86,13 +90,13 @@ function displayTaskSideBar(idNumber) {
 
     for (i = 0; i < tasks.length; i++) {    
         html = '<div class="task-sidebar">' +
-                    '<p style="font-weight: 900; font-size: 20px;">' + tasks[idNumber.id].taskName + '</p> <br>' +
-                    '<p> Date: ' + tasks[idNumber.id].dueDate + '</p>' +
+                    '<p style="font-weight: 900; font-size: 20px;">' + tasks[idNumber.id].taskName + '</p>' +
+                    '<p> <img src="images/planner.png" style="width:15px;"> Date: ' + tasks[idNumber.id].dueDate + '</p>' +
                     '<p> Description: ' + tasks[idNumber.id].description + '</p>'  +
                     '<p> Steps: ' + tasks[idNumber.id].noOfSteps + '</p>' +
                     '<p> Planner: ' + tasks[idNumber.id].plannerName + '</p>' +
 
-                    '<input id="dateInput" class="merriweather-font input" placeholder="Due Date: ' + tasks[idNumber.id].dueDate + '">' +
+                    '<input id="dateInput" type="date" class="merriweather-font input" placeholder="Due Date: ' + tasks[idNumber.id].dueDate + '">' +
                     '<input id="descriptionInput" class="merriweather-font input" placeholder="Description: ' + tasks[idNumber.id].description + '">' +
                     '<input id="stepsInput" class="merriweather-font input" placeholder="Steps: ' + tasks[idNumber.id].noOfSteps + '">' +                
                     '<select class="merriweather-font" id="select" name="asdasd"> </select>' +
@@ -157,6 +161,16 @@ function deleteTask(idNumber) {
     document.getElementById("taskSidebar").innerHTML = html;
 }
 
+function deletePlanners(idNumber) {
+    var html = "";
+
+    planners.splice(idNumber.id , 1);
+    localStorage.setItem('taskStorage', JSON.stringify(tasks)); 
+    displayPlanners();
+    
+    document.getElementById("taskSidebar").innerHTML = html;
+}
+
 function addTaskDetails(idNumber) {
     loadTasks();
 
@@ -186,20 +200,17 @@ function getDaysInMonth(year, month) {
 }
 
 // Shows a calendar for the current day in the sidebar. Clearly a work in progress :(
-function displayCalendar() {
+function displayCalendar(section) {
     var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     
-    var date = new Date();
     const daysToNewMonth = getFirstDayOfMonth(date.getFullYear(), date.getMonth());
     const daysInMonth = getDaysInMonth(date.getFullYear(), date.getMonth());
-    console.log(daysToNewMonth);
-    console.log(daysInMonth);
+    
     var html = ""; 
     
     document.getElementById("sidebarDate").innerHTML = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
     // document.getElementById("mainDate").innerHTML = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
-
     for (i = 0; i < days.length; i++) {
         html +=  "<p>" + days[i][0] + "</p>";
     }
@@ -207,10 +218,19 @@ function displayCalendar() {
     for (i = 1; i < daysToNewMonth; i++) {
         html +=  "<p> </p>";
     }
-    for (i = 1; i < daysInMonth; i++) {
-        html +=  "<p>" + i + "</p>";
+
+    for (i = 1; i < daysInMonth+1; i++) {
+        if (i == date.getDate()) {
+            html += '<p class="currentDate">' + i + '</p>';
+            i++;
+        }
+
+        else {
+            html +=  "<p>" + i + "</p>";
+        }
     }
-    document.getElementById("days").innerHTML = html;
+
+    document.getElementById(section).innerHTML = html;
 }
 
 // A function that when a checkbox in the sidebar section is unchecked removes tasks related to the planner that was unchecked. It is still a rough cut. 
@@ -226,4 +246,10 @@ function sortTasks(number) {
             document.getElementById(i).style.display = "block";
         }
     }
+}
+
+// ghetto code for right now
+function darkMode() {
+    // document.getElementsByName("html").style.prefers-color-scheme = "light";
+
 }
