@@ -1,9 +1,7 @@
 /* Colours - Uses HSL to determine colours */
 :root {
     --primary: 18, 64%, 37%;
-
-    background-color: hsl(0, 0%, 0%, 0%);
-
+      background-color: hsl(0, 0%, 0%, 0%);
 }
 
 /* The Base CSS - margins + colours + fonts */
@@ -232,9 +230,4 @@ input[type=checkbox], input[type=radio] {
     height: 564px;
     width: 100%;
     overflow: scroll;
-}
-
-.currentDate {
-    background-color: hsl(var(--primary), 20%);
-    border-radius: 8px 8px 8px 8px;
 }

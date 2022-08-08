@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html> 
+    <head> 
+        <title>  the testing calendar? </title>
+        <style> 
+            .sidebar-div {
+                display: grid;
+                grid-template-columns: 90px 90px 90px 90px 90px 90px 90px;
+                grid-template-rows: 45px 90px 90px 90px 90px 90px
+            }
+            
+            .sidebar-div p {
+                font-size: 20px;
+                font-weight: 900;
+                text-align: center;
+                border: 1px solid white;
+                margin: 0px;
+            }
+
+            .currentDate {
+                background-color: wheat;
+            }
+
+            .event-div {
+                background-color: pink;
+                margin-top: 10px;
+            }
+        </style>
+
+        <script>
+            var date = new Date();
+            var count = 0;
+
+            function getFirstDayOfMonth(year, month) {
+                return new Date(year, month, 1).getDay();
+            }
+
+            function getDaysInMonth(year, month) {
+                return new Date(year, month, 0).getDate();
+            }
+
+                function previous() {
+                count++;
+                displayCalendar('days'); 
+            }
+
+            function next() {
+                count--;
+                displayCalendar('days'); 
+            } 
+            
+            function displayCalendar(section) {
+                var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+                
+                console.log(count);
+
+                const daysToNewMonth = getFirstDayOfMonth(date.getFullYear()-count, date.getMonth()-count);
+                const daysInMonth = getDaysInMonth(date.getFullYear()-count, date.getMonth()-count);
+                const daysAfterMonth = getDaysInMonth(date.getFullYear()-count+1, date.getMonth()-count+1);
+                
+                var html = ""; 
+                
+                document.getElementById("sidebarDate").innerHTML = months[date.getMonth()-count] + " " + date.getFullYear();
+
+                for (i = 0; i < days.length; i++) {
+                    html +=  "<p>" + days[i][0] + "</p>";
+                }
+asdasdasd   
+                for (i = 1; i < daysToNewMonth-1; i++) {
+                    html +=  "<p> </p>";
+                }
+
+                for (i = 1; i < daysInMonth+1; i++) {
+                    if (i == date.getDate()) {
+                        html += '<p class="currentDate">' + i + '</p>';
+                    }
+
+                    else {
+                        html +=  "<p onclick='addEvent(this)' style='background-color:whitesmoke'>" + i + "</p>";
+                    }
+                }
+                
+                for (i = 1; i < daysAfterMonth; i++) {
+                    if (i == 42) {
+                        break;
+                    }
+
+                    else {
+                        html +=  "<p>" + i + "</p>";
+                    }
+                }
+
+                document.getElementById(section).innerHTML = html;
+            }
+
+            function addEvent(value){
+                var html; 
+
+                html = "<div>" +
+                            "<p>" + value.textContent + "</p>" +
+                            "<input>" +
+                        "</div>";
+
+                document.getElementById('event').innerHTML = html;
+            }
+        </script> 
+    </head>
+    
+    <body onload="displayCalendar('days')">
+        <h2 id="sidebarDate"> </h2> 
+        <button id="previous" onclick="previous()"> p</button> 
+        <button onclick="next()"> n </button>
+
+        <div class="sidebar-div montserrat-font" id="days"> </div> 
+
+        <div class="event-div" id="event"> </div> 
+    </body>
+</html>
+
