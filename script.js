@@ -59,30 +59,25 @@ function displayPlanners() {
                         '<p>' + planners[i] + '</p>' +
                     '</td>' +
                 '</tr>'
+
         document.getElementById("plannerSection").innerHTML = html;
     } 
 }
 
 function displayTasks() {
-    loadTasks();  
+    document.getElementById("taskSection").innerHTML = "";
     html = "";
+    loadTasks();  
     
-    for (i = 0; i < tasks.length; i++) {
-        html += '<tr>' +                    
-        // html += '<tr onclick="displayTaskSideBar(this)" id="' + i + '" value="' + i + '">' +                    
-                    '<td style="width: 30px;">' +
-                        '<button onclick="deleteTask(this)" id="delete' + i + '" value="radio' + i + '"> </button>'   +
-                        // '<input type="radio" onchange="deleteTask(this)" id="' + i + '" value="radio' + i + '">'   +
-                    '</td>' +
-                    // '<td >' +
-                    '<td onclick="displayTaskSideBar(this)" id="' + i + '" value="' + i + '">' +
-                        '<p id ="' + i  + '" style="font-weight: 900; width: 900px;">' + tasks[i].taskName + '</p>' +
-                        '<p> <img src="images/planner.png" style="width:15px;"> ' + tasks[i].plannerName + ' <img src="images/calendar.png" style="width:15px";> ' + tasks[i].dueDate + ' <img src="images/notes.png" style="width:15px";> ' + tasks[i].description + ' <img src="images/steps.png" style="width:15px";> ' + tasks[i].noOfSteps + '</p>' +
-                    '</td>' +
-                '</tr>';
+    html += '<div class="background merriweather-font list task-list" id="taskSection">';
+        for (i = 0; i < tasks.length; i++) {
+            html += '<button onclick="deleteTask(this)" id="delete' + i + '" value="radio' + i + '"> </button>'   +
+                    '<p id ="' + i  + '" style="font-weight: 900;" onclick="displayTaskSideBar(this)">' + tasks[i].taskName + '<br>' +
+                    '<img src="images/planner.png" style="width:15px;"> ' + tasks[i].plannerName + ' <img src="images/calendar.png" style="width:15px";> ' + tasks[i].dueDate + ' <img src="images/notes.png" style="width:15px";> ' + tasks[i].description + ' <img src="images/steps.png" style="width:15px";> ' + tasks[i].noOfSteps + '</p>'; 
 
-        document.getElementById("taskSection").innerHTML = html;
-    }
+            document.getElementById("taskSection").innerHTML = html;
+        }
+    html += '</div>';
 }
 
 function displayTaskSideBar(idNumber) {
@@ -101,8 +96,8 @@ function displayTaskSideBar(idNumber) {
                     '<input id="stepsInput" class="merriweather-font input" placeholder="Steps: ' + tasks[idNumber.id].noOfSteps + '">' +                
                     '<select class="merriweather-font" id="select" name="asdasd"> </select>' +
                     '<button id="' + idNumber.id + '" class="merriweather-font" onclick="addTaskDetails(this)"> <p> add details </p> </button>' +
-
                 '</div>';
+
         document.getElementById("taskSidebar").innerHTML = html; 
     }
     
@@ -137,14 +132,14 @@ function addPlanners() {
     displayPlanners(); 
 }
 
-function addTasks() {    
+function addTasks(content) {    
     if (event.key == 'Enter') {
-        var taskInput = document.getElementById("taskInput");
+        var content = document.getElementById(content);
         
-        tasks.push(new Task(taskInput.value, planners[0], "", "", ""));
+        tasks.push(new Task(content.value, planners[0], "", "", ""));
         localStorage.setItem('taskStorage', JSON.stringify(tasks)); 
         
-        taskInput.value = "";
+        content.value = "";
     }
 
     displayTasks(); 
@@ -217,18 +212,14 @@ function displayCalendar(section) {
     var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     
     console.log(count);
-    // if (count == 1) {
-    //     console.log("test");
-    // }
-    // const daysToNewMonth = getFirstDayOfMonth(date.getFullYear(), date.getMonth());
-    // const daysInMonth = getDaysInMonth(date.getFullYear(), date.getMonth());
     const daysToNewMonth = getFirstDayOfMonth(date.getFullYear()-count, date.getMonth()-count);
     const daysInMonth = getDaysInMonth(date.getFullYear()-count, date.getMonth()-count);
     
     var html = ""; 
     
-    document.getElementById("sidebarDate").innerHTML = months[date.getMonth()-count] + " " + date.getFullYear();
-    // document.getElementById("mainDate").innerHTML = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+    // document.getElementById("sidebarDate").innerHTML = '<button id="previous" class="flex1" onclick="previous()"> previous </button>  <button class="flex1" onclick="next()" id="next"> next </button>';
+    document.getElementById("sidebarDate").innerHTML = "<h2>" + months[date.getMonth()-count] + " " + date.getFullYear() + '</h2>';
+
     for (i = 0; i < days.length; i++) {
         html +=  "<p>" + days[i][0] + "</p>";
     }
@@ -240,14 +231,12 @@ function displayCalendar(section) {
     for (i = 1; i < daysInMonth+1; i++) {
         if (i == date.getDate()) {
             html += '<p class="currentDate">' + i + '</p>';
-            i++;
         }
 
         else {
             html +=  "<p>" + i + "</p>";
         }
     }
-
     document.getElementById(section).innerHTML = html;
 }
 
@@ -267,7 +256,60 @@ function sortTasks(number) {
 }
 
 // ghetto code for right now
-function darkMode() {
-    // document.getElementsByName("html").style.prefers-color-scheme = "light";
 
+function test() {
+    document.getElementById('taskSection').innerHTML = "";
+    document.getElementById('switch').innerHTML = 'list?';
+    document.getElementById('switch').setAttribute('onclick', 'displayTasks()');
+    
+
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var days = ["Monday.", "Tuesday.", "Wednesday.", "Thursday.", "Friday.", "Saturday.", "Sunday."];
+    
+    console.log(count);
+    const daysToNewMonth = getFirstDayOfMonth(date.getFullYear()-count, date.getMonth()-count);
+    const daysInMonth = getDaysInMonth(date.getFullYear()-count, date.getMonth()-count);
+    
+    var html = ""; 
+    
+    html += '<div class="background merriweather-font main-div" id="taskSection">';     
+
+    for (i = 0; i < days.length; i++) {
+        html +=  "<p>" + days[i] + "</p>";
+    }
+
+    for (i = 2; i < daysToNewMonth; i++) {
+        html +=  "<p> </p>";
+    }
+
+    for (i = 1; i < daysInMonth+1; i++) {
+        if (i == date.getDate()) {
+            html += '<p class="currentDate" onclick="addEvent()">' + i + '</p>';
+            // i++;
+        }
+
+        else {
+            html +=  '<p onclick="addEvent(this)">' + i + '</p>';
+        }
+    }
+    html += '</div>';
+
+
+    document.getElementById('taskSection').innerHTML = html;
+}
+
+function addEvent(value){
+    html = '<div class="task-sidebar">' +
+                `<input id="test" class="merriweather-font input" placeholder="add a new task or else..." onkeydown="addTasks('test')">` +
+                '<input id="dateInput" type="date" value="2022-08-' +   value.textContent +'" class="merriweather-font input" placeholder="Due Date: ">' +
+                // '<input id="dateInput" type="date" value="2022-08-"' + value.textContent + '" class="merriweather-font input" placeholder="Due Date: ">' +
+                '<input id="descriptionInput" class="merriweather-font input" placeholder="Description: ">' +
+                '<input id="stepsInput" class="merriweather-font input" placeholder="Steps: ">' +                
+                '<select class="merriweather-font" id="select" name="asdasd"> </select>' +
+                '<button id="' + value.id + '" class="merriweather-font" onclick="addTaskDetails(this)"> <p> add details </p> </button>' +   
+
+                '<p>' + value.textContent + '</p>' +
+            '</div>';
+
+    document.getElementById('event').innerHTML = html;
 }

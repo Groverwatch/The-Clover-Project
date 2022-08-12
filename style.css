@@ -1,6 +1,8 @@
 /* Colours - Uses HSL to determine colours */
 :root {
+    /* --primary: 111, 100%, 26%; */
     --primary: 18, 64%, 37%;
+    /* --primary: 111, 0%, 0%; */
       background-color: hsl(0, 0%, 0%, 0%);
 }
 
@@ -8,6 +10,7 @@
 body {
     margin: 0; 
     background-color: hsl(var(--primary), 14%);
+    color: black;
     font-weight: 400;
 }
 
@@ -90,7 +93,7 @@ input[type='radio'] {
 }
 
 input::placeholder {
-    color: hsl(var(--primary) 100%);
+    color: black;
     padding-left: 5px;
 }
 
@@ -112,9 +115,10 @@ input[type=checkbox], input[type=radio] {
     margin-bottom: 15px;
 }
 
-.sidebar-div {
+.sidebar-div {    
     display: grid;
-    grid-template-columns: 14.28% 14.28% 14.28% 14.28% 14.28% 14.28% 14.28%;
+    /* grid-template-columns: 35px 35px 35px 35px 35px 35px 35px; */
+    grid-template-columns: 14% 14% 14% 14% 14% 14% 14.5% ;
 }
 
 .sidebar-div p {
@@ -128,16 +132,27 @@ input[type=checkbox], input[type=radio] {
     width: 15%;
 }
 
-.planner-input, .planner-input::placeholder { 
+.sidebar button {
+    height: 30px;
+    width: 45%;
+    margin-left: 5px;
     margin-top: 15px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 15px;
+    background-color: hsl(var(--primary), 20%);
+    flex: 1;
+
+}
+
+.planner-input, .planner-input::placeholder { 
+    margin-top: 5px;
     width: 100%;
 }
 
 .planner-list {
-    height: 310px;
+    height: 42%;
     overflow-y: scroll;
-    margin-bottom: 15px;
-
     display: block;
 }
 
@@ -145,6 +160,7 @@ input[type=checkbox], input[type=radio] {
 .task-sidebar {
     padding-top: 20px;
     padding-left: 20px;
+    margin-left: 40px;
     padding-right: 50px;
     margin: 20px;
     height: 634px;
@@ -156,12 +172,10 @@ input[type=checkbox], input[type=radio] {
 
 .task-sidebar input, .task-sidebar button, .task-sidebar select, .task-sidebar option {
     background-color: hsl(var(--primary), 11%);
-    color: hsl(var(--primary) 100%);
     width: 100%;
     height: 42px;
-    margin-bottom: 5px; 
+    /* margin-bottom: 5px;  */
     padding: 5px;
-
 }
 
 .task-sidebar select, .task-sidebar option {
@@ -170,17 +184,18 @@ input[type=checkbox], input[type=radio] {
 
 /* The Main Section - Contains Task List + Task Input */
 .main {
-    margin: 20px;
-    color: hsl(var(--primary) 5%);
     width: 100%; 
-    min-width: 10%;   
+    min-width: 10%;
+
+    background-color: hsl(var(--primary), 11%);
+    padding: 20px;
+    border-radius: 40px 0px 0px 40px;
+
 }
 
 .main input, .sidebar input {
     background-color: hsl(var(--primary), 11%);
-    color: hsl(var(--primary) 100%);
     padding-left: 10px;
-
 }
 
 .main button {
@@ -188,46 +203,70 @@ input[type=checkbox], input[type=radio] {
     height: 30px;
     border-radius: 50px 50px 50px 50px;
     margin-right: 10px;
+    margin-top: 5px;
     background-color: hsl(var(--primary), 20%);
-
 }
 
 .main button:hover {
     background-color: hsl(var(--primary), 40%);
 }
 
-.background {
+.main nav button {
     background-color: hsl(var(--primary), 11%);
-    color: hsl(var(--primary) 5%);
+    width: 100px;
+    height: 50px;
+    float: right;
+    margin: 0px;
+}
+
+.main nav input {
+    background-color: hsl(var(--primary), 11%);
+    width: 70%;
+    margin-bottom: 5px; 
+    padding: 5px;
+    margin-left: 20px; 
+
+}
+
+.main-div {
+    height: 78.4%;
+    width: 95.1%;
+    display: grid;
+    font-size: 20px;
+    grid-template-columns: 14.3% 14.3% 14.3% 14.3% 14.3% 14.3% 14.3% ;
+    grid-template-rows: 5% 19% 19% 19% 19% 19%;
+}
+
+.main-div p {
+    border: 1px solid hsl(var(--primary), 1%);
+    font-size: 19px;
+    padding: 5px;
+}
+
+.main-div p:hover {
+    background-color: hsl(var(--primary), 25%);
+}
+
+.background {
+    /* background-color: hsl(var(--primary), 11%); */
     border-radius: 30px 30px 30px 30px;
-    padding: 15px;
+    padding: 30px;
     margin-bottom: 10px;
 }
 
-.main tr {
-    color: hsl(var(--primary) 5%);
-}
-
-.main td {
-    margin-bottom: 15px;
-    width: 100%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.main h3 {
-    font-weight: 700;
-    font-size: 25px;
-    padding-bottom: 5px;
-    margin: 0px; 
-}
-
-.main tbody {
-    margin-bottom: 15px;
+.list {
+    height: 564px;
+    overflow-y: scroll;
 }
 
 .task-list {
-    height: 564px;
-    width: 100%;
-    overflow: scroll;
+    display: grid;
+    grid-template-columns: 40px 100%;
+    grid-template-rows: repeat(20, 60px);
+    height: 78.4%;
+}
+
+.currentDate {
+    background-color: hsl(var(--primary), 11%);
+    border-radius: 5px 5px 5px 5px;
 }

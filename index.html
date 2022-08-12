@@ -9,37 +9,34 @@
         <script src="script.js"> </script>
     </head>
 
-    <body class="flex merriweather-font" onload="displayPlanners(), displayTasks(), displayCalendar('days')">
+    <body class="flex merriweather-font" onload="displayPlanners(), test(), displayCalendar('days')">
         <div class="sidebar"> 
             <h1 class="header"> Clover. </h1>
              
             <h2> Planner. </h2>
             <table class="merriweather-font planner-list" id="plannerSection"> </table>
 
-            <h2 id="sidebarDate"> </h2> 
-            <button id="previous" onclick="previous()"> p</button> 
-            <!-- <button id="previous" onclick="previous()"> p</button>  -->
-            <button onclick="next()"> n </button>
-
+            <div id="sidebarDate"> </div> 
             <div class="sidebar-div montserrat-font" id="days"> </div> 
+            <div class="flex"> 
+                <button id="previous" onclick="previous()" class="merriweather-font"> previous </button>  
+                <button onclick="next()" id="next" class="merriweather-font"> next </button>
+            </div>
 
             <input id="plannerInput" class="merriweather-font planner-input input" placeholder="add a new planner" onkeydown="addPlanners()">
         </div>
 
-        <div class="main" id="calendar">                
-            <!-- <h3 class="montserrat-font" id="mainDate"> </h3> -->
+        <div class="main">                
+            <p id="taskSection"> </p>
 
-            <div class="background">             
-                <table class="merriweather-font task-list" id="taskSection"> </table>
-            </div>
-             
             <nav>
-                <input id="taskInput" class="merriweather-font input" placeholder="add a new task or else..." onkeydown="addTasks()">
+                <input id="taskInput" class="merriweather-font input" placeholder="add a new task or else..." onkeydown="addTasks('taskInput')">
+                <button id="switch" class="merriweather-font" onclick="displayTasks()"> calendar? </button>
             </nav>
         </div>
         
         <p id="taskSidebar" style="display:none;"> </p>
-
+        <p id="event"> </p>
     </body> 
 </html>
 
