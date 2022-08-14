@@ -1,4 +1,5 @@
-// declaring variables 
+// GLOBAL VARIABLES
+    // Defining variables that will be used in the future. 
     var html = "";
     var planners = [];
     var tasks = [];
@@ -7,7 +8,8 @@
     var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
-// This is a template for the tasks added through the task input in the main section.
+// OBJECT CONSTRUCTOR
+    // this is a template for the tasks added through the task input in the main section.
     function Task(taskName, plannerName, dueDate, noOfSteps, description) {
         this.taskName = taskName;
         this.plannerName = plannerName;
@@ -16,7 +18,8 @@
         this.description = description;
     }
 
-// As of this version, this website is using localStorage, these functions are there to get the storage from previous uses into the current tasks / planner arrays.  
+// LOCAL STORAGE
+    // As of this version, this website is using localStorage, these functions are there to get the storage from previous uses into the current tasks / planner arrays.  
     function loadPlanners() {
         var plannerStorage = JSON.parse(localStorage.plannerStorage);
 
@@ -40,10 +43,9 @@
             tasks = taskStorage;
         }
     }
-
-// The function displayPlanners() is used to display a planner list with the use of D.GEBI and for loops. 
-// Same follows for displayTasks() but with a task list in the main section.
-// displayTaskSideBar() is shown when the user clicks on anything on the task div. When you click the task, A pop up reveals from the side and shows a space for adding details such as steps, descriptions or selected planner. 
+   
+// THE PLANNER SECTION IN THE SIDEBAR.
+    // The function displayPlanners() is used to display a planner list with the use of D.GEBI and for loops. 
     function displayPlanners() {   
         loadPlanners();
         html = "";
@@ -55,7 +57,7 @@
                             <input type="checkbox" id="checkbox_${i}" value="${planners[i]}" onclick="sortTasks(this)" checked>
                         </td>
                         <td>
-                            <p> ${planners[i]} </p>
+                            <p value=${i} onclick="deletePlanners(this)"> ${planners[i]} </p>
                         </td>
                     </tr>`;
 
@@ -63,6 +65,32 @@
         } 
     }
 
+    // On enter, the input on the sidebar is used to enter a new planner into the system, the input's value is pushed into the array and is stored in the localStorage.
+    function addPlanners() {
+        if (event.key == 'Enter') {
+            var plannerInput = document.getElementById("plannerInput");
+            planners.push(plannerInput.value);  
+    
+            localStorage.setItem('plannerStorage', JSON.stringify(planners)); 
+            plannerInput.value = "";
+        }
+    
+        displayPlanners(); 
+    }
+
+    function deletePlanners(idNumber) {
+        var html = "";
+    
+        planners.splice(idNumber.value , 1);
+        localStorage.setItem('plannerStorage', JSON.stringify(planners)); 
+        displayPlanners();
+        console.log(tasks); 
+        
+        document.getElementById("taskSidebar").innerHTML = html;
+    }
+
+// THE TASK SECTION IN THE MAIN..
+    // The function displayTasks() is used to display a task list in the "main section" with the use of D.GEBI and for loops. 
     function displayTasks() {
         document.getElementById("taskSection").innerHTML = "";
         html = "";
@@ -81,6 +109,32 @@
         document.getElementById("taskSection").innerHTML = html;
     }
 
+    // This function adds a new task by pressing the button enter, the only data that is entered into the array is the content written and an empty planner. 
+    function addTasks(content) {    
+        if (event.key == 'Enter') {
+            var content = document.getElementById(content);
+            
+            tasks.push(new Task(content.value, planners[0], "", "", ""));
+            localStorage.setItem('taskStorage', JSON.stringify(tasks)); 
+            
+            content.value = "";
+        }
+    
+        displayTasks(); 
+    }
+    
+    // With the click of the button, the task is deleted from the interface and storage. 
+    function deleteTask(idNumber) {
+        var html = "";
+    
+        tasks.splice(idNumber.value , 1);
+        localStorage.setItem('taskStorage', JSON.stringify(tasks)); 
+        displayTasks();
+        
+        document.getElementById("taskSidebar").innerHTML = html;
+    }
+
+    // displayTaskSideBar() is a function that is used when the user clicks on a task name. When you click the task, A pop up reveals from the side and shows a space for adding details such as steps, descriptions or the selected planner. 
     function displayTaskSideBar(idNumber) {
         var html = "";
 
@@ -111,212 +165,169 @@
         }
     }
 
-// On enter, the input on the sidebar is used to enter a new planner into the system, the input's value is pushed into the array and is stored in the localStorage.
-// Same for the input on the main section but with the input's value being pushed into object propety called "taskName". 
-function addPlanners() {
-    if (event.key == 'Enter') {
-        var plannerInput = document.getElementById("plannerInput");
-        planners.push(plannerInput.value);  
+    // after displayTaskSidebar is called, you can add details through a button that calls this function. this function overwrites the details.
+    function addTaskDetails(idNumber) {
+        loadTasks();
 
-        localStorage.setItem('plannerStorage', JSON.stringify(planners)); 
-        plannerInput.value = "";
-    }
+        html = "";
+        var selectPlanner = document.getElementById("select");
+        var dateInput = document.getElementById("dateInput");
+        console.log(dateInput.value);
+        var stepsInput = document.getElementById("stepsInput");
+        var descriptionInput = document.getElementById("descriptionInput");
 
-    displayPlanners(); 
-}
+        tasks[idNumber.value].dueDate = dateInput.value;
+        tasks[idNumber.value].noOfSteps = stepsInput.value;
+        tasks[idNumber.value].description = descriptionInput.value;
+        tasks[idNumber.value].plannerName = selectPlanner.value;
 
-function addTasks(content) {    
-    if (event.key == 'Enter') {
-        var content = document.getElementById(content);
-        
-        tasks.push(new Task(content.value, planners[0], "", "", ""));
         localStorage.setItem('taskStorage', JSON.stringify(tasks)); 
-        
-        content.value = "";
+
+        displayTasks();
     }
 
-    displayTasks(); 
-}
+// THE CALENDAR IN THE SIDEBAR / MAIN SECTION
+    // this is here to determine the first day of  the Month and the days of the month with Date(). 
+    function getFirstDayOfMonth(year, month) {
+        return new Date(year, month, 1).getDay();
+    }
 
-// With the click of the radio button, the task is deleted from the interface and storage. 
-function deleteTask(idNumber) {
-    var html = "";
+    // this is here to determine the days of the month with Date(). 
+    function getDaysInMonth(year, month) {
+        return new Date(year, month, 0).getDate();
+    }
 
-    tasks.splice(idNumber.value , 1);
-    localStorage.setItem('taskStorage', JSON.stringify(tasks)); 
-    displayTasks();
-    
-    document.getElementById("taskSidebar").innerHTML = html;
-}
+    // this loads the select option of the years and months through a for loop. at first it was a button but this option was way less complicated to code and more compact.
+    function loadCalendarSelect() {
+        var html = "";
+        html += "<select id='month' onchange='next()'>";
+                    for (i = 0; i < months.length; i++) {
+                        if (i == date.getMonth()) {
+                            html += "<option value=" + i + " selected='selected'>" + months[i] + "</option>";
+                        }
 
-function deletePlanners(idNumber) {
-    var html = "";
+                        else {
+                            html += "<option value=" + i + ">" + months[i] + "</option>";
+                        }
+                    }    
+        html += "</select>";
 
-    planners.splice(idNumber.id , 1);
-    localStorage.setItem('taskStorage', JSON.stringify(tasks)); 
-    displayPlanners();
-    
-    document.getElementById("taskSidebar").innerHTML = html;
-}
-
-function addTaskDetails(idNumber) {
-    loadTasks();
-
-    html = "";
-    var selectPlanner = document.getElementById("select");
-    var dateInput = document.getElementById("dateInput");
-    console.log(dateInput.value);
-    var stepsInput = document.getElementById("stepsInput");
-    var descriptionInput = document.getElementById("descriptionInput");
-
-    tasks[idNumber.value].dueDate = dateInput.value;
-    tasks[idNumber.value].noOfSteps = stepsInput.value;
-    tasks[idNumber.value].description = descriptionInput.value;
-    tasks[idNumber.value].plannerName = selectPlanner.value;
-
-    localStorage.setItem('taskStorage', JSON.stringify(tasks)); 
-
-    displayTasks();
-}
-
-// These are here to determine the firstDay of Month and the days of the month with Date(). Still a rough version :(
-// Shows a calendar for the current day in the sidebar. Clearly a work in progress :(
-
-function getFirstDayOfMonth(year, month) {
-    return new Date(year, month, 1).getDay();
-}
-
-function getDaysInMonth(year, month) {
-    return new Date(year, month, 0).getDate();
-}
-
-function loadCalendarSelect() {
-    var html = "";
-    html += "<select id='month' onchange='next()'>";
-                for (i = 0; i < months.length; i++) {
-                    if (i == date.getMonth()) {
-                        html += "<option value=" + i + " selected='selected'>" + months[i] + "</option>";
+        html += "<select id='year' onchange='next()'>";
+                for (i = 2000; i < 2050; i++) {
+                    if (i == date.getFullYear()) {
+                        html += "<option selected='selected'>" + i + "</option>";
                     }
 
                     else {
-                        html += "<option value=" + i + ">" + months[i] + "</option>";
+                        html += "<option>" + i + "</option>";
                     }
                 }    
-    html += "</select>";
+        html += "<select>";
 
-    html += "<select id='year' onchange='next()'>";
-            for (i = 2000; i < 2050; i++) {
-                if (i == date.getFullYear()) {
-                    html += "<option selected='selected'>" + i + "</option>";
-                }
-
-                else {
-                    html += "<option>" + i + "</option>";
-                }
-            }    
-    html += "<select>";
-
-    document.getElementById("mainButton").innerHTML = html;
-    // document.getElementById("sidebarButton").innerHTML = html;
-}
-
-function next() {
-    currentYear = parseInt(year.value);
-    currentMonth = parseInt(month.value);
-    displayCalendar(currentMonth, currentYear, 'sidebarCalendar', 'sidebarDate');
-    displayCalendar(currentMonth, currentYear, 'calendarSection', 'mainDate');
-
-}
-
-function displayCalendar(month, year, section, header) {    
-    const daysToNewMonth = getFirstDayOfMonth(year, month);
-    const daysInMonth = getDaysInMonth(year, month);
-    
-    var html = "";
-
-    html = "<h2>" + months[month] + " " + year + '</h2>';
-    document.getElementById(header).innerHTML = html;
-
-    var html = ""; 
-
-    for (i = 0; i < days.length; i++) {
-        if (section == "sidebarCalendar") {
-            html +=  "<p>" + days[i][0] + "</p>";
-        }
-
-        else {
-            html +=  "<h4>" + days[i] + "</h4>";
-        }
+        document.getElementById("mainButton").innerHTML = html;
     }
 
-    for (i = 1; i < daysToNewMonth; i++) {
-        html +=  "<p> </p>";
+    // this function helps the select to jump to the next option chosen by the user. 
+    function next() {
+        currentYear = year.value;
+        currentMonth = month.value;
+        displayCalendar(currentMonth, currentYear, 'sidebarCalendar', 'sidebarDate');
+        displayCalendar(currentMonth, currentYear, 'calendarSection', 'mainDate');
     }
 
-    for (i = 1; i < daysInMonth+1; i++) {
-        if (i == date.getDate() && date.getMonth() == month) {
-            html += `<p class="currentDate" value=${i} onclick="addEvent(this), swap('event', 'nothing')">${i}</p>`;
-        }
+    // a function that creates a calendar whenever it is called, once again for loops are used and if statements are used to determine the current date etc etc.
+    function displayCalendar(month, year, section, header) {    
+        const daysToNewMonth = getFirstDayOfMonth(year, month);
+        const daysInMonth = getDaysInMonth(year, month);
+        
+        var html = "";
 
-        else {
-            html +=  `<p value=${i} onclick='addEvent(this), swap("event", "nothing")'>${i}</p>`;
-        }
-    }
+        html = "<h2>" + months[month] + " " + year + '</h2>';
+        document.getElementById(header).innerHTML = html;
 
-    document.getElementById(section).innerHTML = html;
-    html = "";
-}
+        var html = ""; 
 
-// A function that when a checkbox in the sidebar section is unchecked removes tasks related to the planner that was unchecked. It is still a rough cut. 
-function sortTasks(number) {
-    for (i = 0; i < tasks.length; i++) {    
-        if (number.checked == false) {
-            if (tasks[i].plannerName == number.value) {
-                document.getElementById(i).style.display = "none";
+        for (i = 0; i < days.length; i++) {
+            if (section == "sidebarCalendar") {
+                html +=  "<p>" + days[i][0] + "</p>";
+            }
+
+            else {
+                html +=  "<h4>" + days[i] + "</h4>";
             }
         }
 
-        else {
-            document.getElementById(i).style.display = "block";
+        for (i = 1; i < daysToNewMonth; i++) {
+            html +=  "<p> </p>";
+        }
+
+        for (i = 1; i < daysInMonth+1; i++) {
+            if (i == date.getDate() && date.getMonth() == month) {
+                html += `<p class="currentDate" value=${i} onclick="addEvent(this), swap('event', 'nothing')">${i}</p>`;
+            }
+
+            else {
+                html +=  `<p value=${i} onclick='addEvent(this), swap("event", "nothing")'>${i}</p>`;
+            }
+        }
+
+        document.getElementById(section).innerHTML = html;
+        html = "";
+    }
+
+    // when a calendar date is clicked a sidebar pops out that helps you to try make a new task, sadly dosen't work as I wasn't efficent with time. the if statement helps with date input as it only accepts dates in a YYYY-MM-DD format. 
+    function addEvent(value){
+        var chosenDate;
+        if (value.textContent < 10) {
+            chosenDate = 0 + value.textContent;
+        }
+
+        else { 
+            chosenDate = value.textContent;
+        }
+
+        html = `<div class="task-sidebar">
+                    <input id="test" class="merriweather-font input" placeholder="add a new task or else..." onkeydown="addTasks('test')">
+                    <input id="dateInput" type="date" value="2022-08-${chosenDate}" class="merriweather-font input" placeholder="Due Date: ">
+                    <input id="descriptionInput" class="merriweather-font input" placeholder="Description: ">
+                    <input id="stepsInput" class="merriweather-font input" placeholder="Steps: ">       
+                    <select class="merriweather-font" id="select" name="asdasd"> </select>
+                    <button value=${value.textContent} class="merriweather-font" onclick="addTaskDetails(this)"> <p> add details </p> </button> 
+                    <button onclick="swap('nothing', 'event')"> X </button>
+                    <p> ${value.textContent} </p>
+                </div>`;
+
+        document.getElementById('event').innerHTML = html;
+    }
+
+// EXTRA FUNCTIONS
+    // A function that when a checkbox in the sidebar section is unchecked removes tasks related to the planner that was unchecked. It is not finished as there was many features that was more important than this one. 
+    function sortTasks(number) {
+        for (i = 0; i < tasks.length; i++) {    
+            if (number.checked == false) {
+                if (tasks[i].plannerName == number.value) {
+                    document.getElementById(i).style.display = "none";
+                }
+            }
+
+            else {
+                document.getElementById(i).style.display = "block";
+            }
         }
     }
-}
 
-function addEvent(value){
-    var chosenDate;
-    if (value.textContent < 10) {
-        chosenDate = 0 + value.textContent;
+    // this function is used to hide hidden divs such as the calendar / task or the task sidebar. 
+    function swap(sectionA, sectionB) {
+        var sectionA = document.getElementById(sectionA); 
+        var sectionB = document.getElementById(sectionB); 
+
+        if (sectionA.style.display == "grid") {
+            sectionA.style.display = "none";
+            sectionB.style.display = "grid";
+        }
+
+        else {  
+            sectionB.style.display = 'none';
+            sectionA.style.display = 'grid'
+        }
     }
-
-    else { 
-        chosenDate = value.textContent;
-    }
-
-    html = `<div class="task-sidebar">
-                <input id="test" class="merriweather-font input" placeholder="add a new task or else..." onkeydown="addTasks('test')">
-                <input id="dateInput" type="date" value="2022-08-${chosenDate}" class="merriweather-font input" placeholder="Due Date: ">
-                <input id="descriptionInput" class="merriweather-font input" placeholder="Description: ">
-                <input id="stepsInput" class="merriweather-font input" placeholder="Steps: ">       
-                <select class="merriweather-font" id="select" name="asdasd"> </select>
-                <button value=${value.textContent} class="merriweather-font" onclick="addTaskDetails(this)"> <p> add details </p> </button> 
-                <button onclick="swap('nothing', 'event')"> X </button>
-                <p> ${value.textContent} </p>
-            </div>`;
-
-    document.getElementById('event').innerHTML = html;
-}
-
-function swap(sectionA, sectionB) {
-    var sectionA = document.getElementById(sectionA); 
-    var sectionB = document.getElementById(sectionB); 
-
-    if (sectionA.style.display == "grid") {
-        sectionA.style.display = "none";
-        sectionB.style.display = "grid";
-    }
-
-    else {  
-        sectionB.style.display = 'none';
-        sectionA.style.display = 'grid'
-    }
-}
