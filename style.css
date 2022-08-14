@@ -1,272 +1,281 @@
-/* Colours - Uses HSL to determine colours */
-:root {
-    /* --primary: 111, 100%, 26%; */
-    --primary: 18, 64%, 37%;
-    /* --primary: 111, 0%, 0%; */
-      background-color: hsl(0, 0%, 0%, 0%);
-}
+    /* Colours - Uses HSL to determine colours */
+    :root {
+        /* --primary: 111, 100%, 26%; */
+        --primary: 18, 64%, 37%;
+        /* --primary: 111, 0%, 0%; */
+        background-color: hsl(0, 0%, 0%, 0%);
+    }
 
-/* The Base CSS - margins + colours + fonts */
-body {
-    margin: 0; 
-    background-color: hsl(var(--primary), 14%);
-    color: black;
-    font-weight: 400;
-}
+    /* The Base CSS - margins + colours + fonts */
+    body {
+        margin: 0; 
+        background-color: hsl(var(--primary), 14%);
+        color: black;
+        font-weight: 400;
+    }
 
-::-webkit-scrollbar {
-    display: none;
-}
+    ::-webkit-scrollbar {
+        display: none;
+    }
 
-table {
-    font-weight: 700;
-    font-size: 20px;
-    table-layout: fixed;
-    border-collapse: collapse;
-    padding: 0px;
-    margin-top: 0px;
-    display: block;
-}
+    table {
+        font-weight: 700;
+        font-size: 20px;
+        table-layout: fixed;
+        border-collapse: collapse;
+        padding: 0px;
+        margin-top: 0px;
+        display: block;
+    }
 
-td, tr {
-    border-collapse: collapse;
+    td, tr {
+        border-collapse: collapse;
 
-}
+    }
 
-button { 
-    border-radius: 8px 8px 8px 8px;
-    outline: none;
-    border: none;
-}
+    button { 
+        border-radius: 8px 8px 8px 8px;
+        outline: none;
+        border: none;
+    }
 
-h1, h2, h3,  h4, h5 {
-    margin: 0px;
-}
+    h1, h2, h3,  h4, h5 {
+        margin: 0px;
+    }
 
-p {
-    margin: 0px;
-    font-weight: 400;
-    font-size: 16px;
-}
+    p {
+        margin: 0px;
+        font-weight: 400;
+        font-size: 16px;
+    }
 
-li {
-    list-style: none;
-    margin: 0px;    
-}
+    li {
+        list-style: none;
+        margin: 0px;    
+    }
 
-select, option {
-    border: none;
-}
+    select, option {
+        border: none;
+    }
 
 
-input[type='radio'] {
-    height: 15px;
-    width: 15px;
-}
+    input[type='radio'] {
+        height: 15px;
+        width: 15px;
+    }
 
-.merriweather-font {
-    font-family: 'Merriweather', serif;
-}
+    .merriweather-font {
+        font-family: 'Merriweather', serif;
+    }
 
-.montserrat-font {
-    font-family: 'Montserrat', serif;
-}
+    .montserrat-font {
+        font-family: 'Montserrat', serif;
+    }
 
-.flex {
-    display: flex;
-}
+    .flex {
+        display: flex;
+    }
 
-.flex1 {
-    flex: 1;
-}
+    .flex1 {
+        flex: 1;
+    }
 
-.flex4 {
-    flex: 4;
-}
+    .flex4 {
+        flex: 4;
+    }
 
-.input { 
-    border-radius: 30px 30px 30px 30px;
-    outline: none;
-    border: none;
-    width: 100%;
-    height: 50px;
-}
+    .input { 
+        border-radius: 30px 30px 30px 30px;
+        outline: none;
+        border: none;
+        width: 100%;
+        height: 50px;
+    }
 
-input::placeholder {
-    color: black;
-    padding-left: 5px;
-}
+    input::placeholder {
+        color: black;
+        padding-left: 5px;
+    }
 
-input[type=checkbox], input[type=radio] { 
-    height: 15px;
-    width: 15px;
-}
+    input[type=checkbox], input[type=radio] { 
+        height: 15px;
+        width: 15px;
+    }
 
-/* The Sidebar Section - Contains Planner List + Mini Calendar + Planner Input */
-.sidebar {
-    margin: 20px;
-    width: 15%;
-    min-width: 15%;       
-}
+    /* The Sidebar Section - Contains Planner List + Mini Calendar + Planner Input */
+    .sidebar {
+        margin: 20px;
+        width: 15%;
+        min-width: 15%;       
+    }
 
-.sidebar h1 {
-    font-weight: 800;
-    font-size: 35px;
-    margin-bottom: 15px;
-}
+    .sidebar h1 {
+        font-weight: 800;
+        font-size: 35px;
+        margin-bottom: 15px;
+    }
 
-.sidebar-div {    
-    display: grid;
-    /* grid-template-columns: 35px 35px 35px 35px 35px 35px 35px; */
-    grid-template-columns: 14% 14% 14% 14% 14% 14% 14.5% ;
-}
+    .sidebar-div {    
+        display: grid;
+        /* grid-template-columns: 35px 35px 35px 35px 35px 35px 35px; */
+        grid-template-columns: 14% 14% 14% 14% 14% 14% 14.5% ;
+    }
 
-.sidebar-div p {
-    font-size: 20px;
-    font-weight: 900;
-    text-align: center;
-}
+    .sidebar-div p {
+        font-size: 20px;
+        font-weight: 900;
+        text-align: center;
+    }
 
-.sidebar td {
-    height: 20%;
-    width: 15%;
-}
+    .sidebar td {
+        height: 20%;
+        width: 15%;
+    }
 
-.sidebar button {
-    height: 30px;
-    width: 45%;
-    margin-left: 5px;
-    margin-top: 15px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    border-radius: 15px;
-    background-color: hsl(var(--primary), 20%);
-    flex: 1;
+    .sidebar button {
+        height: 30px;
+        width: 45%;
+        margin-left: 5px;
+        margin-top: 15px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        border-radius: 15px;
+        background-color: hsl(var(--primary), 20%);
+    }
 
-}
+    #mainButton {
+        text-align: right;
+    }
 
-.planner-input, .planner-input::placeholder { 
-    margin-top: 5px;
-    width: 100%;
-}
+    #mainButton button {
+        height: 30px;
+        width: 15%;
+        margin-left: 5px;
+        margin-right: 5px;
+        border-radius: 15px;
+        background-color: hsl(var(--primary), 20%);
+        justify-content: flex-end;
+    }
 
-.planner-list {
-    height: 42%;
-    overflow-y: scroll;
-    display: block;
-}
+    .planner-input, .planner-input::placeholder { 
+        margin-top: 5px;
+        width: 100%;
+    }
 
-/* The Task Sidebar Section - Contains Buttons + Inputs */
-.task-sidebar {
-    padding-top: 20px;
-    padding-left: 20px;
-    margin-left: 40px;
-    padding-right: 50px;
-    margin: 20px;
-    height: 634px;
-    width: 200px;
-    /* min-width: 200px; */
-    border-radius: 30px 30px 30px 30px;
-    background-color: hsl(var(--primary), 20%);
-}
+    .planner-list {
+        height: 42%;
+        overflow-y: scroll;
+        display: block;
+    }
 
-.task-sidebar input, .task-sidebar button, .task-sidebar select, .task-sidebar option {
-    background-color: hsl(var(--primary), 11%);
-    width: 100%;
-    height: 42px;
-    /* margin-bottom: 5px;  */
-    padding: 5px;
-}
+    /* The Task Sidebar Section - Contains Buttons + Inputs */
+    .task-sidebar {
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-right: 50px;
+        height: 700px;
+        width: 200px;
+        background-color: hsl(var(--primary), 20%);
+    }
 
-.task-sidebar select, .task-sidebar option {
-    border-radius: 8px 8px 8px 8px;
-}
+    .task-sidebar input, .task-sidebar button, .task-sidebar select, .task-sidebar option {
+        background-color: hsl(var(--primary), 11%);
+        width: 100%;
+        height: 42px;
+        /* margin-bottom: 5px;  */
+        padding: 5px;
+    }
 
-/* The Main Section - Contains Task List + Task Input */
-.main {
-    width: 100%; 
-    min-width: 10%;
+    .task-sidebar select, .task-sidebar option {
+        border-radius: 8px 8px 8px 8px;
+    }
 
-    background-color: hsl(var(--primary), 11%);
-    padding: 20px;
-    border-radius: 40px 0px 0px 40px;
+    /* The Main Section - Contains Task List + Task Input */
+    .main {
+        width: 100%; 
+        min-width: 10%;
 
-}
+        background-color: hsl(var(--primary), 11%);
+        padding: 40px;
+        border-radius: 40px 0px 0px 40px;
 
-.main input, .sidebar input {
-    background-color: hsl(var(--primary), 11%);
-    padding-left: 10px;
-}
+    }
 
-.main button {
-    width: 30px;
-    height: 30px;
-    border-radius: 50px 50px 50px 50px;
-    margin-right: 10px;
-    margin-top: 5px;
-    background-color: hsl(var(--primary), 20%);
-}
+    .main input, .sidebar input {
+        background-color: hsl(var(--primary), 11%);
+        padding-left: 10px;
+    }
 
-.main button:hover {
-    background-color: hsl(var(--primary), 40%);
-}
+    .main button {
+        width: 30px;
+        height: 30px;
+        border-radius: 50px 50px 50px 50px;
+        margin-right: 10px;
+        margin-top: 5px;
+        background-color: hsl(var(--primary), 20%);
+    }
 
-.main nav button {
-    background-color: hsl(var(--primary), 11%);
-    width: 100px;
-    height: 50px;
-    float: right;
-    margin: 0px;
-}
+    .main button:hover, .main input:hover, .sidebar button:hover, .sidebar input:hover {
+        background-color: hsl(var(--primary), 40%);
+    }
 
-.main nav input {
-    background-color: hsl(var(--primary), 11%);
-    width: 70%;
-    margin-bottom: 5px; 
-    padding: 5px;
-    margin-left: 20px; 
+    .main nav button {
+        background-color: hsl(var(--primary), 11%);
+        width: 100px;
+        height: 50px;
+        float: right;
+        margin: 0px;
+    }
 
-}
+    .main nav input {
+        background-color: hsl(var(--primary), 11%);
+        width: 70%;
+        margin-bottom: 5px; 
+        padding: 5px;
+    }
 
-.main-div {
-    height: 78.4%;
-    width: 95.1%;
-    display: grid;
-    font-size: 20px;
-    grid-template-columns: 14.3% 14.3% 14.3% 14.3% 14.3% 14.3% 14.3% ;
-    grid-template-rows: 5% 19% 19% 19% 19% 19%;
-}
+    .main-div {
+        height: 82.5%;
+        width: 95.1%;
+        display: grid;
+        font-size: 20px;
+        grid-template-columns: 14.3% 14.3% 14.3% 14.3% 14.3% 14.3% 14.3% ;
+        grid-template-rows: 5% 19% 19% 19% 19% 19%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
 
-.main-div p {
-    border: 1px solid hsl(var(--primary), 1%);
-    font-size: 19px;
-    padding: 5px;
-}
+    .main-div p {
+        border: 1px solid hsl(var(--primary), 3%);
+        font-size: 19px;
+        border-radius: 8px 8px 8px 8px;
+        padding: 5px;
 
-.main-div p:hover {
-    background-color: hsl(var(--primary), 25%);
-}
+    }
 
-.background {
-    /* background-color: hsl(var(--primary), 11%); */
-    border-radius: 30px 30px 30px 30px;
-    padding: 30px;
-    margin-bottom: 10px;
-}
+    .main-div p:hover {
+        background-color: hsl(var(--primary), 25%);
+    }
 
-.list {
-    height: 564px;
-    overflow-y: scroll;
-}
+    .background {
+        /* background-color: hsl(var(--primary), 11%); */
+        /* border-radius: 30px 30px 30px 30px; */
+        margin-bottom: 10px;
+    }
 
-.task-list {
-    display: grid;
-    grid-template-columns: 40px 100%;
-    grid-template-rows: repeat(20, 60px);
-    height: 78.4%;
-}
+    .list {
+        height: 564px;
+        overflow-y: scroll;
+    }
 
-.currentDate {
-    background-color: hsl(var(--primary), 11%);
-    border-radius: 5px 5px 5px 5px;
-}
+    .task-list {
+        display: grid;
+        grid-template-columns: 40px 100%;
+        grid-template-rows: repeat(10, 60px);
+        height: 84%;
+    }
+
+    .currentDate {
+        background-color: hsl(var(--primary), 11%);
+        border-radius: 5px 5px 5px 5px;
+    }

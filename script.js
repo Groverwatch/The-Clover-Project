@@ -69,7 +69,7 @@ function displayTasks() {
     html = "";
     loadTasks();  
     
-    html += '<div class="background merriweather-font list task-list" id="taskSection">';
+    // html += '<div class="background merriweather-font list task-list" id="taskSection">';
         for (i = 0; i < tasks.length; i++) {
             html += '<button onclick="deleteTask(this)" id="delete' + i + '" value="radio' + i + '"> </button>'   +
                     '<p id ="' + i  + '" style="font-weight: 900;" onclick="displayTaskSideBar(this)">' + tasks[i].taskName + '<br>' +
@@ -77,7 +77,7 @@ function displayTasks() {
 
             document.getElementById("taskSection").innerHTML = html;
         }
-    html += '</div>';
+    // html += '</div>';
 }
 
 function displayTaskSideBar(idNumber) {
@@ -96,6 +96,7 @@ function displayTaskSideBar(idNumber) {
                     '<input id="stepsInput" class="merriweather-font input" placeholder="Steps: ' + tasks[idNumber.id].noOfSteps + '">' +                
                     '<select class="merriweather-font" id="select" name="asdasd"> </select>' +
                     '<button id="' + idNumber.id + '" class="merriweather-font" onclick="addTaskDetails(this)"> <p> add details </p> </button>' +
+                    '<button> X </button>'
                 '</div>';
 
         document.getElementById("taskSidebar").innerHTML = html; 
@@ -197,47 +198,98 @@ function getDaysInMonth(year, month) {
 let count = 0;
 
 // Shows a calendar for the current day in the sidebar. Clearly a work in progress :(
-function previous() {
+function previous(day, month, year, section, header, button) {
     count++;
-    displayCalendar('days'); 
+    console.log(count);
+    displayCalendar(day, month, year, section, header, button);
 }
 
-function next() {
+function next(day, month, year, section, header, button) {
     count--;
-    displayCalendar('days'); 
+
+    if((day - count) == 12) {
+        console.log('tragic');
+    }
+
+    console.log(count);
+
+    displayCalendar(day, month, year, section, header, button);
 }
 
-function displayCalendar(section) {
+var number = 0;
+
+function previousTest(day, month, year, section, header, button) {
+    number--;
+
+    if((month - number) == 12) {
+        number = 0;
+        month = 0; 
+        year = date.getFullYear()-1;
+    }
+
+    displayCalendar(day, month + number, year, section, header, button);
+    
+}
+function nextTest(day, month, year, section, header, button) {
+    number++;
+
+    if((month + number) == 12) {
+        number = 0;
+        month = 0; 
+        year = date.getFullYear()+1;
+    }
+
+    displayCalendar(day, month + number, year, section, header, button);
+    
+}
+
+function displayCalendar(day, month, year, section, header, button) {
     var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     
-    console.log(count);
-    const daysToNewMonth = getFirstDayOfMonth(date.getFullYear()-count, date.getMonth()-count);
-    const daysInMonth = getDaysInMonth(date.getFullYear()-count, date.getMonth()-count);
+    const daysToNewMonth = getFirstDayOfMonth(year - count, month - count);
+    const daysInMonth = getDaysInMonth(year - count, month - count);
     
+    var html = "";
+
+    html = "<h2>" + months[month - count] + " " + year + '</h2>';
+    document.getElementById(header).innerHTML = html;
+
     var html = ""; 
-    
-    // document.getElementById("sidebarDate").innerHTML = '<button id="previous" class="flex1" onclick="previous()"> previous </button>  <button class="flex1" onclick="next()" id="next"> next </button>';
-    document.getElementById("sidebarDate").innerHTML = "<h2>" + months[date.getMonth()-count] + " " + date.getFullYear() + '</h2>';
 
     for (i = 0; i < days.length; i++) {
-        html +=  "<p>" + days[i][0] + "</p>";
+        if (section == "sidebarCalendar") {
+            html +=  "<p>" + days[i][0] + "</p>";
+        }
+
+        else {
+            html +=  "<h4>" + days[i] + "</h4>";
+        }
     }
 
-    for (i = 2; i < daysToNewMonth; i++) {
+    for (i = 1; i < daysToNewMonth; i++) {
         html +=  "<p> </p>";
     }
 
     for (i = 1; i < daysInMonth+1; i++) {
-        if (i == date.getDate()) {
-            html += '<p class="currentDate">' + i + '</p>';
+        if (i == day && count == 0) {
+            html += '<p class="currentDate" onclick="addEvent(this)">' + i + '</p>';
         }
 
         else {
-            html +=  "<p>" + i + "</p>";
+            html +=  "<p onclick='addEvent(this)'>" + i + "</p>";
         }
     }
+
     document.getElementById(section).innerHTML = html;
+    html = "";
+
+    html += `<button id="previous" onclick="previousTest(date.getDate(), date.getMonth(), date.getFullYear(), '${section}', '${header}', '${button}')" class="merriweather-font"> previous </button>` +
+            `<button onclick="nextTest(date.getDate(), date.getMonth(), date.getFullYear(), '${section}', '${header}', '${button}')" id="next" class="merriweather-font"> next </button>`;
+            // `<button onclick="next(date.getDate(), date.getMonth(), date.getFullYear(), '${section}', '${header}', '${button}')" id="next" class="merriweather-font"> next </button>`;
+
+
+    document.getElementById(button).innerHTML = html;
 }
 
 // A function that when a checkbox in the sidebar section is unchecked removes tasks related to the planner that was unchecked. It is still a rough cut. 
@@ -255,49 +307,6 @@ function sortTasks(number) {
     }
 }
 
-// ghetto code for right now
-
-function test() {
-    document.getElementById('taskSection').innerHTML = "";
-    document.getElementById('switch').innerHTML = 'list?';
-    document.getElementById('switch').setAttribute('onclick', 'displayTasks()');
-    
-
-    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    var days = ["Monday.", "Tuesday.", "Wednesday.", "Thursday.", "Friday.", "Saturday.", "Sunday."];
-    
-    console.log(count);
-    const daysToNewMonth = getFirstDayOfMonth(date.getFullYear()-count, date.getMonth()-count);
-    const daysInMonth = getDaysInMonth(date.getFullYear()-count, date.getMonth()-count);
-    
-    var html = ""; 
-    
-    html += '<div class="background merriweather-font main-div" id="taskSection">';     
-
-    for (i = 0; i < days.length; i++) {
-        html +=  "<p>" + days[i] + "</p>";
-    }
-
-    for (i = 2; i < daysToNewMonth; i++) {
-        html +=  "<p> </p>";
-    }
-
-    for (i = 1; i < daysInMonth+1; i++) {
-        if (i == date.getDate()) {
-            html += '<p class="currentDate" onclick="addEvent()">' + i + '</p>';
-            // i++;
-        }
-
-        else {
-            html +=  '<p onclick="addEvent(this)">' + i + '</p>';
-        }
-    }
-    html += '</div>';
-
-
-    document.getElementById('taskSection').innerHTML = html;
-}
-
 function addEvent(value){
     html = '<div class="task-sidebar">' +
                 `<input id="test" class="merriweather-font input" placeholder="add a new task or else..." onkeydown="addTasks('test')">` +
@@ -312,4 +321,19 @@ function addEvent(value){
             '</div>';
 
     document.getElementById('event').innerHTML = html;
+}
+
+function swap(sectionA, sectionB) {
+    var sectionA = document.getElementById(sectionA); 
+    var sectionB = document.getElementById(sectionB); 
+
+    if (sectionA.style.display == "grid") {
+        sectionA.style.display = "none";
+        sectionB.style.display = "grid";
+    }
+
+    else {  
+        sectionB.style.display = 'none';
+        sectionA.style.display = 'grid'
+    }
 }
