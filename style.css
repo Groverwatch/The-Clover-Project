@@ -1,8 +1,8 @@
     /* Colours - Uses HSL to determine colours */
     :root {
         /* --primary: 111, 100%, 26%; */
-        --primary: 18, 64%, 37%;
-        /* --primary: 111, 0%, 0%; */
+        /* --primary: 18, 64%, 37%; */
+        --primary: 44, 100%, 50%;
         background-color: hsl(0, 0%, 0%, 0%);
     }
 
@@ -64,6 +64,19 @@
         width: 15px;
     }
 
+    select {
+        height: 30px;
+        width: 30%;
+        margin-left: 5px;
+        padding-left: 5px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        border-radius: 15px;
+        background-color: hsl(var(--primary), 20%);
+        font-family: 'Merriweather', serif;
+
+    }
+
     .merriweather-font {
         font-family: 'Merriweather', serif;
     }
@@ -117,7 +130,6 @@
 
     .sidebar-div {    
         display: grid;
-        /* grid-template-columns: 35px 35px 35px 35px 35px 35px 35px; */
         grid-template-columns: 14% 14% 14% 14% 14% 14% 14.5% ;
     }
 
@@ -158,12 +170,12 @@
     }
 
     .planner-input, .planner-input::placeholder { 
-        margin-top: 5px;
+        margin-top: 15px;
         width: 100%;
     }
 
     .planner-list {
-        height: 42%;
+        height: 47.5%;
         overflow-y: scroll;
         display: block;
     }

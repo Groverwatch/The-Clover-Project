@@ -1,45 +1,45 @@
 // declaring variables 
-var html = "";
-var planners = [];
-var tasks = [];
-var checkboxes = [];
-var date = new Date();
-var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    var html = "";
+    var planners = [];
+    var tasks = [];
+    var checkboxes = [];
+    var date = new Date();
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 // This is a template for the tasks added through the task input in the main section.
-function Task(taskName, plannerName, dueDate, noOfSteps, description) {
-    this.taskName = taskName;
-    this.plannerName = plannerName;
-    this.dueDate = dueDate;
-    this.noOfSteps = noOfSteps;
-    this.description = description;
-}
+    function Task(taskName, plannerName, dueDate, noOfSteps, description) {
+        this.taskName = taskName;
+        this.plannerName = plannerName;
+        this.dueDate = dueDate;
+        this.noOfSteps = noOfSteps;
+        this.description = description;
+    }
 
 // As of this version, this website is using localStorage, these functions are there to get the storage from previous uses into the current tasks / planner arrays.  
-function loadPlanners() {
-    var plannerStorage = JSON.parse(localStorage.plannerStorage);
+    function loadPlanners() {
+        var plannerStorage = JSON.parse(localStorage.plannerStorage);
 
-    if (plannerStorage === null) {
-        planners = [];
+        if (plannerStorage === null) {
+            planners = [];
+        }
+
+        else {
+            planners = plannerStorage;
+        }
     }
 
-    else {
-        planners = plannerStorage;
-    }
-}
+    function loadTasks() {
+        var taskStorage = JSON.parse(localStorage.taskStorage);
 
-function loadTasks() {
-    var taskStorage = JSON.parse(localStorage.taskStorage);
+        if (taskStorage === null) {
+            tasks = [];
+        }
 
-    if (taskStorage === null) {
-        tasks = [];
+        else {
+            tasks = taskStorage;
+        }
     }
-
-    else {
-        tasks = taskStorage;
-    }
-}
 
 // The function displayPlanners() is used to display a planner list with the use of D.GEBI and for loops. 
 // Same follows for displayTasks() but with a task list in the main section.
@@ -70,7 +70,6 @@ function displayTasks() {
     html = "";
     loadTasks();  
     
-    // html += '<div class="background merriweather-font list task-list" id="taskSection">';
         for (i = 0; i < tasks.length; i++) {
             html += `<button onclick="deleteTask(this)" id="delete${i}" value="radio${i}"> </button>
                      <p id=${i} style="font-weight: 900;" onclick="displayTaskSideBar(this)"> ${tasks[i].taskName} <br>
@@ -78,7 +77,6 @@ function displayTasks() {
 
             document.getElementById("taskSection").innerHTML = html;
         }
-    // html += '</div>';
 }
 
 function displayTaskSideBar(idNumber) {
@@ -224,24 +222,26 @@ function loadCalendarSelect() {
             }    
     html += "<select>";
 
-    document.getElementById("sidebarDate").innerHTML = html;
+    document.getElementById("mainButton").innerHTML = html;
+    // document.getElementById("sidebarButton").innerHTML = html;
 }
 
 function next() {
     currentYear = parseInt(year.value);
     currentMonth = parseInt(month.value);
-    displayCalendar(currentMonth, currentYear, 'sidebarCalendar', 'sidebarDate', 'sidebarButton');
+    displayCalendar(currentMonth, currentYear, 'sidebarCalendar', 'sidebarDate');
+    displayCalendar(currentMonth, currentYear, 'calendarSection', 'mainDate');
 
 }
 
-function displayCalendar(month, year, section, header, button) {    
+function displayCalendar(month, year, section, header) {    
     const daysToNewMonth = getFirstDayOfMonth(year, month);
     const daysInMonth = getDaysInMonth(year, month);
     
     var html = "";
 
-    // html = "<h2>" + months[month] + " " + year + '</h2>';
-    // document.getElementById(header).innerHTML = html;
+    html = "<h2>" + months[month] + " " + year + '</h2>';
+    document.getElementById(header).innerHTML = html;
 
     var html = ""; 
 
@@ -271,13 +271,6 @@ function displayCalendar(month, year, section, header, button) {
 
     document.getElementById(section).innerHTML = html;
     html = "";
-
-    // html += `<button id="previous" onclick="previousTest(date.getDate(), date.getMonth(), date.getFullYear(), '${section}', '${header}', '${button}')" class="merriweather-font"> previous </button>` +
-    //         `<button onclick="nextTest(date.getDate(), date.getMonth(), date.getFullYear(), '${section}', '${header}', '${button}')" id="next" class="merriweather-font"> next </button>`;
-    //         // `<button onclick="next(date.getDate(), date.getMonth(), date.getFullYear(), '${section}', '${header}', '${button}')" id="next" class="merriweather-font"> next </button>`;
-
-
-    // document.getElementById(button).innerHTML = html;
 }
 
 // A function that when a checkbox in the sidebar section is unchecked removes tasks related to the planner that was unchecked. It is still a rough cut. 
@@ -299,7 +292,6 @@ function addEvent(value){
     html = '<div class="task-sidebar">' +
                 `<input id="test" class="merriweather-font input" placeholder="add a new task or else..." onkeydown="addTasks('test')">` +
                 '<input id="dateInput" type="date" value="2022-08-' +   value.textContent +'" class="merriweather-font input" placeholder="Due Date: ">' +
-                // '<input id="dateInput" type="date" value="2022-08-"' + value.textContent + '" class="merriweather-font input" placeholder="Due Date: ">' +
                 '<input id="descriptionInput" class="merriweather-font input" placeholder="Description: ">' +
                 '<input id="stepsInput" class="merriweather-font input" placeholder="Steps: ">' +                
                 '<select class="merriweather-font" id="select" name="asdasd"> </select>' +

@@ -10,7 +10,7 @@
         <script src="script.js"> </script>
     </head>
 
-    <body class="flex merriweather-font" onload="loadCalendarSelect(), displayPlanners(), displayCalendar(date.getMonth(), date.getFullYear(), 'sidebarCalendar', 'sidebarDate', 'sidebarButton'), displayCalendar(date.getMonth(), date.getFullYear(), 'calendarSection', 'mainDate', 'mainButton'), displayTasks()">
+    <body class="flex merriweather-font" onload="loadCalendarSelect(), displayPlanners(), displayCalendar(date.getMonth(), date.getFullYear(), 'sidebarCalendar', 'sidebarDate'), displayCalendar(date.getMonth(), date.getFullYear(), 'calendarSection', 'mainDate'), displayTasks()">
         <div class="sidebar"> 
             <h1 class="header"> Clover. </h1>
              
@@ -32,8 +32,8 @@
                 <p class="flex1" id="mainButton"> </p>
             </span>  
      
-            <p id="taskSection" style="display: grid" class="background merriweather-font list task-list"> </p>
-            <p id="calendarSection" style="display: none" class="main-div"> </p>
+            <p id="taskSection" style="display: none" class="background merriweather-font list task-list"> </p>
+            <p id="calendarSection" style="display: grid" class="main-div"> </p>
 
             <nav>
                 <input id="taskInput" class="merriweather-font input" placeholder="add a new task or else..." onkeydown="addTasks('taskInput')">
