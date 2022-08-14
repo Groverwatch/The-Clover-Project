@@ -4,7 +4,8 @@ var planners = [];
 var tasks = [];
 var checkboxes = [];
 var date = new Date();
-
+var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 // This is a template for the tasks added through the task input in the main section.
 function Task(taskName, plannerName, dueDate, noOfSteps, description) {
@@ -51,14 +52,14 @@ function displayPlanners() {
     planners[0] = "";
 
     for (i = 1; i < planners.length; i++) {
-        html += '<tr>' +
-                    '<td style="width: 0.1%;">' +
-                        '<input type="checkbox" id = "checkbox_' + i + '"value="' + planners[i] + '" onclick="sortTasks(this)" checked>' +
-                    '</td>' +
-                    '<td>' +
-                        '<p>' + planners[i] + '</p>' +
-                    '</td>' +
-                '</tr>'
+        html += `<tr>
+                    <td style="width: 0.1%;">
+                        <input type="checkbox" id="checkbox_${i}" value="${planners[i]}" onclick="sortTasks(this)" checked>
+                    </td>
+                    <td>
+                        <p> ${planners[i]} </p>
+                    </td>
+                </tr>`;
 
         document.getElementById("plannerSection").innerHTML = html;
     } 
@@ -71,9 +72,9 @@ function displayTasks() {
     
     // html += '<div class="background merriweather-font list task-list" id="taskSection">';
         for (i = 0; i < tasks.length; i++) {
-            html += '<button onclick="deleteTask(this)" id="delete' + i + '" value="radio' + i + '"> </button>'   +
-                    '<p id ="' + i  + '" style="font-weight: 900;" onclick="displayTaskSideBar(this)">' + tasks[i].taskName + '<br>' +
-                    '<img src="images/planner.png" style="width:15px;"> ' + tasks[i].plannerName + ' <img src="images/calendar.png" style="width:15px";> ' + tasks[i].dueDate + ' <img src="images/notes.png" style="width:15px";> ' + tasks[i].description + ' <img src="images/steps.png" style="width:15px";> ' + tasks[i].noOfSteps + '</p>'; 
+            html += `<button onclick="deleteTask(this)" id="delete${i}" value="radio${i}"> </button>
+                     <p id=${i} style="font-weight: 900;" onclick="displayTaskSideBar(this)"> ${tasks[i].taskName} <br>
+                     <img src="images/planner.png" style="width:15px;"> ${tasks[i].plannerName} <img src="images/calendar.png" style="width:15px";> ${tasks[i].dueDate} <img src="images/notes.png" style="width:15px";> ${tasks[i].description} <img src="images/steps.png" style="width:15px";> ${tasks[i].noOfSteps} </p>`; 
 
             document.getElementById("taskSection").innerHTML = html;
         }
@@ -187,6 +188,8 @@ function addTaskDetails(idNumber) {
 }
 
 // These are here to determine the firstDay of Month and the days of the month with Date(). Still a rough version :(
+// Shows a calendar for the current day in the sidebar. Clearly a work in progress :(
+
 function getFirstDayOfMonth(year, month) {
     return new Date(year, month, 1).getDay();
 }
@@ -195,65 +198,50 @@ function getDaysInMonth(year, month) {
     return new Date(year, month, 0).getDate();
 }
 
-let count = 0;
+function loadCalendarSelect() {
+    var html = "";
+    html += "<select id='month' onchange='next()'>";
+                for (i = 0; i < months.length; i++) {
+                    if (i == date.getMonth()) {
+                        html += "<option value=" + i + " selected='selected'>" + months[i] + "</option>";
+                    }
 
-// Shows a calendar for the current day in the sidebar. Clearly a work in progress :(
-function previous(day, month, year, section, header, button) {
-    count++;
-    console.log(count);
-    displayCalendar(day, month, year, section, header, button);
+                    else {
+                        html += "<option value=" + i + ">" + months[i] + "</option>";
+                    }
+                }    
+    html += "</select>";
+
+    html += "<select id='year' onchange='next()'>";
+            for (i = 2000; i < 2050; i++) {
+                if (i == date.getFullYear()) {
+                    html += "<option selected='selected'>" + i + "</option>";
+                }
+
+                else {
+                    html += "<option>" + i + "</option>";
+                }
+            }    
+    html += "<select>";
+
+    document.getElementById("sidebarDate").innerHTML = html;
 }
 
-function next(day, month, year, section, header, button) {
-    count--;
+function next() {
+    currentYear = parseInt(year.value);
+    currentMonth = parseInt(month.value);
+    displayCalendar(currentMonth, currentYear, 'sidebarCalendar', 'sidebarDate', 'sidebarButton');
 
-    if((day - count) == 12) {
-        console.log('tragic');
-    }
-
-    console.log(count);
-
-    displayCalendar(day, month, year, section, header, button);
 }
 
-var number = 0;
-
-function previousTest(day, month, year, section, header, button) {
-    number--;
-
-    if((month - number) == 12) {
-        number = 0;
-        month = 0; 
-        year = date.getFullYear()-1;
-    }
-
-    displayCalendar(day, month + number, year, section, header, button);
-    
-}
-function nextTest(day, month, year, section, header, button) {
-    number++;
-
-    if((month + number) == 12) {
-        number = 0;
-        month = 0; 
-        year = date.getFullYear()+1;
-    }
-
-    displayCalendar(day, month + number, year, section, header, button);
-    
-}
-
-function displayCalendar(day, month, year, section, header, button) {
-    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-    
-    const daysToNewMonth = getFirstDayOfMonth(year - count, month - count);
-    const daysInMonth = getDaysInMonth(year - count, month - count);
+function displayCalendar(month, year, section, header, button) {    
+    const daysToNewMonth = getFirstDayOfMonth(year, month);
+    const daysInMonth = getDaysInMonth(year, month);
     
     var html = "";
 
-    html = "<h2>" + months[month - count] + " " + year + '</h2>';
-    document.getElementById(header).innerHTML = html;
+    // html = "<h2>" + months[month] + " " + year + '</h2>';
+    // document.getElementById(header).innerHTML = html;
 
     var html = ""; 
 
@@ -272,7 +260,7 @@ function displayCalendar(day, month, year, section, header, button) {
     }
 
     for (i = 1; i < daysInMonth+1; i++) {
-        if (i == day && count == 0) {
+        if (i == date.getDate()) {
             html += '<p class="currentDate" onclick="addEvent(this)">' + i + '</p>';
         }
 
@@ -284,12 +272,12 @@ function displayCalendar(day, month, year, section, header, button) {
     document.getElementById(section).innerHTML = html;
     html = "";
 
-    html += `<button id="previous" onclick="previousTest(date.getDate(), date.getMonth(), date.getFullYear(), '${section}', '${header}', '${button}')" class="merriweather-font"> previous </button>` +
-            `<button onclick="nextTest(date.getDate(), date.getMonth(), date.getFullYear(), '${section}', '${header}', '${button}')" id="next" class="merriweather-font"> next </button>`;
-            // `<button onclick="next(date.getDate(), date.getMonth(), date.getFullYear(), '${section}', '${header}', '${button}')" id="next" class="merriweather-font"> next </button>`;
+    // html += `<button id="previous" onclick="previousTest(date.getDate(), date.getMonth(), date.getFullYear(), '${section}', '${header}', '${button}')" class="merriweather-font"> previous </button>` +
+    //         `<button onclick="nextTest(date.getDate(), date.getMonth(), date.getFullYear(), '${section}', '${header}', '${button}')" id="next" class="merriweather-font"> next </button>`;
+    //         // `<button onclick="next(date.getDate(), date.getMonth(), date.getFullYear(), '${section}', '${header}', '${button}')" id="next" class="merriweather-font"> next </button>`;
 
 
-    document.getElementById(button).innerHTML = html;
+    // document.getElementById(button).innerHTML = html;
 }
 
 // A function that when a checkbox in the sidebar section is unchecked removes tasks related to the planner that was unchecked. It is still a rough cut. 
