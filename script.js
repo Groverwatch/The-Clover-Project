@@ -70,33 +70,41 @@ function displayTasks() {
     html = "";
     loadTasks();  
     
-        for (i = 0; i < tasks.length; i++) {
-            html += `<button onclick="deleteTask(this)" id="delete${i}" value="radio${i}"> </button>
-                     <p id=${i} style="font-weight: 900;" onclick="displayTaskSideBar(this)"> ${tasks[i].taskName} <br>
-                     <img src="images/planner.png" style="width:15px;"> ${tasks[i].plannerName} <img src="images/calendar.png" style="width:15px";> ${tasks[i].dueDate} <img src="images/notes.png" style="width:15px";> ${tasks[i].description} <img src="images/steps.png" style="width:15px";> ${tasks[i].noOfSteps} </p>`; 
+    html += `<table id="table"> `
+    for (i = 0; i < tasks.length; i++) {
+        html += 
+            `<tr value="task${i}" id='${i}' class="show" onclick="displayTaskSideBar(this)">
+                <td> <button id="delete${i}" value="${i}" onclick="deleteTask(this)"> </button>
+                <td> <h4> ${tasks[i].taskName} </h4> <p> ${tasks[i].plannerName} ${tasks[i].dueDate} ${tasks[i].noOfSteps} ${tasks[i].description} </p> </td>
+                </tr>`;
+    }
+    html += `</table>`;
 
-            document.getElementById("taskSection").innerHTML = html;
-        }
+    document.getElementById("taskSection").innerHTML = html;
+    
 }
 
 function displayTaskSideBar(idNumber) {
     var html = "";
 
-    for (i = 0; i < tasks.length; i++) {    
-        html = '<div class="task-sidebar">' +
-                    '<p style="font-weight: 900; font-size: 20px;">' + tasks[idNumber.id].taskName + '</p>' +
-                    '<p> <img src="images/planner.png" style="width:15px;"> Date: ' + tasks[idNumber.id].dueDate + '</p>' +
-                    '<p> Description: ' + tasks[idNumber.id].description + '</p>'  +
-                    '<p> Steps: ' + tasks[idNumber.id].noOfSteps + '</p>' +
-                    '<p> Planner: ' + tasks[idNumber.id].plannerName + '</p>' +
+    console.log(idNumber.value);
+    console.log(idNumber.id);
 
-                    '<input id="dateInput" type="date" class="merriweather-font input" placeholder="Due Date: ' + tasks[idNumber.id].dueDate + '">' +
-                    '<input id="descriptionInput" class="merriweather-font input" placeholder="Description: ' + tasks[idNumber.id].description + '">' +
-                    '<input id="stepsInput" class="merriweather-font input" placeholder="Steps: ' + tasks[idNumber.id].noOfSteps + '">' +                
-                    '<select class="merriweather-font" id="select" name="asdasd"> </select>' +
-                    '<button id="' + idNumber.id + '" class="merriweather-font" onclick="addTaskDetails(this)"> <p> add details </p> </button>' +
-                    '<button> X </button>'
-                '</div>';
+    for (i = 0; i < tasks.length; i++) {    
+        html = `<div class="task-sidebar">
+                    <p style="font-weight: 900; font-size: 20px;"> ${tasks[idNumber.id].taskName} </p>
+                    <p> <img src="images/planner.png" style="width:15px;"> Date: ${tasks[idNumber.id].dueDate} </p>
+                    <p> Description: ${tasks[idNumber.id].description} </p>
+                    <p> Steps: ${tasks[idNumber.id].noOfSteps} </p>
+                    <p> Planner: ${tasks[idNumber.id].plannerName} </p>
+
+                    <input id="dateInput" type="date" class="merriweather-font input" value="Due Date: ${tasks[idNumber.id].dueDate}">
+                    <input id="descriptionInput" class="merriweather-font input" placeholder="Description: ${tasks[idNumber.id].description}">
+                    <input id="stepsInput" class="merriweather-font input" placeholder="Steps: ${tasks[idNumber.id].noOfSteps}">                  
+                    <select class="merriweather-font" id="select" name="asdasd"> </select>
+                    <button id="' + ${idNumber.id} + '" class="merriweather-font" onclick="addTaskDetails(this)"> <p> add details </p> </button>
+                    <button onclick="swap(asdasdasdasdas)"> X </button>
+                 </div>`;
 
         document.getElementById("taskSidebar").innerHTML = html; 
     }
@@ -149,7 +157,7 @@ function addTasks(content) {
 function deleteTask(idNumber) {
     var html = "";
 
-    tasks.splice(idNumber.id , 1);
+    tasks.splice(idNumber.value , 1);
     localStorage.setItem('taskStorage', JSON.stringify(tasks)); 
     displayTasks();
     
