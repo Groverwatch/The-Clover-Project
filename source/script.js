@@ -10,11 +10,10 @@
 
 // OBJECT CONSTRUCTOR
     // this is a template for the tasks added through the task input in the main section.
-    function Task(taskName, plannerName, dueDate, noOfSteps, description) {
+    function Task(taskName, plannerName, dueDate, description) {
         this.taskName = taskName;
         this.plannerName = plannerName;
         this.dueDate = dueDate;
-        this.noOfSteps = noOfSteps;
         this.description = description;
     }
 
@@ -49,15 +48,14 @@
     function displayPlanners() {   
         loadPlanners();
         html = "";
-        planners[0] = "";
 
-        for (i = 1; i < planners.length; i++) {
+        for (i = 0; i < planners.length; i++) {
             html += `<tr>
                         <td style="width: 0.1%;">
                             <input type="checkbox" id="checkbox_${i}" value="${planners[i]}" onclick="sortTasks(this)" checked>
                         </td>
-                        <td>
-                            <p value=${i} onclick="deletePlanners(this)"> ${planners[i]} </p>
+                        <td id='${i}' onclick="deletePlanners(this)">
+                            <p> ${planners[i]} </p>
                         </td>
                     </tr>`;
 
@@ -81,7 +79,12 @@
     function deletePlanners(idNumber) {
         var html = "";
     
-        planners.splice(idNumber.value , 1);
+        let deleteConfirm = confirm(`Do you want to delete the planner '${planners[idNumber.id]}'?`);
+
+        if (deleteConfirm) {
+            planners.splice(idNumber.id , 1);
+        } 
+
         localStorage.setItem('plannerStorage', JSON.stringify(planners)); 
         displayPlanners();
         console.log(tasks); 
@@ -99,9 +102,9 @@
         html += `<table id="table"> `
         for (i = 0; i < tasks.length; i++) {
             html += 
-                `<tr value="task${i}" id='${i}' class="show" onclick="displayTaskSideBar(this), swap('taskSidebar', 'nothing')">
+                `<tr value="task${i}">
                     <td> <button id="delete${i}" value="${i}" onclick="deleteTask(this)"> </button>
-                    <td> <h4> ${tasks[i].taskName} </h4> <p> ${tasks[i].plannerName} ${tasks[i].dueDate} ${tasks[i].noOfSteps} ${tasks[i].description} </p> </td>
+                    <td id='${i}' class="show" onclick="displayTaskSideBar(this), swap('taskSidebar', 'nothing')"> <h4> ${tasks[i].taskName} </h4> <p> ${tasks[i].plannerName} | ${tasks[i].dueDate} | ${tasks[i].description} | </p> </td>
                 </tr>`;
         }
         html += `</table>`;
@@ -114,7 +117,7 @@
         if (event.key == 'Enter') {
             var content = document.getElementById(content);
             
-            tasks.push(new Task(content.value, planners[0], "", "", ""));
+            tasks.push(new Task(content.value, "", "", "", ""));
             localStorage.setItem('taskStorage', JSON.stringify(tasks)); 
             
             content.value = "";
@@ -138,27 +141,35 @@
     function displayTaskSideBar(idNumber) {
         var html = "";
 
-        for (i = 0; i < tasks.length; i++) {    
-            html = `<div class="task-sidebar">
-                        <p style="font-weight: 900; font-size: 20px;"> ${tasks[idNumber.id].taskName} </p>
-                        <p> <img src="images/planner.png" style="width:15px;"> Date: ${tasks[idNumber.id].dueDate} </p>
-                        <p> Description: ${tasks[idNumber.id].description} </p>
-                        <p> Steps: ${tasks[idNumber.id].noOfSteps} </p>
-                        <p> Planner: ${tasks[idNumber.id].plannerName} </p>
+        html = `<div class="task-sidebar">
+                    <p> Task: </p>
+                    <input id="taskNameInput" class="merriweather-font input" placeholder="Write a task name."value="${tasks[idNumber.id].taskName}">
 
-                        <input id="dateInput" type="date" class="merriweather-font input" value="Due Date: 2022/08/ ${tasks[idNumber.id].dueDate}">
-                        <input id="descriptionInput" class="merriweather-font input" placeholder="Description: ${tasks[idNumber.id].description}">
-                        <input id="stepsInput" class="merriweather-font input" placeholder="Steps: ${tasks[idNumber.id].noOfSteps}">                  
-                        <select class="merriweather-font" id="select" name="asdasd"> </select>
-                        <button id="${idNumber.value}" class="merriweather-font" onclick="addTaskDetails(this)"> <p> add details </p> </button>
-                        <button onclick="swap('nothing', 'taskSidebar')"> X </button>
-                    </div>`;
+                    <p> Description: </p>
+                    <input id="descriptionInput" class="merriweather-font input" placeholder="Write a description." value="${tasks[idNumber.id].description}">
 
-            document.getElementById("taskSidebar").innerHTML = html; 
-        }
-        
+                    <p> Due Date: </p>
+                    <input id="dateInput" type="date" class="merriweather-font input" value="${tasks[idNumber.id].dueDate}">
+
+                    <p> Planner: </p>
+                    <select class="merriweather-font" id="select"> </select>
+
+                    <br> 
+                    <button id="add" value="${idNumber.id}" class="merriweather-font" onclick="addTaskDetails(this)"> add details </button>
+                    <button id="exit" onclick="swap('nothing', 'taskSidebar')"> close </button>
+                </div>`;
+
+        document.getElementById("taskSidebar").innerHTML = html; 
         html = "";
-        
+
+        if (tasks[idNumber.id].plannerName == "") {
+            html += `<option value="" disabled selected> Choose your planner. </option>`
+        }
+
+        else {
+            html += `<option value="" disabled selected> ${tasks[idNumber.id].plannerName} </option>`
+        }
+
         for (i = 0; i < planners.length; i++) {
             html += '<option>' + planners[i] + '</option>';
             document.getElementById("select").innerHTML = html;
@@ -170,14 +181,13 @@
         loadTasks();
 
         html = "";
+        var taskNameInput = document.getElementById("taskNameInput");
         var selectPlanner = document.getElementById("select");
         var dateInput = document.getElementById("dateInput");
-        console.log(dateInput.value);
-        var stepsInput = document.getElementById("stepsInput");
         var descriptionInput = document.getElementById("descriptionInput");
 
+        tasks[idNumber.value].taskName = taskNameInput.value;
         tasks[idNumber.value].dueDate = dateInput.value;
-        tasks[idNumber.value].noOfSteps = stepsInput.value;
         tasks[idNumber.value].description = descriptionInput.value;
         tasks[idNumber.value].plannerName = selectPlanner.value;
 
@@ -262,7 +272,7 @@
         }
 
         for (i = 1; i < daysInMonth+1; i++) {
-            if (i == date.getDate() && date.getMonth() == month) {
+            if (i == date.getDate() && date.getMonth() == month && date.getFullYear == year) {
                 html += `<p class="currentDate" value=${i} onclick="addEvent(this), swap('event', 'nothing')">${i}</p>`;
             }
 
@@ -285,19 +295,30 @@
         else { 
             chosenDate = value.textContent;
         }
+        // <p> ${value.textContent} </p>
 
         html = `<div class="task-sidebar">
-                    <input id="test" class="merriweather-font input" placeholder="add a new task or else..." onkeydown="addTasks('test')">
-                    <input id="dateInput" type="date" value="2022-08-${chosenDate}" class="merriweather-font input" placeholder="Due Date: ">
-                    <input id="descriptionInput" class="merriweather-font input" placeholder="Description: ">
-                    <input id="stepsInput" class="merriweather-font input" placeholder="Steps: ">       
-                    <select class="merriweather-font" id="select" name="asdasd"> </select>
-                    <button value=${value.textContent} class="merriweather-font" onclick="addTaskDetails(this)"> <p> add details </p> </button> 
-                    <button onclick="swap('nothing', 'event')"> X </button>
-                    <p> ${value.textContent} </p>
+                    <p> Task: </p>
+                    <input id="taskNameInput" class="merriweather-font input" placeholder="Write a task name.">
+
+                    <p> Description: </p>
+                    <input id="descriptionInput" class="merriweather-font input" placeholder="Write a description.">
+
+                    <p> Due Date: </p>
+                    <input id="dateInput" type="date" class="merriweather-font input" value="2022-08-${chosenDate}">
+
+                    <p> Planner: </p>
+                    <select class="merriweather-font" id="select"> </select>
+
+                    <br> 
+                    <button id="add" value="${value.value}" class="merriweather-font" onclick="addTaskDetails(this)"> add details </button>
+                    <button id="exit" onclick="swap('nothing', 'taskSidebar')"> close </button>
                 </div>`;
 
+
         document.getElementById('event').innerHTML = html;
+        tasks.push(new Task(taskNameInput.value, "", "", "", ""));
+
     }
 
 // EXTRA FUNCTIONS
