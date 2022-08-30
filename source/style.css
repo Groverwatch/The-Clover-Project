@@ -1,6 +1,6 @@
 /* Colours - Uses HSL to determine colours (If you change the numbers in the primary variable then the website will change looks :D) */
     :root {
-        --primary: 136, 69%;
+        --primary: 26, 100%;
         background-color: hsl(0, 0%, 0%, 0%);
     }
 
