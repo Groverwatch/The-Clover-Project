@@ -98,17 +98,24 @@
 /* The Sidebar Section - Contains Planner List + Mini Calendar + Planner Input */
     .sidebar {
         margin: 20px;
-        width: 15%;
-        min-width: 15%;       
+        width: 16%;
+        min-width: 16%;
+       
     }
 
     .sidebar h1 {
+        font-family: 'Lusitana', serif;
         font-weight: 800;
-        font-size: 35px;
+        font-size: 40px;
         margin-bottom: 15px;
         padding-top: 5px;
     }
 
+    .sidebar h2 {
+        font-family: 'Lusitana', serif;
+        font-size: 25px;
+
+    }
     .sidebar-div {    
         display: grid;
         grid-template-columns: 14% 14% 14% 14% 14% 14% 14.5% ;
