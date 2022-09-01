@@ -1,15 +1,16 @@
 /* Colours - Uses HSL to determine colours (If you change the numbers in the primary variable then the website will change looks :D) */
     :root {
-        --primary: 26, 100%;
-        background-color: hsl(0, 0%, 0%, 0%);
+        --primary: 18, 64%;
     }
 
 /* The Base CSS - margins + colours + fonts */
     body {
         margin: 0; 
-        background-color: hsl(var(--primary), 95%);
+        background-color: hsl(var(--primary), 84%);
         color: black;
+
         font-weight: 400;
+        font-family: 'Lusitana', serif;
     }
 
     ::-webkit-scrollbar {
@@ -18,27 +19,22 @@
 
     table {
         font-weight: 700;
-        font-size: 20px;
-        table-layout: fixed;
+        font-size: 21px;
         border-collapse: collapse;
-        padding: 0px;
-        margin-top: 0px;
-        display: block;
     }
 
-    td, tr {
-        border-collapse: collapse;
-
+    tr:hover {
+        background-color: hsl(var(--primary), 100%, 15%);
+        padding-left: 100px;
     }
 
-    h1, h2, h3,  h4, h5 {
+    h1, h2, h3, h4, h5, p {
         margin: 0px;
     }
 
     p {
-        margin: 0px;
         font-weight: 400;
-        font-size: 16px;
+        font-size: 18px;
     }
 
     li {
@@ -47,27 +43,60 @@
     }
 
     select, option {
-        border: none;
-    }
-
-    select, option {
         height: 30px;
-        width: 18%;
-        padding-left: 5px;
+        width: 110px;
+        text-align: center;
         margin-right: 5px;
         margin-bottom: 5px;
-        border-radius: 15px 15px 15px 15px;
+        border-radius: 20px 20px 20px 20px;
+
         background-color: hsl(var(--primary), 1%);
         color: hsl(var(--primary), 95%);
         font-family: 'Merriweather', serif;
     }
 
-    .merriweather-font {
+    input, button { 
+        border-radius: 20px 20px 20px 20px;
+        outline: none;
+        border: none;
+        width: 100%;
+        height: 50px;
         font-family: 'Merriweather', serif;
+
+    }
+
+    input {
+        background-color: hsl(var(--primary), 3%);
+        color: hsl(var(--primary), 95%);
+        padding-left: 10px;
+
+    }
+
+    input:hover, button:hover {
+        background-color: hsl(var(--primary), 10%);
+        color: white;
+    }
+
+    input::placeholder {
+        color: white;
+        padding: 5px;
+    }
+
+    button {
+        background-color: hsl(var(--primary), 1%);  
+        color: hsl(var(--primary), 95%); 
+        
+        outline: none;
+        border: none;
+    }
+
+    input[type=checkbox], input[type=radio] { 
+        height: 15px;
+        width: 15px;
     }
 
     .montserrat-font {
-        font-family: 'Montserrat', serif;
+        font-family: 'Inter', sans-serif;
     }
 
     .flex {
@@ -82,25 +111,11 @@
         flex: 4;
     }
 
-    .input { 
-        border-radius: 15px 15px 15px 15px;
-        outline: none;
-        border: none;
-        width: 100%;
-        height: 50px;
-    }
-
-    input[type=checkbox], input[type=radio] { 
-        height: 15px;
-        width: 15px;
-    }
-
 /* The Sidebar Section - Contains Planner List + Mini Calendar + Planner Input */
     .sidebar {
         margin: 20px;
         width: 16%;
-        min-width: 16%;
-       
+        min-width: 16%; 
     }
 
     .sidebar h1 {
@@ -142,7 +157,7 @@
     }
 
     .planner-list {
-        height: 47.5%;
+        height: 45.7%;
         overflow-y: scroll;
         display: block;
     }
@@ -162,23 +177,12 @@
         font-weight: 900;
         padding-bottom: 5px;
     }
-
-    #add {
-        background-color: hsl(var(--primary), 1%);  
-        color: hsl(var(--primary), 95%);  
-        padding-left: 20px;
-        padding-right: 20px;
-        height: 35px;
-        border-radius: 25px 25px 25px 25px;
-        margin-top: 25px;
-        margin-left: 40px;
-        flex: 1
-    }
     
-    #dateInput, #descriptionInput, #select, #taskNameInput {
+    #dateInput, #descriptionInput, #select, #taskNameInput, #add {
         padding-left: 10px;
         width: 100%;
         height: 35px;
+        margin-bottom: 5px;
     }
 
     #exit {
@@ -205,39 +209,6 @@
 
     }
 
-    input {
-        background-color: hsl(var(--primary), 3%);
-        color: hsl(var(--primary), 95%);
-        padding-left: 10px;
-
-        height: 42px;
-
-    }
-
-    input:hover {
-        background-color: hsl(var(--primary), 10%);
-        color: white;
-    }
-
-    input::placeholder {
-        color: white;
-        padding: 5px;
-    }
-
-    button {
-        background-color: hsl(var(--primary), 1%);  
-        color: hsl(var(--primary), 95%); 
-        
-        border-radius: 15px 15px 15px 15px;
-        outline: none;
-        border: none;
-    }
-
-    button:hover {
-        background-color: hsl(var(--primary), 10%);
-
-    }
-
     .background button {
         width: 30px;
         height: 30px;
@@ -245,6 +216,7 @@
         margin-right: 10px;
         margin-top: 5px;
         background-color: hsl(var(--primary), 84%);
+        float: right;
     }
 
     .background button:hover {
@@ -259,7 +231,7 @@
     }
 
     .main nav input {
-        width: 70%;
+        width: 50%;
         margin-bottom: 5px; 
         padding: 5px;
         height: 42px;
@@ -302,6 +274,6 @@
 
     .currentDate {
         background-color: hsl(var(--primary), 1%);
-        color: hsl(var(--primary), 95%);
-        border-radius: 5px 5px 5px 5px;
+        color: hsl(var(--primary), 84%);
+        border-radius: 90px 90px 90px 90px;
     }

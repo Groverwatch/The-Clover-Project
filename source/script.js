@@ -103,8 +103,8 @@
         for (i = 0; i < tasks.length; i++) {
             html += 
                 `<tr value="task${i}">
-                    <td> <button id="delete${i}" value="${i}" onclick="deleteTask(this)"> </button>
                     <td id='${i}' class="show" onclick="displayTaskSideBar(this), swap('taskSidebar', 'nothing')"> <h4> ${tasks[i].taskName} </h4> <p> ${tasks[i].plannerName} | ${tasks[i].dueDate} | ${tasks[i].description} | </p> </td>
+                    <td> <button id="delete${i}" value="${i}" onclick="deleteTask(this)"> </button>
                 </tr>`;
         }
         html += `</table>`;
@@ -143,19 +143,19 @@
 
         html = `<div class="task-sidebar">
                     <p> Task: </p>
-                    <input id="taskNameInput" class="merriweather-font input" placeholder="Write a task name."value="${tasks[idNumber.id].taskName}">
+                    <input id="taskNameInput" placeholder="Write a task name."value="${tasks[idNumber.id].taskName}">
 
                     <p> Description: </p>
-                    <input id="descriptionInput" class="merriweather-font input" placeholder="Write a description." value="${tasks[idNumber.id].description}">
+                    <input id="descriptionInput" placeholder="Write a description." value="${tasks[idNumber.id].description}">
 
                     <p> Due Date: </p>
-                    <input id="dateInput" type="date" class="merriweather-font input" value="${tasks[idNumber.id].dueDate}">
+                    <input id="dateInput" type="date" value="${tasks[idNumber.id].dueDate}">
 
                     <p> Planner: </p>
-                    <select class="merriweather-font" id="select"> </select>
+                    <select id="select"> </select>
 
-                    <br> 
-                    <button id="add" value="${idNumber.id}" class="merriweather-font" onclick="addTaskDetails(this)"> add details </button>
+                    <p> Place Holder: </p>
+                    <button id="add" value="${idNumber.id}" onclick="addTaskDetails(this)"> add details </button>
                     <button id="exit" onclick="swap('nothing', 'taskSidebar')"> close </button>
                 </div>`;
 
@@ -299,19 +299,19 @@
 
         html = `<div class="task-sidebar">
                     <p> Task: </p>
-                    <input id="taskNameInput" class="merriweather-font input" placeholder="Write a task name.">
+                    <input id="taskNameInput" placeholder="Write a task name.">
 
                     <p> Description: </p>
-                    <input id="descriptionInput" class="merriweather-font input" placeholder="Write a description.">
+                    <input id="descriptionInput" placeholder="Write a description.">
 
                     <p> Due Date: </p>
-                    <input id="dateInput" type="date" class="merriweather-font input" value="2022-08-${chosenDate}">
+                    <input id="dateInput" type="date" value="2022-08-${chosenDate}">
 
                     <p> Planner: </p>
-                    <select class="merriweather-font" id="select"> </select>
+                    <select id="select"> </select>
 
                     <br> 
-                    <button id="add" value="${value.value}" class="merriweather-font" onclick="addTaskDetails(this)"> add details </button>
+                    <button id="add" value="${value.value}" onclick="addTaskDetails(this)"> add details </button>
                     <button id="exit" onclick="swap('nothing', 'taskSidebar')"> close </button>
                 </div>`;
 

@@ -5,19 +5,19 @@
         <title> Clover - Task List</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Lusitana:wght@400;700&family=Merriweather:ital,wght@0,300;0,400;0,900;1,400&family=Montserrat:wght@700&display=swap" rel="stylesheet">
-                <link rel="icon" href="images/icon.png" type="image/x-icon">
-
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Lusitana:wght@400;700&family=Merriweather:ital,wght@0,300;0,400;0,900;1,400&display=swap" rel="stylesheet">
+        
+        <link rel="icon" href="images/icon.png" type="image/x-icon">
         <link rel="stylesheet" href="style.css">
         <script src="script.js"> </script>
     </head>
 
-    <body class="flex merriweather-font" onload="loadCalendarSelect(), displayPlanners(), displayTasks(), displayCalendar(date.getMonth(), date.getFullYear(), 'sidebarCalendar', 'sidebarDate'), displayCalendar(date.getMonth(), date.getFullYear(), 'calendarSection', 'mainDate')">
+    <body class="flex" onload="loadCalendarSelect(), displayPlanners(), displayTasks(), displayCalendar(date.getMonth(), date.getFullYear(), 'sidebarCalendar', 'sidebarDate'), displayCalendar(date.getMonth(), date.getFullYear(), 'calendarSection', 'mainDate')">
         <div class="sidebar"> 
             <h1> Clover. </h1>
              
             <h2> Planner. </h2>
-            <table class="merriweather-font planner-list" id="plannerSection"> </table>
+            <table class="planner-list" id="plannerSection"> </table>
 
             <p id="sidebarDate"> </p> 
             <div class="sidebar-div montserrat-font" id="sidebarCalendar"> </div>
@@ -25,7 +25,7 @@
             <div class="flex" id="sidebarButton"> 
             </div>  
 
-            <input id="plannerInput" class="merriweather-font planner-input input" placeholder="add a new planner" onkeydown="addPlanners()">
+            <input id="plannerInput" class="planner-input" placeholder="add a new planner" onkeydown="addPlanners()">
         </div>
 
         <div class="main">
@@ -34,11 +34,11 @@
                 <p class="flex1" id="mainButton"> </p>
             </span>  
      
-            <p id="taskSection" style="display: grid" class="background merriweather-font list task-list"> </p>
+            <p id="taskSection" style="display: grid" class="background list task-list"> </p>
             <p id="calendarSection" style="display: none" class="main-div"> </p>
 
             <nav>
-                <input id="taskInput" class="merriweather-font input" placeholder="add a new task or else..." onkeydown="addTasks('taskInput')">
+                <input id="taskInput" class="merriweather-font" placeholder="add a new task or else..." onkeydown="addTasks('taskInput')">
                 <button id="switch" class="merriweather-font" onclick="swap('taskSection', 'calendarSection')"> calendar? </button>
             </nav>
         </div>
