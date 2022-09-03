@@ -20,7 +20,7 @@
 // LOCAL STORAGE
     // As of this version, this website is using localStorage, these functions are there to get the storage from previous uses into the current tasks / planner arrays.  
     function loadPlanners() {
-        var plannerStorage = JSON.parse(localStorage.plannerStorage);
+        var plannerStorage = JSON.parse(localStorage.getItem('plannerStorage'));
 
         if (plannerStorage === null) {
             planners = ['test'];
@@ -32,7 +32,7 @@
     }
 
     function loadTasks() {
-        var taskStorage = JSON.parse(localStorage.taskStorage);
+        var taskStorage = JSON.parse(localStorage.getItem('taskStorage'));
 
         if (taskStorage === null) {
             tasks = [];
