@@ -65,7 +65,7 @@
 
     // On enter, the input on the sidebar is used to enter a new planner into the system, the input's value is pushed into the array and is stored in the localStorage.
     function addPlanners() {
-        if (event.key == 'Enter') {
+        if (event.key == 'Enter' ) {
             var plannerInput = document.getElementById("plannerInput");
             planners.push(plannerInput.value);  
     
@@ -259,25 +259,25 @@
 
         for (i = 0; i < days.length; i++) {
             if (section == "sidebarCalendar") {
-                html +=  "<p>" + days[i][0] + "</p>";
+                html +=  "<div>" + days[i][0] + "</div>";
             }
 
             else {
-                html +=  "<h4>" + days[i] + "</h4>";
+                html +=  "<div>" + days[i] + "</div>";
             }
         }
 
         for (i = 1; i < daysToNewMonth; i++) {
-            html +=  "<p> </p>";
+            html +=  "<div> </div>";
         }
 
         for (i = 1; i < daysInMonth+1; i++) {
             if (i == date.getDate() && date.getMonth() == month && date.getFullYear() == year) {
-                html += `<p class="currentDate" value=${i} onclick="addEvent(this), swap('event', 'nothing')">${i}</p>`;
+                html += `<div class="currentDate" value=${i} onclick="addEvent(this), swap('event', 'nothing')"> ${i} </div>`;
             }
 
             else {
-                html +=  `<p value=${i} onclick='addEvent(this), swap("event", "nothing")'>${i}</p>`;
+                html +=  `<div value=${i} onclick='addEvent(this), swap("event", "nothing")'> ${i} </div>`;
             }
         }
 
