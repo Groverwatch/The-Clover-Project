@@ -23,7 +23,7 @@
         var plannerStorage = JSON.parse(localStorage.plannerStorage);
 
         if (plannerStorage === null) {
-            planners = [];
+            planners = ['test'];
         }
 
         else {
@@ -272,7 +272,7 @@
         }
 
         for (i = 1; i < daysInMonth+1; i++) {
-            if (i == date.getDate() && date.getMonth() == month && date.getFullYear == year) {
+            if (i == date.getDate() && date.getMonth() == month && date.getFullYear() == year) {
                 html += `<p class="currentDate" value=${i} onclick="addEvent(this), swap('event', 'nothing')">${i}</p>`;
             }
 
