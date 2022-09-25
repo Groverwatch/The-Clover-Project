@@ -59,30 +59,25 @@ function displayPlanners() {
                         '<p>' + planners[i] + '</p>' +
                     '</td>' +
                 '</tr>'
+
         document.getElementById("plannerSection").innerHTML = html;
     } 
 }
 
 function displayTasks() {
-    loadTasks();  
+    document.getElementById("taskSection").innerHTML = "";
     html = "";
+    loadTasks();  
     
-    for (i = 0; i < tasks.length; i++) {
-        html += '<tr>' +                    
-        // html += '<tr onclick="displayTaskSideBar(this)" id="' + i + '" value="' + i + '">' +                    
-                    '<td style="width: 30px;">' +
-                        '<button onclick="deleteTask(this)" id="delete' + i + '" value="radio' + i + '"> </button>'   +
-                        // '<input type="radio" onchange="deleteTask(this)" id="' + i + '" value="radio' + i + '">'   +
-                    '</td>' +
-                    // '<td >' +
-                    '<td onclick="displayTaskSideBar(this)" id="' + i + '" value="' + i + '">' +
-                        '<p id ="' + i  + '" style="font-weight: 900; width: 900px;">' + tasks[i].taskName + '</p>' +
-                        '<p> <img src="images/planner.png" style="width:15px;"> ' + tasks[i].plannerName + ' <img src="images/calendar.png" style="width:15px";> ' + tasks[i].dueDate + ' <img src="images/notes.png" style="width:15px";> ' + tasks[i].description + ' <img src="images/steps.png" style="width:15px";> ' + tasks[i].noOfSteps + '</p>' +
-                    '</td>' +
-                '</tr>';
+    // html += '<div class="background merriweather-font list task-list" id="taskSection">';
+        for (i = 0; i < tasks.length; i++) {
+            html += '<button onclick="deleteTask(this)" id="delete' + i + '" value="radio' + i + '"> </button>'   +
+                    '<p id ="' + i  + '" style="font-weight: 900;" onclick="displayTaskSideBar(this)">' + tasks[i].taskName + '<br>' +
+                    '<img src="images/planner.png" style="width:15px;"> ' + tasks[i].plannerName + ' <img src="images/calendar.png" style="width:15px";> ' + tasks[i].dueDate + ' <img src="images/notes.png" style="width:15px";> ' + tasks[i].description + ' <img src="images/steps.png" style="width:15px";> ' + tasks[i].noOfSteps + '</p>'; 
 
-        document.getElementById("taskSection").innerHTML = html;
-    }
+            document.getElementById("taskSection").innerHTML = html;
+        }
+    // html += '</div>';
 }
 
 function displayTaskSideBar(idNumber) {
@@ -101,8 +96,9 @@ function displayTaskSideBar(idNumber) {
                     '<input id="stepsInput" class="merriweather-font input" placeholder="Steps: ' + tasks[idNumber.id].noOfSteps + '">' +                
                     '<select class="merriweather-font" id="select" name="asdasd"> </select>' +
                     '<button id="' + idNumber.id + '" class="merriweather-font" onclick="addTaskDetails(this)"> <p> add details </p> </button>' +
-
+                    '<button> X </button>'
                 '</div>';
+
         document.getElementById("taskSidebar").innerHTML = html; 
     }
     
@@ -137,14 +133,14 @@ function addPlanners() {
     displayPlanners(); 
 }
 
-function addTasks() {    
+function addTasks(content) {    
     if (event.key == 'Enter') {
-        var taskInput = document.getElementById("taskInput");
+        var content = document.getElementById(content);
         
-        tasks.push(new Task(taskInput.value, planners[0], "", "", ""));
+        tasks.push(new Task(content.value, planners[0], "", "", ""));
         localStorage.setItem('taskStorage', JSON.stringify(tasks)); 
         
-        taskInput.value = "";
+        content.value = "";
     }
 
     displayTasks(); 
@@ -202,53 +198,98 @@ function getDaysInMonth(year, month) {
 let count = 0;
 
 // Shows a calendar for the current day in the sidebar. Clearly a work in progress :(
-function previous() {
+function previous(day, month, year, section, header, button) {
     count++;
-    displayCalendar('days'); 
+    console.log(count);
+    displayCalendar(day, month, year, section, header, button);
 }
 
-function next() {
+function next(day, month, year, section, header, button) {
     count--;
-    displayCalendar('days'); 
+
+    if((day - count) == 12) {
+        console.log('tragic');
+    }
+
+    console.log(count);
+
+    displayCalendar(day, month, year, section, header, button);
 }
 
-function displayCalendar(section) {
+var number = 0;
+
+function previousTest(day, month, year, section, header, button) {
+    number--;
+
+    if((month - number) == 12) {
+        number = 0;
+        month = 0; 
+        year = date.getFullYear()-1;
+    }
+
+    displayCalendar(day, month + number, year, section, header, button);
+    
+}
+function nextTest(day, month, year, section, header, button) {
+    number++;
+
+    if((month + number) == 12) {
+        number = 0;
+        month = 0; 
+        year = date.getFullYear()+1;
+    }
+
+    displayCalendar(day, month + number, year, section, header, button);
+    
+}
+
+function displayCalendar(day, month, year, section, header, button) {
     var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     
-    console.log(count);
-    // if (count == 1) {
-    //     console.log("test");
-    // }
-    // const daysToNewMonth = getFirstDayOfMonth(date.getFullYear(), date.getMonth());
-    // const daysInMonth = getDaysInMonth(date.getFullYear(), date.getMonth());
-    const daysToNewMonth = getFirstDayOfMonth(date.getFullYear()-count, date.getMonth()-count);
-    const daysInMonth = getDaysInMonth(date.getFullYear()-count, date.getMonth()-count);
+    const daysToNewMonth = getFirstDayOfMonth(year - count, month - count);
+    const daysInMonth = getDaysInMonth(year - count, month - count);
     
+    var html = "";
+
+    html = "<h2>" + months[month - count] + " " + year + '</h2>';
+    document.getElementById(header).innerHTML = html;
+
     var html = ""; 
-    
-    document.getElementById("sidebarDate").innerHTML = months[date.getMonth()-count] + " " + date.getFullYear();
-    // document.getElementById("mainDate").innerHTML = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+
     for (i = 0; i < days.length; i++) {
-        html +=  "<p>" + days[i][0] + "</p>";
+        if (section == "sidebarCalendar") {
+            html +=  "<p>" + days[i][0] + "</p>";
+        }
+
+        else {
+            html +=  "<h4>" + days[i] + "</h4>";
+        }
     }
 
-    for (i = 2; i < daysToNewMonth; i++) {
+    for (i = 1; i < daysToNewMonth; i++) {
         html +=  "<p> </p>";
     }
 
     for (i = 1; i < daysInMonth+1; i++) {
-        if (i == date.getDate()) {
-            html += '<p class="currentDate">' + i + '</p>';
-            i++;
+        if (i == day && count == 0) {
+            html += '<p class="currentDate" onclick="addEvent(this)">' + i + '</p>';
         }
 
         else {
-            html +=  "<p>" + i + "</p>";
+            html +=  "<p onclick='addEvent(this)'>" + i + "</p>";
         }
     }
 
     document.getElementById(section).innerHTML = html;
+    html = "";
+
+    html += `<button id="previous" onclick="previousTest(date.getDate(), date.getMonth(), date.getFullYear(), '${section}', '${header}', '${button}')" class="merriweather-font"> previous </button>` +
+            `<button onclick="nextTest(date.getDate(), date.getMonth(), date.getFullYear(), '${section}', '${header}', '${button}')" id="next" class="merriweather-font"> next </button>`;
+            // `<button onclick="next(date.getDate(), date.getMonth(), date.getFullYear(), '${section}', '${header}', '${button}')" id="next" class="merriweather-font"> next </button>`;
+
+
+    document.getElementById(button).innerHTML = html;
 }
 
 // A function that when a checkbox in the sidebar section is unchecked removes tasks related to the planner that was unchecked. It is still a rough cut. 
@@ -266,8 +307,33 @@ function sortTasks(number) {
     }
 }
 
-// ghetto code for right now
-function darkMode() {
-    // document.getElementsByName("html").style.prefers-color-scheme = "light";
+function addEvent(value){
+    html = '<div class="task-sidebar">' +
+                `<input id="test" class="merriweather-font input" placeholder="add a new task or else..." onkeydown="addTasks('test')">` +
+                '<input id="dateInput" type="date" value="2022-08-' +   value.textContent +'" class="merriweather-font input" placeholder="Due Date: ">' +
+                // '<input id="dateInput" type="date" value="2022-08-"' + value.textContent + '" class="merriweather-font input" placeholder="Due Date: ">' +
+                '<input id="descriptionInput" class="merriweather-font input" placeholder="Description: ">' +
+                '<input id="stepsInput" class="merriweather-font input" placeholder="Steps: ">' +                
+                '<select class="merriweather-font" id="select" name="asdasd"> </select>' +
+                '<button id="' + value.id + '" class="merriweather-font" onclick="addTaskDetails(this)"> <p> add details </p> </button>' +   
 
+                '<p>' + value.textContent + '</p>' +
+            '</div>';
+
+    document.getElementById('event').innerHTML = html;
+}
+
+function swap(sectionA, sectionB) {
+    var sectionA = document.getElementById(sectionA); 
+    var sectionB = document.getElementById(sectionB); 
+
+    if (sectionA.style.display == "grid") {
+        sectionA.style.display = "none";
+        sectionB.style.display = "grid";
+    }
+
+    else {  
+        sectionB.style.display = 'none';
+        sectionA.style.display = 'grid'
+    }
 }
