@@ -1,15 +1,17 @@
 /* Colours - Uses HSL to determine colours (If you change the numbers in the primary variable then the website will change looks :D) */
     :root {
-        --primary: 136, 69%;
-        background-color: hsl(0, 0%, 0%, 0%);
+        /* --primary: 108, 34%; */
+        --primary: 18, 64%;
     }
 
 /* The Base CSS - margins + colours + fonts */
     body {
         margin: 0; 
-        background-color: hsl(var(--primary), 95%);
+        background-color: hsl(var(--primary), 84%);
         color: black;
+
         font-weight: 400;
+        font-family: 'Lusitana', serif;
     }
 
     ::-webkit-scrollbar {
@@ -18,33 +20,22 @@
 
     table {
         font-weight: 700;
-        font-size: 20px;
-        table-layout: fixed;
+        font-size: 21px;
         border-collapse: collapse;
-        padding: 0px;
-        margin-top: 0px;
-        display: block;
     }
 
-    td, tr {
-        border-collapse: collapse;
-
+    tr:hover {
+        background-color: hsl(var(--primary), 100%, 15%);
+        padding-left: 100px;
     }
 
-    button { 
-        border-radius: 8px 8px 8px 8px;
-        outline: none;
-        border: none;
-    }
-
-    h1, h2, h3,  h4, h5 {
+    h1, h2, h3, h4, h5, p {
         margin: 0px;
     }
 
     p {
-        margin: 0px;
         font-weight: 400;
-        font-size: 16px;
+        font-size: 18px;
     }
 
     li {
@@ -53,32 +44,60 @@
     }
 
     select, option {
+        height: 30px;
+        width: 110px;
+        text-align: center;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        border-radius: 20px 20px 20px 20px;
+
+        background-color: hsl(var(--primary), 1%);
+        color: hsl(var(--primary), 95%);
+        font-family: 'Merriweather', serif;
+    }
+
+    input, button { 
+        border-radius: 20px 20px 20px 20px;
+        outline: none;
+        border: none;
+        width: 100%;
+        height: 50px;
+        font-family: 'Merriweather', serif;
+
+    }
+
+    input {
+        background-color: hsl(var(--primary), 3%);
+        color: hsl(var(--primary), 95%);
+        padding-left: 10px;
+
+    }
+
+    input:hover, button:hover {
+        background-color: hsl(var(--primary), 10%);
+        color: white;
+    }
+
+    input::placeholder {
+        color: white;
+        padding: 5px;
+    }
+
+    button {
+        background-color: hsl(var(--primary), 1%);  
+        color: hsl(var(--primary), 95%); 
+        
+        outline: none;
         border: none;
     }
 
-
-    input[type='radio'] {
+    input[type=checkbox], input[type=radio] { 
         height: 15px;
         width: 15px;
     }
 
-    select {
-        height: 30px;
-        width: 18%;
-        padding-left: 5px;
-        margin-right: 5px;
-        margin-bottom: 5px;
-        border-radius: 15px;
-        background-color: hsl(var(--primary), 84%);
-        font-family: 'Merriweather', serif;
-    }
-
-    .merriweather-font {
-        font-family: 'Merriweather', serif;
-    }
-
     .montserrat-font {
-        font-family: 'Montserrat', serif;
+        font-family: 'Inter', sans-serif;
     }
 
     .flex {
@@ -93,38 +112,26 @@
         flex: 4;
     }
 
-    .input { 
-        border-radius: 30px 30px 30px 30px;
-        outline: none;
-        border: none;
-        width: 100%;
-        height: 50px;
-    }
-
-    input::placeholder {
-        color: black;
-        padding-left: 5px;
-    }
-
-    input[type=checkbox], input[type=radio] { 
-        height: 15px;
-        width: 15px;
-    }
-
 /* The Sidebar Section - Contains Planner List + Mini Calendar + Planner Input */
     .sidebar {
         margin: 20px;
-        width: 15%;
-        min-width: 15%;       
+        width: 16%;
+        min-width: 16%; 
     }
 
     .sidebar h1 {
+        font-family: 'Lusitana', serif;
         font-weight: 800;
-        font-size: 35px;
+        font-size: 40px;
         margin-bottom: 15px;
         padding-top: 5px;
     }
 
+    .sidebar h2 {
+        font-family: 'Lusitana', serif;
+        font-size: 25px;
+
+    }
     .sidebar-div {    
         display: grid;
         grid-template-columns: 14% 14% 14% 14% 14% 14% 14.5% ;
@@ -145,25 +152,26 @@
         text-align: right;
     }
 
-    .planner-input, .planner-input::placeholder { 
-        margin-top: 15px;
-        width: 100%;
+    .planner-input { 
+        margin-top: 18.5px;
+        height: 42px;
     }
 
     .planner-list {
-        height: 47.5%;
+        height: 45.7%;
         overflow-y: scroll;
         display: block;
     }
 
 /* The Task Sidebar Section - Contains Buttons + Inputs */
     .task-sidebar {
+        /* margin-top: 20px; */
         padding-top: 25px;
         padding-left: 30px;
         padding-right: 35px;
         height: 96.3%;
         width: 200px;
-        background-color: hsl(var(--primary), 95%);
+        background-color: hsl(var(--primary), 92.5%);
     }
 
     .task-sidebar p { 
@@ -171,84 +179,68 @@
         font-weight: 900;
         padding-bottom: 5px;
     }
-
-    #add {
-        background-color: hsl(var(--primary), 90%);
-        padding-left: 20px;
-        padding-right: 20px;
-        height: 35px;
-        border-radius: 25px 25px 25px 25px;
-        margin-top: 25px;
-        margin-left: 40px;
-        flex: 1
-    }
-
-    #dateInput, #descriptionInput, #select, #taskNameInput {
-        background-color: hsl(var(--primary), 90%);
+    
+    #dateInput, #descriptionInput, #select, #taskNameInput, #add {
         padding-left: 10px;
         width: 100%;
         height: 35px;
+        margin-bottom: 5px;
     }
 
     #exit {
-        background-color: hsl(var(--primary), 90%);  
-        bottom: 5px;
+        padding-left: 10px;
+        width: 100%;
+        height: 40px;
+
+        margin-top: 93.6%;
         border-radius: 25px 25px 25px 25px;
-        height: 50px;
-        width: 100px;
-        position: absolute;
-        bottom: 45px;
-        right: 30px;
         font-family: Merriweather;
     }
 
 /* The Main Section - Contains Task List + Task Input */
     .main {
-        width: 100%; 
+        width: 110%; 
         min-width: 10%;
-
         background-color: hsl(var(--primary), 91%);
         padding: 40px;
         border-radius: 40px 0px 0px 40px;
 
     }
 
-    .main input, .sidebar input {
-        background-color: hsl(var(--primary), 84%);
-        color: hsl(var(--primary), 99%);
-        padding-left: 10px;
-    }
-
-    .main button {
+    .background button {
         width: 30px;
         height: 30px;
         border-radius: 50px 50px 50px 50px;
         margin-right: 10px;
         margin-top: 5px;
         background-color: hsl(var(--primary), 84%);
+        float: right;
     }
 
-    .main button:hover, .main input:hover, .sidebar button:hover, .sidebar input:hover {
+    .background button:hover {
         background-color: hsl(var(--primary), 80%);
     }
 
     .main nav button {
-        background-color: hsl(var(--primary), 84%);
         width: 100px;
-        height: 50px;
+        height: 42px;
         float: right;
         margin: 0px;
     }
 
     .main nav input {
-        background-color: hsl(var(--primary), 84%);
-        width: 70%;
+        width: 50%;
         margin-bottom: 5px; 
         padding: 5px;
+        height: 42px;
+    }
+
+    .main tr {
+        height: 55px;
     }
 
     .main-div {
-        height: 82.5%;
+        height: 83.65%;
         width: 95.1%;
         display: grid;
         font-size: 20px;
@@ -279,6 +271,7 @@
     }
 
     .currentDate {
-        background-color: hsl(var(--primary), 80%);
-        border-radius: 5px 5px 5px 5px;
+        background-color: hsl(var(--primary), 1%);
+        color: hsl(var(--primary), 84%);
+        border-radius: 90px 90px 90px 90px;
     }
