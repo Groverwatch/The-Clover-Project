@@ -1,18 +1,18 @@
+<!-- This version is not fully finished. There are still many things that need to be implemented properly. This version was done on 14 / 08 / 22 -->
+
 <html>
     <head>
         <title> Clover - Task List</title>
-
         <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,900;1,400&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-        
         <link rel="icon" href="images/icon.png" type="image/x-icon">
 
         <link rel="stylesheet" href="style.css">
         <script src="script.js"> </script>
     </head>
 
-    <body class="flex merriweather-font" onload="loadCalendarSelect(), displayPlanners(), displayCalendar(date.getMonth(), date.getFullYear(), 'sidebarCalendar', 'sidebarDate'), displayCalendar(date.getMonth(), date.getFullYear(), 'calendarSection', 'mainDate'), displayTasks()">
+    <body class="flex merriweather-font" onload="loadCalendarSelect(), displayPlanners(), displayTasks(), displayCalendar(date.getMonth(), date.getFullYear(), 'sidebarCalendar', 'sidebarDate'), displayCalendar(date.getMonth(), date.getFullYear(), 'calendarSection', 'mainDate')">
         <div class="sidebar"> 
-            <h1 class="header"> Clover. </h1>
+            <h1> Clover. </h1>
              
             <h2> Planner. </h2>
             <table class="merriweather-font planner-list" id="plannerSection"> </table>
@@ -32,8 +32,8 @@
                 <p class="flex1" id="mainButton"> </p>
             </span>  
      
-            <p id="taskSection" style="display: none" class="background merriweather-font list task-list"> </p>
-            <p id="calendarSection" style="display: grid" class="main-div"> </p>
+            <p id="taskSection" style="display: grid" class="background merriweather-font list task-list"> </p>
+            <p id="calendarSection" style="display: none" class="main-div"> </p>
 
             <nav>
                 <input id="taskInput" class="merriweather-font input" placeholder="add a new task or else..." onkeydown="addTasks('taskInput')">
@@ -42,8 +42,7 @@
         </div>
         
         <p id="taskSidebar" style="display:none;"> </p>
-        <p id="event"> </p>
+        <p id="event" style="display:none;"> </p>
+        <p id="nothing" style="display:none;"> </p>
     </body> 
 </html>
-
-<!-- This version is not fully finished. There are still things such as the calendar, task sorting or the task sidebar that needs fixing or implementation -->
