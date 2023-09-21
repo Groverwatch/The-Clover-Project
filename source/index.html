@@ -8,43 +8,65 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Lusitana:wght@400;700&family=Merriweather:ital,wght@0,300;0,400;0,900;1,400&display=swap" rel="stylesheet">
         
         <link rel="icon" href="images/icon.png" type="image/x-icon">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="styles/input.css">
         <script src="script.js"> </script>
     </head>
 
-    <body class="flex" onload="loadCalendarSelect(), displayPlanners(), displayTasks(), displayCalendar(date.getMonth(), date.getFullYear(), 'sidebarCalendar', 'sidebarDate'), displayCalendar(date.getMonth(), date.getFullYear(), 'calendarSection', 'mainDate')">
-        <div class="sidebar"> 
-            <h1> Clover. </h1>
-             
-            <h2> Planner. </h2>
-            <table class="planner-list" id="plannerSection"> </table>
+    <body class="flex">
+        <section class="sidebar"> 
+            <h1 class="sidebar-title"> Clover. </h1>
 
-            <p id="sidebarDate"> </p> 
-            <div class="sidebar-div montserrat-font" id="sidebarCalendar"> </div>
+            <article class="planner-list">
+                <h1 class="planner-title"> Planner. </h1>
 
-            <div class="flex" id="sidebarButton"> 
-            </div>  
+                <aside class="planner">
+                    <input type="button" class="planner-button button">
+                    <p class="planner-text"> Planner One </p>
+                </aside>
 
-            <input id="plannerInput" class="planner-input" placeholder="add a new planner" onkeydown="addPlanners()">
-        </div>
+                <aside class="planner">
+                    <input type="button" class="planner-button button">
+                    <p class="planner-text"> Planner One </p>
+                </aside>
+            </article>
+        </section>
 
-        <div class="main">
-            <span class="flex"> 
-                <p class="flex1 montserrat-font" id="mainDate"> </p> 
-                <p class="flex1" id="mainButton"> </p>
-            </span>  
-     
-            <p id="taskSection" style="display: grid" class="background list task-list"> </p>
-            <p id="calendarSection" style="display: none" class="main-div"> </p>
+        <section class="main">
+            <h2 class="main-title"> Task List - Pending </h2>
 
-            <nav>
-                <input id="taskInput" class="merriweather-font" placeholder="add a new task or else..." onkeydown="addTasks('taskInput')">
-                <button id="switch" class="merriweather-font" onclick="swap('taskSection', 'calendarSection')"> calendar? </button>
+            <article> 
+                <aside class="task"> 
+                    <div> 
+                        <h3> Task Name </h3>
+                        <p> Details, Details</p>    
+                    </div>
+
+                    <input type="button" class="task-button button">
+                </aside>
+
+                <aside class="task"> 
+                    <div> 
+                        <h3> Task Name </h3>
+                        <p> Details, Details</p>    
+                    </div>
+
+                    <input type="button" class="task-button button">
+                </aside>
+
+                <aside class="task"> 
+                    <div> 
+                        <h3> Task Name </h3>
+                        <p> Details, Details</p>    
+                    </div>
+
+                    <input type="button" class="task-button button">
+                </aside>
+            </article>
+
+            <nav class="task-add"> 
+                <input type="text" class="task-input input">
             </nav>
-        </div>
-        
-        <p id="taskSidebar" style="display:none;"> </p>
-        <p id="event" style="display:none;"> </p>
-        <p id="nothing" style="display:none;"> </p>
+        </section>
     </body> 
 </html>

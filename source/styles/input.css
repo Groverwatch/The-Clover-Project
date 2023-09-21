@@ -1,0 +1,24 @@
+.button {
+    border-radius: 40px;
+    border: none;
+}
+
+.button:hover { 
+    filter: brightness(98%);
+}
+
+.button:active {
+    filter: brightness(96%);
+}
+
+.input {
+    border-radius: 40px;
+    border: none;
+    padding-left: 20px;
+}
+
+.input:focus {
+    filter: brightness(96%);
+    border: white;
+    outline: none;
+}
