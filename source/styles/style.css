@@ -75,6 +75,15 @@ body {
     filter:brightness(95%);
 }
 
+.task-planner-colour {
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    background-color: var(--sidebar);
+    border-radius: 8px 8px 8px 8px;
+    margin: 0px 5px 0px 2px;
+}
+
 /* Add Task Styling */
 .task-add {
     display: flex;
@@ -96,6 +105,10 @@ body {
     width: 700px;
 }
 
+#task-list {
+    height: 725px;
+}
+
 .planner {
     display:flex;
 }
@@ -105,9 +118,9 @@ body {
     padding: 0px 0px 10px 0px;
 }
 
-.planner-button {
-    width: 22px;
-    height: 22px;
+.planner-checkbox {
+    width: 20px;
+    height: 20px;
     margin: 0px 10px 10px 2px;
     background-color: black;
 }

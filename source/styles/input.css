@@ -22,3 +22,7 @@
     border: white;
     outline: none;
 }
+
+.checkbox {
+    accent-color: black;
+}

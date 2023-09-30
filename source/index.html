@@ -13,33 +13,30 @@
         <script src="script.js"> </script>
     </head>
 
-    <body class="flex" onload="displayTask()">
+    <body class="flex" onload="displayPlanners(), displayTasks()">
         <section class="sidebar"> 
             <h1 class="sidebar-title"> Clover. </h1>
 
             <article class="planner-list">
                 <h1 class="planner-title"> Planner. </h1>
 
-                <aside class="planner">
-                    <input type="button" class="planner-button button">
-                    <p class="planner-text"> Planner One </p>
-                </aside>
-
-                <aside class="planner">
-                    <input type="button" class="planner-button button">
-                    <p class="planner-text"> Planner One </p>
-                </aside>
+                <form id="planner-list"> 
+                    <!-- Planners appear here -->
+                </form>
             </article>
         </section>
 
-        <section class="main">
+        <section class="main" id="main">
             <h2 class="main-title"> Task List - Pending </h2>
 
             <article id="task-list"> 
+                <!-- Task appear here.  -->
             </article>
 
             <nav class="task-add"> 
-                <input type="text" id="task-input" class="task-input input" onkeydown="addTask()">
+                <div> 
+                    <input type="text" id="task-input" class="task-input input" onkeydown="addTask()">
+                </div>
             </nav>
         </section>
     </body> 
