@@ -1,6 +1,8 @@
 <!-- This version is not fully finished. There are still many things that need to be implemented properly. This version was done on 14 / 08 / 22 -->
 
 <html>
+    <script src="script/script.js"> </script>
+    
     <head>
         <title> Clover - Task List</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,10 +12,9 @@
         <link rel="icon" href="images/icon.png" type="image/x-icon">
         <link rel="stylesheet" href="styles/style.css">
         <link rel="stylesheet" href="styles/input.css">
-        <script src="script.js"> </script>
     </head>
 
-    <body class="flex" onload="displayPlanners(), displayTasks()">
+    <body class="flex">
         <section class="sidebar"> 
             <h1 class="sidebar-title"> Clover. </h1>
 
@@ -35,9 +36,11 @@
 
             <nav class="task-add"> 
                 <div> 
-                    <input type="text" id="task-input" class="task-input input" onkeydown="addTask()">
+                    <input type="text" id="task-input" class="task-input input">
                 </div>
             </nav>
         </section>
     </body> 
+
+    <script src="script/eventListener.js"> </script>
 </html>

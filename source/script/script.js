@@ -58,11 +58,6 @@ function displayTask(i) {
 
     html += `<aside class="task"> <div> <h3> ${tasks[i].getName()} </h3>  <span>`;
 
-    if (tasks[i].getPlanner().getName() != null) {
-        html += `<div class="task-planner-colour" style="background-color: ${tasks[i].getPlanner().getColour()}"> </div>`;
-        html += `${tasks[i].getPlanner().getName()}, `;
-    }
-
     if (tasks[i].getDate() != null) {
         html += `${tasks[i].getDate()}, `;
     }
@@ -70,30 +65,32 @@ function displayTask(i) {
         html += `${tasks[i].getDescription()}, `;
     }
 
+    if (tasks[i].getPlanner().getName() != null) {
+        html += `<div class="task-planner-colour" style="background-color: ${tasks[i].getPlanner().getColour()}"> </div>`;
+        html += `${tasks[i].getPlanner().getName()}, `;
+    }
+
     html += `</span> </div> <input type="button" class="task-button button"> </aside>`;
     
     return html;
 }
 
-function addTask() {
-    if (event.key == 'Enter' && document.getElementById("task-input").value != "") {
-        details = document.getElementById("task-input").value;
-        taskDetails = details.split(', ');
-        plannerDetails = new Planner(taskDetails[3], "#54333A");
-        tasks.push(new Task(taskDetails[0], taskDetails[1], taskDetails[2], plannerDetails));
-        displayTasks();
-    }
+function add() {
+    details = document.getElementById("task-input").value;
+    taskDetails = details.split(', ');
+    plannerDetails = new Planner(taskDetails[3], "#54333A");
+    tasks.push(new Task(taskDetails[0], taskDetails[1], taskDetails[2], secondPlanner));
+    displayTasks();
 }
 
 function displayPlanners() {
     html = "";
 
     for (i = 0; i < planners.length; i++) {
-        html += 
-        `<aside class="planner">
-            <input type="checkbox" name="${planners[i].getName()}" class="planner-checkbox checkbox" style="accent-color: ${planners[i].getColour()}" onclick="displayTasks()" checked> 
-            <p class="planner-text"> ${planners[i].getName()} </p>
-        </aside>`
+        html += `<aside class="planner">
+                    <input type="checkbox" name="${planners[i].getName()}" class="planner-checkbox checkbox" style="accent-color: ${planners[i].getColour()}" onclick="displayTasks()" checked> 
+                    <p class="planner-text"> ${planners[i].getName()} </p>
+                 </aside>`;
     }
 
     document.getElementById("planner-list").innerHTML = html;
