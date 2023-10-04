@@ -42,16 +42,17 @@ tasks = [];
 planners = [];
 
 firstPlanner = new Planner("School", "#7EA16B");
-planners[0] = firstPlanner;
-firstTask = new Task("Finish Homework", "24/03/13", "Science", firstPlanner);
-tasks[0] = firstTask;
-
 secondPlanner = new Planner("Testing", "#DECE85");
+
+planners[0] = firstPlanner;
 planners[1] = secondPlanner;
-secondTask = new Task("Finish Cooking", "28/04/13", "Create Biriyani", secondPlanner);
-tasks[1] = secondTask;
-tasks[2] = secondTask;
-tasks[3] = secondTask;
+
+tasks[0] = new Task("Test 1", "24/03/13", "Science", firstPlanner);
+tasks[1] = new Task("Nessago", "28/04/13", "Create Biriyani", secondPlanner);
+tasks[2] = new Task("Holly Mollo", "24/03/13", "Science", firstPlanner);
+tasks[3] = new Task("East Side", "28/04/13", "Create Biriyani", secondPlanner);
+tasks[4] = new Task("Finish Cooking", "28/04/13", "Create Biriyani", secondPlanner);
+tasks[5] = new Task("Finish Homework", "24/03/13", "Science", firstPlanner);
 
 function displayTask(i) {
     html = "";
@@ -70,16 +71,22 @@ function displayTask(i) {
         html += `${tasks[i].getPlanner().getName()}, `;
     }
 
-    html += `</span> </div> <input type="button" class="task-button button"> </aside>`;
+    html += `</span> </div> <input type="button" class="task-button button" id="${i}"> </aside>`;
+    // html += `</span> </div> <input type="button" class="task-button button" id="${i}" onclick="deleteTask(this)"> </aside>`;
     
     return html;
 }
 
-function add() {
+function addTask() {
     details = document.getElementById("task-input").value;
     taskDetails = details.split(', ');
     plannerDetails = new Planner(taskDetails[3], "#54333A");
     tasks.push(new Task(taskDetails[0], taskDetails[1], taskDetails[2], secondPlanner));
+    displayTasks();
+}
+
+function deleteTask(button) {
+    tasks.splice(button.id, 1);
     displayTasks();
 }
 
@@ -97,16 +104,14 @@ function displayPlanners() {
 }
 
 function displayTasks() {
-    const inputFields = document.querySelectorAll("#planner-list input[type='checkbox']");
+    plannerInput = document.querySelectorAll("#planner-list input[type='checkbox']");
     html = "";
 
-    for (i = 0; i < inputFields.length; i++) {
-        if (inputFields[i].checked == true) {
-            for (j = 0; j < tasks.length; j++) {
-                if (tasks[j].getPlanner().getName() == planners[i].getName()) {
-                    html += displayTask(j);
-                }
-            }  
+    for (i = 0; i < plannerInput.length; i++) {
+        for (j = 0; j < tasks.length; j++) {
+            if (tasks[j].getPlanner().getName() == planners[i].getName() && plannerInput[i].checked == true) {
+                html += displayTask(j);
+            }
         }
     }
 
