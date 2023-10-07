@@ -1,30 +1,32 @@
+
 let body = document.getElementsByTagName("body")[0];
-window.onload = function()
+window.onload = function(e)
 {
     displayPlanners();
     displayTasks();
 }
 
-let taskInput = document.getElementById("task-input");
-taskInput.addEventListener("keydown", function(e) {
-    if (e.key == "Enter") { 
-        addTask();
-    }
+window.addEventListener("load", function() {
+    let taskInput = document.getElementById("task-input");
+
+    taskInput.addEventListener("keydown", function(event) {
+        if (event.key == "Enter") { 
+            addTask();
+        }
+    }); 
+
+    taskInput.value = "";
 });
 
-// deleteInput = document.querySelectorAll("#task-list input[type='button']");
-
-// deleteInput[0].addEventListener("click", function() {
-//     // console.log(deleteInput[i]);
-//     deleteTask(i);
-// });    
-
-
-// // console.log(deleteInput);
-
-// // for (i = 0; i < deleteInput.length; i++) {
-// //     deleteInput[i].addEventListener("click", function() {
-// //         console.log(deleteInput[i]);
-// //         deleteTask(i);
-// //     });    
-// // }
+// WORKS ONCE 
+// function deleteTaskEventListener() {
+//     console.log('AHHH');
+//     var deleteInputs = document.querySelectorAll("#task-list input[type='button']");
+    
+//     deleteInputs.forEach((input) =>
+//         input.addEventListener("click", function() {
+//             console.log(input);
+//             deleteTask(input);
+//         }
+//     ));
+// }
