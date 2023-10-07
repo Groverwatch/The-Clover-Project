@@ -100,9 +100,16 @@ body {
     background-color: white;
 }
 
+.task-input-div {
+    height: 40px;
+    width: 800px;
+    background-color: bisque;
+    border-radius: 40px 40px 40px 40px;
+}
+
 .task-input {
     height: 40px;
-    width: 700px;
+    width: 500px;
 }
 
 #task-list {

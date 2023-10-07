@@ -1,32 +1,19 @@
-
-let body = document.getElementsByTagName("body")[0];
-window.onload = function(e)
+window.onload = function()
 {
     displayPlanners();
     displayTasks();
+    displayPlannersInSelect();
 }
 
 window.addEventListener("load", function() {
-    let taskInput = document.getElementById("task-input");
+    let textInput = document.getElementById("text-add");
+    let buttonInput = document.getElementById("button-add");
 
-    taskInput.addEventListener("keydown", function(event) {
+    textInput.addEventListener("keydown", function(event) {
         if (event.key == "Enter") { 
             addTask();
         }
     }); 
 
-    taskInput.value = "";
+    buttonInput.addEventListener("click", addTask);
 });
-
-// WORKS ONCE 
-// function deleteTaskEventListener() {
-//     console.log('AHHH');
-//     var deleteInputs = document.querySelectorAll("#task-list input[type='button']");
-    
-//     deleteInputs.forEach((input) =>
-//         input.addEventListener("click", function() {
-//             console.log(input);
-//             deleteTask(input);
-//         }
-//     ));
-// }

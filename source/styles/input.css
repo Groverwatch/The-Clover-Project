@@ -26,3 +26,11 @@
 .checkbox {
     accent-color: black;
 }
+
+.select {
+    border: none;
+}
+
+.select:target {
+    border: none;
+}
