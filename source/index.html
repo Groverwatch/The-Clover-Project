@@ -15,10 +15,10 @@
 
     <body class="flex">
         <section class="sidebar"> 
-            <h1 class="sidebar-title"> Clover. </h1>
+            <h1 class="sidebar_title"> Clover. </h1>
 
-            <article class="planner-list">
-                <h1 class="planner-title"> Planner. </h1>
+            <article class="planners">
+                <h1 class="planners_title"> Planner. </h1>
 
                 <form id="plannerList"> 
                     <!-- Planners appear here -->
@@ -26,27 +26,24 @@
             </article>
         </section>
 
-        <section class="main" id="main">
-            <h2 class="main-title"> Task List - Pending </h2>
+        <section class="main">
+            <h2 class="main_title"> Task List - Pending </h2>
 
-            <article id="taskList"> 
+            <article id="taskList" class="task"> 
                 <!-- Task appear here.  -->
             </article>
 
-
-            <nav class="task-add"> 
-                <div class="task-input-div"> 
-                    <input type="button" id="modeChange" value="Planner"> </button>
-
-                    <input type="text" id="textInput" class="task-input input">
-                    
+            <nav class="inputs"> 
+                <div class="inputs_container"> 
+                    <input type="button" id="modeChange" value="Planner" class=""> 
+                    <input type="text" id="textInput" class="inputs_text input">
                     <input type="color" id="colorInput">
 
-                    <select class="task-input-select select" id="plannerInput"> 
+                    <select class="select" id="plannerInput"> 
                         <!-- Planners appear here -->
                     </select>
 
-                    <button id="buttonAdd"> + </button>
+                    <input type="button" id="buttonAdd" value="+"> 
                 </div>
             </nav>
         </section>

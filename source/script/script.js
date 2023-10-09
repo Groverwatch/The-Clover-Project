@@ -7,24 +7,28 @@ class Task {
     getName() {
         return this.name;
     }
+    
+    getPlannerName() {
+        return this.planner.getName();
+    }
 
-    getPlanner() {
-        return this.planner;
+    getPlannerColor() {
+        return this.planner.getColor();
     }
 }
 
 class Planner {
-    constructor (name, colour) {
+    constructor (name, color) {
         this.name = name;
-        this.colour = colour; 
+        this.color = color; 
     }
 
     getName() {
         return this.name;
     }
     
-    getColour() {
-        return this.colour;
+    getColor() {
+        return this.color;
     }
 }
 
@@ -47,16 +51,54 @@ tasks[5] = new Task("Finish Homework", firstPlanner);
 function displayTask(i) {
     html = "";
 
-    html += `<aside class="task"> <div> <h3> ${tasks[i].getName()} </h3>  <span>`;
+    html += `<aside class="task_container"> <div> <h3> ${tasks[i].getName()} </h3>  <span>`;
 
-    if (tasks[i].getPlanner().getName() != null) {
-        html += `<div class="task-planner-colour" style="background-color: ${tasks[i].getPlanner().getColour()}"> </div>`;
-        html += `${tasks[i].getPlanner().getName()}`;
+    if (tasks[i].getPlannerName() != null) {
+        html += `<div class="task_colour" style="background-color: ${tasks[i].getPlannerColor()}"> </div>`;
+        html += `${tasks[i].getPlannerName()}`;
     }
 
-    html += `</span> </div> <input type="button" class="task-button button" id="${i}" onclick="deleteTask(${i})"> </aside>`;
+    html += `</span> </div> <input type="button" class="task_button button" id="${i}" onclick="deleteTask(${i})"> </aside>`;
     
     return html;
+}
+
+function displayTasks() {
+    plannerInput = document.querySelectorAll("#plannerList input[type='checkbox']");
+    html = "";
+
+    for (i = 0; i < plannerInput.length; i++) {
+        for (j = 0; j < tasks.length; j++) {
+            if (tasks[j].getPlannerName() == planners[i].getName() && plannerInput[i].checked == true) {
+                html += displayTask(j);
+            }
+        }
+    }
+
+    document.getElementById("taskList").innerHTML = html;
+}
+
+function displayPlanners() {
+    html = "";
+
+    for (i = 0; i < planners.length; i++) {
+        html += `<aside class="flex">
+                    <input type="checkbox" name="${planners[i].getName()}" class="planners_checkbox checkbox" style="accent-color: ${planners[i].getColor()}" onclick="displayTasks()" checked> 
+                    <p class="planners_name"> ${planners[i].getName()} </p>
+                 </aside>`;
+    }
+
+    document.getElementById("plannerList").innerHTML = html;
+}
+
+function displayPlannersInSelect() {
+    html = "";
+
+    for (i = 0; i < planners.length; i++) {
+        html += `<option> ${planners[i].getName()} </option>`;
+    }
+    
+    document.getElementById("plannerInput").innerHTML = html;
 }
 
 function addTask() {
@@ -91,44 +133,6 @@ function addPlanner() {
 function deleteTask(position) {
     tasks.splice(position, 1);
     displayTasks();
-}
-
-function displayPlanners() {
-    html = "";
-
-    for (i = 0; i < planners.length; i++) {
-        html += `<aside class="planner">
-                    <input type="checkbox" name="${planners[i].getName()}" class="planner-checkbox checkbox" style="accent-color: ${planners[i].getColour()}" onclick="displayTasks()" checked> 
-                    <p class="planner-text"> ${planners[i].getName()} </p>
-                 </aside>`;
-    }
-
-    document.getElementById("plannerList").innerHTML = html;
-}
-
-function displayPlannersInSelect() {
-    html = "";
-
-    for (i = 0; i < planners.length; i++) {
-        html += `<option> ${planners[i].getName()} </option>`;
-    }
-    
-    document.getElementById("plannerInput").innerHTML = html;
-}
-
-function displayTasks() {
-    plannerInput = document.querySelectorAll("#plannerList input[type='checkbox']");
-    html = "";
-
-    for (i = 0; i < plannerInput.length; i++) {
-        for (j = 0; j < tasks.length; j++) {
-            if (tasks[j].getPlanner().getName() == planners[i].getName() && plannerInput[i].checked == true) {
-                html += displayTask(j);
-            }
-        }
-    }
-
-    document.getElementById("taskList").innerHTML = html;
 }
 
 function changeMode() {       

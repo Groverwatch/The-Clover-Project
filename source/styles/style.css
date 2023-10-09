@@ -1,3 +1,4 @@
+/* General Properties */
 :root {
     --text: black;
     --sidebar: white;
@@ -19,17 +20,8 @@ body {
     display: none;
 }
 
-/* Flex Properties */
 .flex {
     display: flex;
-}
-
-.flex1 {
-    flex: 1;
-}
-
-.flex4 {
-    flex: 4;
 }
 
 /* Sidebar Styling */
@@ -43,8 +35,29 @@ body {
     flex-direction: column;
 }   
 
-.sidebar-title {
+.sidebar_title {
     font-size: 40px;
+}
+
+/* Planner Styling */
+.planners {
+    min-height: 500px;
+}
+
+.planners_title {
+    font-size: 28px;
+    padding: 0px 0px 10px 0px;
+}
+
+.planners_checkbox {
+    width: 20px;
+    height: 20px;
+    margin: 0px 10px 10px 2px;
+    background-color: black;
+}
+
+.planners_name {
+    font-size: 18px;
 }
 
 /* Main Styling */
@@ -56,13 +69,17 @@ body {
     border-radius: 40px 0px 0px 40px;
 }
 
-.main-title {
+.main_title {
     padding: 10px 10px 10px 12px;
     font-family: Inter;
 }
 
 /* Task Styling */
 .task {
+    min-height: 725px;
+}
+
+.task_container {
     display: flex;
     justify-content: space-between;
     padding: 10px;
@@ -70,12 +87,12 @@ body {
     border-radius: 20px;
 }
 
-.task:hover {
+.task_container:hover {
     background-color: var(--main);
     filter:brightness(95%);
 }
 
-.task-planner-colour {
+.task_colour {
     display: inline-block;
     height: 10px;
     width: 10px;
@@ -84,8 +101,15 @@ body {
     margin: 0px 5px 0px 2px;
 }
 
-/* Add Task Styling */
-.task-add {
+.task_button {
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    background-color: white;
+}
+
+/* Inputs Styling, ic = inputs container */
+.inputs {
     display: flex;
     padding: 10px 10px 0px 10px;
     margin: 5px;
@@ -94,48 +118,15 @@ body {
     position:absolute;
 }
 
-.task-button {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-}
-
-.task-input-div {
+.inputs_container {
     height: 40px;
     width: 800px;
     background-color: bisque;
     border-radius: 40px 40px 40px 40px;
 }
 
-.task-input {
+.inputs_text {
+    border-radius: 40px;
     height: 40px;
     width: 500px;
-}
-
-#task-list {
-    height: 725px;
-}
-
-.planner {
-    display:flex;
-}
-
-.planner-title {
-    font-size: 28px;
-    padding: 0px 0px 10px 0px;
-}
-
-.planner-checkbox {
-    width: 20px;
-    height: 20px;
-    margin: 0px 10px 10px 2px;
-    background-color: black;
-}
-
-.planner-list {
-    height: 500px;
-}
-
-.planner-text {
-    font-size: 18px;
 }
