@@ -127,7 +127,6 @@ function addPlanner() {
     displayPlanners();
 
     document.getElementById("textInput").value = "";
-    document.getElementById("colorInput").value = "#000000";
 }
 
 function deleteTask(position) {
@@ -147,6 +146,6 @@ function changeMode() {
     else {
         input.value = "Planner";
         document.getElementById("plannerInput").style = "display: none";
-        document.getElementById("colorInput").style = "display: inline-block";
+        document.getElementById("colorInput").style = "";
     }
 }

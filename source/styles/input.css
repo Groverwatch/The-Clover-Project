@@ -1,5 +1,6 @@
 .button {
     border: none;
+    font-family: 'Lusitana', serif;
 }
 
 .button:hover { 
@@ -11,8 +12,11 @@
 }
 
 .input {
+    font-family: 'Lusitana', serif;
+    font-size: 16px;
     border: none;
     padding-left: 20px;
+    padding-right: 20px;
 }
 
 .input:focus {
@@ -26,6 +30,7 @@
 }
 
 .select {
+    font-family: 'Lusitana', serif;
     border: none;
 }
 

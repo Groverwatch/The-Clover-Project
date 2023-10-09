@@ -112,21 +112,40 @@ body {
 .inputs {
     display: flex;
     padding: 10px 10px 0px 10px;
-    margin: 5px;
+    margin: 5px 5px 5px 5px;
 
     justify-content: space-between;
     position:absolute;
 }
 
-.inputs_container {
+.inputs_mode {
+    width: 80px;
     height: 40px;
-    width: 800px;
-    background-color: bisque;
-    border-radius: 40px 40px 40px 40px;
+    border-radius: 40px 0px 0px 40px;
+    background-color: var(--sidebar);
 }
 
 .inputs_text {
-    border-radius: 40px;
     height: 40px;
     width: 500px;
+}
+
+.inputs_color {
+    width: 80px;
+    height: 40px;
+    border: none;
+    background-color: var(--sidebar)
+}
+
+.inputs_select {
+    height: 40px;
+    min-width: 80px;
+}
+
+.inputs_add {
+    height: 40px;
+    width: 50px;
+    border-radius: 0px 40px 40px 0px;
+    background-color: var(--sidebar);
+    font-size: 18px;
 }
