@@ -20,7 +20,7 @@
             <article class="planner-list">
                 <h1 class="planner-title"> Planner. </h1>
 
-                <form id="planner-list"> 
+                <form id="plannerList"> 
                     <!-- Planners appear here -->
                 </form>
             </article>
@@ -29,30 +29,24 @@
         <section class="main" id="main">
             <h2 class="main-title"> Task List - Pending </h2>
 
-            <article id="task-list"> 
+            <article id="taskList"> 
                 <!-- Task appear here.  -->
             </article>
 
+
             <nav class="task-add"> 
-                <!-- <div class="task-input-div"> 
-                    <button id="addMode"> Task </button>
-
-                    <input type="text" id="text-add" class="task-input input">
-
-                    <input type="color" id="color-add">
-
-                    <button id="button-add"> + </button>
-                </div> -->
-
                 <div class="task-input-div"> 
-                    <button id="addMode"> Task </button>
+                    <input type="button" id="modeChange" value="Planner"> </button>
 
-                    <input type="text" id="text-add" class="task-input input">
+                    <input type="text" id="textInput" class="task-input input">
+                    
+                    <input type="color" id="colorInput">
 
-                    <select class="task-input-select select" id="task-input-select"> 
+                    <select class="task-input-select select" id="plannerInput"> 
+                        <!-- Planners appear here -->
                     </select>
 
-                    <button id="button-add"> + </button>
+                    <button id="buttonAdd"> + </button>
                 </div>
             </nav>
         </section>

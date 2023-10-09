@@ -3,17 +3,36 @@ window.onload = function()
     displayPlanners();
     displayTasks();
     displayPlannersInSelect();
+    changeMode();
 }
 
 window.addEventListener("load", function() {
-    let textInput = document.getElementById("text-add");
-    let buttonInput = document.getElementById("button-add");
+    let textInput = document.getElementById("textInput");
+    let buttonAdd = document.getElementById("buttonAdd");
+    let modeChange = document.getElementById("modeChange");
+
+    modeChange.addEventListener("click", changeMode);
 
     textInput.addEventListener("keydown", function(event) {
         if (event.key == "Enter") { 
-            addTask();
+            if (modeChange.value == "Task") {
+                addTask();
+            }
+
+            else {
+                addPlanner();
+            }
         }
+        
     }); 
 
-    buttonInput.addEventListener("click", addTask);
+    buttonAdd.addEventListener("click", function() {
+        if (modeChange.value == "Task") {
+            addTask();
+        }
+    
+        else {
+            addPlanner();
+        }
+    }); 
 });

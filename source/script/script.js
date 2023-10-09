@@ -60,8 +60,8 @@ function displayTask(i) {
 }
 
 function addTask() {
-    taskName = document.getElementById("text-add").value;
-    plannerName = document.getElementById("task-input-select").value;
+    taskName = document.getElementById("textInput").value;
+    plannerName = document.getElementById("plannerInput").value;
     
     for (i = 0; i < planners.length; i++) {
         if (planners[i].getName() == plannerName) {
@@ -72,22 +72,21 @@ function addTask() {
 
     displayTasks();
 
-    document.getElementById("text-add").value = "";
+    document.getElementById("textInput").value = "";
 }
 
-// function addPlanner() {
-//     plannerName = document.getElementById("text-add").value;
-//     plannerColour = document.getElementById("color-add").value;
+function addPlanner() {
+    plannerName = document.getElementById("textInput").value;
+    plannerColour = document.getElementById("colorInput").value;
 
-//     console.log(plannerColour);
-//     newPlanner = new Planner(plannerName, plannerColour);
-//     planners.push(newPlanner);
+    planners.push(new Planner(plannerName, plannerColour));
 
-//     displayPlannersInSelect();
+    displayPlannersInSelect();
+    displayPlanners();
 
-//     document.getElementById("text-add").value = "";
-//     document.getElementById("plannerColour").value = "";
-// }
+    document.getElementById("textInput").value = "";
+    document.getElementById("colorInput").value = "#000000";
+}
 
 function deleteTask(position) {
     tasks.splice(position, 1);
@@ -104,7 +103,7 @@ function displayPlanners() {
                  </aside>`;
     }
 
-    document.getElementById("planner-list").innerHTML = html;
+    document.getElementById("plannerList").innerHTML = html;
 }
 
 function displayPlannersInSelect() {
@@ -114,11 +113,11 @@ function displayPlannersInSelect() {
         html += `<option> ${planners[i].getName()} </option>`;
     }
     
-    document.getElementById("task-input-select").innerHTML = html;
+    document.getElementById("plannerInput").innerHTML = html;
 }
 
 function displayTasks() {
-    plannerInput = document.querySelectorAll("#planner-list input[type='checkbox']");
+    plannerInput = document.querySelectorAll("#plannerList input[type='checkbox']");
     html = "";
 
     for (i = 0; i < plannerInput.length; i++) {
@@ -129,5 +128,21 @@ function displayTasks() {
         }
     }
 
-    document.getElementById("task-list").innerHTML = html;
+    document.getElementById("taskList").innerHTML = html;
+}
+
+function changeMode() {       
+    input = document.getElementById("modeChange");
+
+    if (input.value == "Planner") {
+        input.value = "Task";
+        document.getElementById("plannerInput").style = "display: inline-block";
+        document.getElementById("colorInput").style = "display: none";
+    }
+
+    else {
+        input.value = "Planner";
+        document.getElementById("plannerInput").style = "display: none";
+        document.getElementById("colorInput").style = "display: inline-block";
+    }
 }
