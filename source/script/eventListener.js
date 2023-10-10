@@ -1,5 +1,8 @@
 window.onload = function()
 {
+    firstPlanner = new Planner("General", "#7EA16B");
+    planners.push(firstPlanner);
+
     displayPlanners();
     displayTasks();
     displayPlannersInSelect();

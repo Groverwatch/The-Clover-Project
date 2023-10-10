@@ -35,19 +35,6 @@ class Planner {
 tasks = [];
 planners = [];
 
-firstPlanner = new Planner("School", "#7EA16B");
-secondPlanner = new Planner("Testing", "#DECE85");
-
-planners[0] = firstPlanner;
-planners[1] = secondPlanner;
-
-tasks[0] = new Task("Test 1", firstPlanner);
-tasks[1] = new Task("Nessago", secondPlanner);
-tasks[2] = new Task("Holly Mollo", firstPlanner);
-tasks[3] = new Task("East Side", secondPlanner);
-tasks[4] = new Task("Finish Cooking", secondPlanner);
-tasks[5] = new Task("Finish Homework", firstPlanner);
-
 function displayTask(i) {
     html = "";
 
