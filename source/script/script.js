@@ -121,18 +121,54 @@ function deleteTask(position) {
     displayTasks();
 }
 
-function changeMode() {       
-    input = document.getElementById("modeChange");
+function changeMode() {   
+    selectedMode = document.querySelector("input[name='Mode']:checked").value;
+    rootCSS = document.querySelector(':root');    
 
-    if (input.value == "Planner") {
-        input.value = "Task";
-        document.getElementById("plannerInput").style = "display: inline-block";
-        document.getElementById("colorInput").style = "display: none";
+    plannerInput = document.getElementById("plannerInput");
+    colorInput = document.getElementById("colorInput");
+    textInput = document.getElementById("textInput");
+    buttonAdd = document.getElementById("buttonAdd");
+
+    if (selectedMode == "Task") {
+        plannerInput.style.display = "block";
+        colorInput.style.display = "none";
+        buttonAdd.style.display = "block";
+        textInput.style.display = "block";
+        textInput.placeholder = "Add a new task.";
+
+        rootCSS.style.setProperty('--selectedColor', 'var(--taskColor)');
     }
 
-    else {
-        input.value = "Planner";
-        document.getElementById("plannerInput").style = "display: none";
-        document.getElementById("colorInput").style = "";
+    else if (selectedMode == "Planner") {
+        plannerInput.style.display = "none";
+        colorInput.style.display = "block";
+        buttonAdd.style.display = "block";
+        textInput.style.display = "block";
+        textInput.placeholder = "Add a new planner.";
+
+        rootCSS.style.setProperty('--selectedColor', 'var(--plannerColor)');
     }
+
+    else if (selectedMode == "Calendar") {
+        plannerInput.style.display = "none";
+        colorInput.style.display = "none";
+        textInput.style.display = "none";
+        buttonAdd.style.display = "none";
+
+        rootCSS.style.setProperty('--selectedColor', 'var(--calendarColor)');
+    }
+
+
+    // if (input.value == "Planner") {
+    //     input.value = "Task";
+    //     document.getElementById("plannerInput").style = "display: inline-block";
+    //     document.getElementById("colorInput").style = "display: none";
+    // }
+
+    // else {
+    //     input.value = "Planner";
+    //     document.getElementById("plannerInput").style = "display: none";
+    //     document.getElementById("colorInput").style = "";
+    // }
 }
