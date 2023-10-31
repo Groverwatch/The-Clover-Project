@@ -1,50 +1,69 @@
-<!-- This version is not fully finished. There are still many things that need to be implemented properly. This version was done on 14 / 08 / 22 -->
-
 <html>
     <head>
         <title> Clover - Task List</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Lusitana:wght@400;700&family=Merriweather:ital,wght@0,300;0,400;0,900;1,400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         
         <link rel="icon" href="images/icon.png" type="image/x-icon">
-        <link rel="stylesheet" href="style.css">
-        <script src="script.js"> </script>
+        <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="styles/input.css">
+
+        <script src="script/script.js"> </script>
+        <script src="script/eventListener.js"> </script>      
     </head>
 
-    <body class="flex" onload="loadCalendarSelect(), displayPlanners(), displayTasks(), displayCalendar(date.getMonth(), date.getFullYear(), 'sidebarCalendar', 'sidebarDate'), displayCalendar(date.getMonth(), date.getFullYear(), 'calendarSection', 'mainDate')">
-        <div class="sidebar"> 
-            <h1> Clover. </h1>
-             
-            <h2> Planner. </h2>
-            <table class="planner-list" id="plannerSection"> </table>
+    <body class="flex">
+        <section class="sidebar"> 
+            <h1 class="sidebar_title"> Clover. </h1>
 
-            <p id="sidebarDate"> </p> 
-            <div class="sidebar-div montserrat-font" id="sidebarCalendar"> </div>
+            <article class="planners">
+                <h1 class="planners_title"> Planner. </h1>
 
-            <div class="flex" id="sidebarButton"> 
-            </div>  
+                <form id="plannerList"> 
+                    <!-- Planners appear here -->
+                </form>
+            </article>
+        </section>
 
-            <input id="plannerInput" class="planner-input" placeholder="add a new planner" onkeydown="addPlanners()">
-        </div>
+        <section class="main">
+            <h2 class="main_title"> Task List </h2>
 
-        <div class="main">
-            <span class="flex"> 
-                <p class="flex1 montserrat-font" id="mainDate"> </p> 
-                <p class="flex1" id="mainButton"> </p>
-            </span>  
-     
-            <p id="taskSection" style="display: grid" class="background list task-list"> </p>
-            <p id="calendarSection" style="display: none" class="main-div"> </p>
+            <article id="taskList" class="task"> 
+                <!-- Task appear here.  -->
+            </article>
 
-            <nav>
-                <input id="taskInput" class="merriweather-font" placeholder="add a new task or else..." onkeydown="addTasks('taskInput')">
-                <button id="switch" class="merriweather-font" onclick="swap('taskSection', 'calendarSection')"> calendar? </button>
+            <nav class="inputs"> 
+                <div class="flex"> 
+                    <input type="text" id="textInput" class="inputs_text input"> 
+                    <!-- change textInput to textAdd -->
+                    <input type="color" id="colorInput" class="inputs_color">
+
+                    <select id="plannerInput" class="inputs_select select"> 
+                        <!-- Planners appear here -->
+                    </select>
+
+                    <input type="button" id="buttonAdd" value="+" class="inputs_add button"> 
+                </div>
+
+                <div class="mode flex">
+                    <label class="mode_label"> 
+                        <input type="radio" name="Mode" value="Task" onchange="changeMode()" checked>
+                        <span class="material-symbols-outlined mode_radio"> check_box </span>                    
+                    </label>
+                    
+                    <label class="mode_label"> 
+                        <input type="radio" name="Mode" value="Planner" onchange="changeMode()">
+                        <span class="material-symbols-outlined mode_radio"> inventory_2 </span> 
+                    </label>
+    
+                    <label class="mode_label"> 
+                        <input type="radio" name="Mode" value="Calendar" onchange="changeMode()">
+                        <span class="material-symbols-outlined mode_radio"> calendar_month</span>                    
+                    </label>    
+                </div>
             </nav>
-        </div>
-        
-        <p id="taskSidebar" style="display:none;"> </p>
-        <p id="event" style="display:none;"> </p>
-        <p id="nothing" style="display:none;"> </p>
+        </section>
     </body> 
 </html>

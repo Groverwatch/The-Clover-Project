@@ -1,0 +1,169 @@
+/* General Properties */
+:root {
+    --text: black;
+    --sidebar: white;
+    
+    --taskColor: #e2e7cd;
+    --calendarColor: #c1c0db;
+    --plannerColor: #caa4a4;
+
+    --selectedColor: var(--taskColor);
+}
+
+* {
+    margin: 0;
+}
+
+body {
+    color: var(--text);
+    background-color: var(--sidebar);    
+    font-weight: 400;
+    font-family: 'Lusitana', serif;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.flex {
+    display: flex;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    padding: 20px;
+    width: 20%;
+    min-width: 20%; 
+    background-color: var(--sidebar);  
+    display: flex;
+    justify-content: space-between;  
+    flex-direction: column;
+}   
+
+.sidebar_title {
+    font-size: 40px;
+}
+
+/* Planner Styling */
+.planners {
+    min-height: 500px;
+}
+
+.planners_title {
+    font-size: 28px;
+    padding: 0px 0px 10px 0px;
+}
+
+.planners_checkbox {
+    width: 20px;
+    height: 20px;
+    margin: 0px 10px 10px 2px;
+    background-color: black;
+}
+
+.planners_name {
+    font-size: 18px;
+}
+
+/* Main Styling */
+.main {
+    width: 110%; 
+    min-width: 10%;
+    background-color: var(--selectedColor);
+    padding: 30px;
+    border-radius: 40px 0px 0px 40px;
+}
+
+.main_title {
+    padding: 10px 10px 10px 12px;
+    font-family: Inter;
+}
+
+/* Task Styling */
+.task {
+    min-height: 725px;
+    max-height: 725px;
+    overflow-y: scroll;
+}
+
+.task_container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 0px 0px 0px 0px;
+    border-radius: 20px;
+}
+
+.task_container:hover {
+    background-color: var(--selectedColor);
+    filter:brightness(95%);
+}
+
+.task_colour {
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    background-color: var(--sidebar);
+    border-radius: 8px 8px 8px 8px;
+    margin: 0px 5px 0px 2px;
+}
+
+.task_button {
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    background-color: white;
+}
+
+/* Inputs Styling, ic = inputs container */
+.inputs {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 10px 10px 0px 10px;
+    margin: 5px 5px 5px 5px;
+}
+
+.inputs_mode {
+    width: 80px;
+    height: 40px;
+    border-radius: 40px 0px 0px 40px;
+    background-color: var(--sidebar);
+}
+
+.inputs_text {
+    height: 40px;
+    width: 500px;
+    border-radius: 40px 0px 0px 40px;
+}
+
+.inputs_color {
+    width: 80px;
+    height: 40px;
+    border: none;
+    background-color: var(--sidebar)
+}
+
+.inputs_select {
+    height: 40px;
+    min-width: 80px;
+}
+
+.inputs_add {
+    height: 40px;
+    width: 50px;
+    border-radius: 0px 40px 40px 0px;
+    background-color: var(--sidebar);
+    font-size: 18px;
+}
+
+.mode {
+    justify-content: space-evenly;
+    align-items: center;
+
+    background-color: white;
+    height: 40px;
+    width: 120px;
+
+    border-radius: 40px;
+}
