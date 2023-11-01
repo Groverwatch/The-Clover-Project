@@ -74,7 +74,6 @@
     filter: brightness(96%);
 }
 
-
 /* General Icon Styling for Mode Radio*/
 .material-symbols-outlined {
     font-variation-settings:
@@ -113,5 +112,29 @@ input[name="Mode"]:checked + .mode_radio {
 }
 
 ::-webkit-scrollbar {
+    background-color: transparent;
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--sidebar);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+::-moz-scrollbar {
+    background-color: transparent;
+    width: 10px;
+}
+
+::-moz-scrollbar-thumb {
+    background-color: var(--sidebar);
+    border-radius: 10px;
+}
+
+::-moz-scrollbar-button {
     display: none;
 }
