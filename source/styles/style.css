@@ -1,4 +1,4 @@
-/* General Properties */
+/* Setting Variables */
 :root {
     --text: black;
     --sidebar: white;
@@ -10,6 +10,7 @@
     --selectedColor: var(--taskColor);
 }
 
+/* General Properties */
 * {
     margin: 0;
 }
