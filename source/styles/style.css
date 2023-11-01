@@ -21,10 +21,6 @@ body {
     font-family: 'Lusitana', serif;
 }
 
-::-webkit-scrollbar {
-    display: none;
-}
-
 .flex {
     display: flex;
 }
@@ -89,7 +85,7 @@ body {
 .task_container {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    padding: 10px 10px 10px 14px;
     margin: 0px 0px 0px 0px;
     border-radius: 20px;
 }
@@ -138,15 +134,18 @@ body {
 }
 
 .inputs_color {
-    width: 80px;
+    display: none;
+    width: 120px;
     height: 40px;
+    padding: 5px 30px 5px 30px;
+    /* t r b l */
     border: none;
     background-color: var(--sidebar)
 }
 
 .inputs_select {
     height: 40px;
-    min-width: 80px;
+    width: 120px;
 }
 
 .inputs_add {

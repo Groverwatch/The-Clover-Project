@@ -82,7 +82,7 @@ function displayPlannersInSelect() {
     html = "";
 
     for (i = 0; i < planners.length; i++) {
-        html += `<option> ${planners[i].getName()} </option>`;
+        html += `<option class="option"> ${planners[i].getName()} </option>`;
     }
     
     document.getElementById("plannerInput").innerHTML = html;
@@ -158,17 +158,4 @@ function changeMode() {
 
         rootCSS.style.setProperty('--selectedColor', 'var(--calendarColor)');
     }
-
-
-    // if (input.value == "Planner") {
-    //     input.value = "Task";
-    //     document.getElementById("plannerInput").style = "display: inline-block";
-    //     document.getElementById("colorInput").style = "display: none";
-    // }
-
-    // else {
-    //     input.value = "Planner";
-    //     document.getElementById("plannerInput").style = "display: none";
-    //     document.getElementById("colorInput").style = "";
-    // }
 }
