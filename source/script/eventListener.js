@@ -1,9 +1,18 @@
 window.onload = function()
 {
     planners.push(new Planner("General", "#7EA16B"));
-    tasks.push(new Task("Testing", planners[0]));
+    planners.push(new Planner("asd", "#432AAA"));
 
-    displayPlanners();
+    tasks.push(new Task("1", planners[0]));
+    tasks.push(new Task("2", planners[0]));
+    tasks.push(new Task("3", planners[0]));
+    tasks.push(new Task("4", planners[0]));
+    tasks.push(new Task("5", planners[0]));
+    tasks.push(new Task("6", planners[1]));
+    tasks.push(new Task("7", planners[1]));
+    tasks.push(new Task("8", planners[1]));
+
+    displayPlannersInSidebar();
     displayTasks();
     displayPlannersInSelect();
 }

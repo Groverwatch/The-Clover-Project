@@ -94,7 +94,6 @@ input[name="Mode"] {
 }
 
 input[name="Mode"]:checked + .mode_radio {
-    /* color: #2bb375; */
     color: var(--text);
 }
 

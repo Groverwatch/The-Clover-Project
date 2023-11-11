@@ -28,38 +28,33 @@
         </section>
 
         <section class="main">
-            <h2 class="main_title"> Task List </h2>
+            <h2 class="main_title" id="title"> Task List </h2>
 
-            <article id="taskList" class="task"> 
+            <article id="taskList" class="task" style="display: block"> 
                 <!-- Task appear here.  -->
             </article>
 
             <nav class="inputs"> 
                 <div class="flex"> 
                     <input type="text" id="textInput" class="inputs_text input"> 
-                    <!-- change textInput to textAdd -->
                     <input type="color" id="colorInput" class="inputs_color color">
-
-                    <select id="plannerInput" class="inputs_select select"> 
-                        <!-- Planners appear here -->
-                    </select>
-
+                    <select id="plannerInput" class="inputs_select select"> </select>
                     <input type="button" id="buttonAdd" value="+" class="inputs_add button"> 
                 </div>
 
                 <div class="mode flex">
                     <label class="mode_label"> 
-                        <input type="radio" name="Mode" value="Task" onchange="changeMode()" checked>
+                        <input type="radio" name="Mode" value="Task" onchange="toggleMode()" checked>
                         <span class="material-symbols-outlined mode_radio"> check_box </span>                    
                     </label>
                     
                     <label class="mode_label"> 
-                        <input type="radio" name="Mode" value="Planner" onchange="changeMode()">
+                        <input type="radio" name="Mode" value="Planner" onchange="toggleMode()">
                         <span class="material-symbols-outlined mode_radio"> inventory_2 </span> 
                     </label>
     
                     <label class="mode_label"> 
-                        <input type="radio" name="Mode" value="Calendar" onchange="changeMode()">
+                        <input type="radio" name="Mode" value="Calendar" onchange="toggleMode()">
                         <span class="material-symbols-outlined mode_radio"> calendar_month</span>                    
                     </label>    
                 </div>
