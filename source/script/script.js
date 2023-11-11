@@ -48,9 +48,8 @@ class Planner {
 tasks = [];
 planners = [];
 
-function displayTasks() {
+function displayTasksInMain() {
     html = "";
-    index = 0;
     
     for (let i = 0; i < tasks.length; i++) {
         if (tasks[i].getPlannerVisiblity() == true) {
@@ -71,7 +70,7 @@ function displayTasks() {
     document.getElementById("taskList").innerHTML = html;
 }
 
-function displayPlanners() {
+function displayPlannersInMain() {
     html = "";
 
     for (let i = 0; i < planners.length; i++) {
@@ -125,7 +124,7 @@ function addTask() {
         }
     }
 
-    displayTasks();
+    displayTasksInMain();
 
     document.getElementById("textInput").value = "";
 }
@@ -136,7 +135,7 @@ function addPlanner() {
 
     planners.push(new Planner(plannerName, plannerColour));
 
-    displayPlanners();
+    displayPlannersInMain();
     displayPlannersInSelect();
     displayPlannersInSidebar();
 
@@ -152,14 +151,14 @@ function deletePlanner(position) {
 
     planners.splice(position, 1); 
 
-    displayPlanners();
+    displayPlannersInMain();
     displayPlannersInSelect();
     displayPlannersInSidebar();
 }
 
 function deleteTask(position) {
     tasks.splice(position, 1);
-    displayTasks();
+    displayTasksInMain();
 }
 
 function togglePlanner(input) {
@@ -173,7 +172,7 @@ function togglePlanner(input) {
         planners[index].setVisiblity(false);
     }
 
-    displayTasks();
+    displayTasksInMain();
 }
 
 function toggleMode() {   
@@ -186,7 +185,7 @@ function toggleMode() {
     buttonAdd = document.getElementById("buttonAdd");
 
     if (selectedMode == "Task") {
-        displayTasks();
+        displayTasksInMain();
         plannerInput.style.display = "block";
         colorInput.style.display = "none";
         buttonAdd.style.display = "block";
@@ -197,7 +196,7 @@ function toggleMode() {
     }
 
     else if (selectedMode == "Planner") {
-        displayPlanners();
+        displayPlannersInMain();
         plannerInput.style.display = "none";
         colorInput.style.display = "block";
         buttonAdd.style.display = "block";

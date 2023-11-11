@@ -13,7 +13,7 @@ window.onload = function()
     tasks.push(new Task("8", planners[1]));
 
     displayPlannersInSidebar();
-    displayTasks();
+    displayTasksInMain();
     displayPlannersInSelect();
 }
 
