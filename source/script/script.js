@@ -162,6 +162,7 @@ function deleteTask(position) {
 }
 
 function togglePlanner(input) {
+    selectedMode = document.querySelector("input[name='Mode']:checked").value;
     index = input.value;
 
     if (input.checked == true) {
@@ -172,13 +173,13 @@ function togglePlanner(input) {
         planners[index].setVisiblity(false);
     }
 
-    displayTasksInMain();
+    if (selectedMode == "Task") {
+        displayTasksInMain();
+    }
 }
 
 function toggleMode() {   
     selectedMode = document.querySelector("input[name='Mode']:checked").value;
-    rootCSS = document.querySelector(':root');    
-
     plannerInput = document.getElementById("plannerInput");
     colorInput = document.getElementById("colorInput");
     textInput = document.getElementById("textInput");
@@ -191,8 +192,6 @@ function toggleMode() {
         buttonAdd.style.display = "block";
         textInput.style.display = "block";
         textInput.placeholder = "Add a new task.";
-
-        rootCSS.style.setProperty('--selectedColor', 'var(--taskColor)');
     }
 
     else if (selectedMode == "Planner") {
@@ -202,7 +201,5 @@ function toggleMode() {
         buttonAdd.style.display = "block";
         textInput.style.display = "block";
         textInput.placeholder = "Add a new planner.";
-
-        rootCSS.style.setProperty('--selectedColor', 'var(--taskColor)');
     }
 }

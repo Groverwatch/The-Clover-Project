@@ -111,7 +111,7 @@ body {
     background-color: white;
 }
 
-/* Inputs Styling, ic = inputs container */
+/* Inputs Styling */
 .inputs {
     display: flex;
     justify-content: space-between;

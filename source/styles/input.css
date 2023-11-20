@@ -59,6 +59,7 @@
     -moz-appearance: none;
 
     border: none;
+    cursor: pointer;
 }
 
 .color::-webkit-color-swatch {
@@ -74,7 +75,7 @@
     filter: brightness(96%);
 }
 
-/* General Icon Styling for Mode Radio*/
+/* General Icon Styling for Mode Radio */
 .material-symbols-outlined {
     font-variation-settings:
     'FILL' 1,
