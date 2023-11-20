@@ -90,6 +90,11 @@ body {
     border-radius: 20px;
 }
 
+.task-subtitle {
+    display: inline-flex;
+    align-items: center;
+}
+
 .task_container:hover {
     background-color: var(--selectedColor);
     filter:brightness(95%);
@@ -110,6 +115,7 @@ body {
     border-radius: 40px;
     background-color: white;
 }
+
 
 /* Inputs Styling */
 .inputs {
