@@ -1,4 +1,4 @@
-/* General Properties */
+/* Setting Variables */
 :root {
     --text: black;
     --sidebar: white;
@@ -10,6 +10,7 @@
     --selectedColor: var(--taskColor);
 }
 
+/* General Properties */
 * {
     margin: 0;
 }
@@ -19,10 +20,6 @@ body {
     background-color: var(--sidebar);    
     font-weight: 400;
     font-family: 'Lusitana', serif;
-}
-
-::-webkit-scrollbar {
-    display: none;
 }
 
 .flex {
@@ -70,7 +67,7 @@ body {
     width: 110%; 
     min-width: 10%;
     background-color: var(--selectedColor);
-    padding: 30px;
+    padding: 30px 30px 30px 30px;
     border-radius: 40px 0px 0px 40px;
 }
 
@@ -89,8 +86,7 @@ body {
 .task_container {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
-    margin: 0px 0px 0px 0px;
+    padding: 10px 10px 10px 14px;
     border-radius: 20px;
 }
 
@@ -115,7 +111,7 @@ body {
     background-color: white;
 }
 
-/* Inputs Styling, ic = inputs container */
+/* Inputs Styling */
 .inputs {
     display: flex;
     justify-content: space-between;
@@ -138,15 +134,17 @@ body {
 }
 
 .inputs_color {
-    width: 80px;
+    display: none;
+    width: 120px;
     height: 40px;
+    padding: 5px 30px 5px 30px;
     border: none;
     background-color: var(--sidebar)
 }
 
 .inputs_select {
     height: 40px;
-    min-width: 80px;
+    width: 120px;
 }
 
 .inputs_add {
@@ -163,7 +161,7 @@ body {
 
     background-color: white;
     height: 40px;
-    width: 120px;
+    width: 90px;
 
     border-radius: 40px;
 }

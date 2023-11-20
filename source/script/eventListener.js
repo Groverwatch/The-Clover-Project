@@ -1,12 +1,9 @@
 window.onload = function()
 {
-    firstPlanner = new Planner("General", "#7EA16B");
-    planners.push(firstPlanner);
-
-    displayPlanners();
-    displayTasks();
+    planners.push(new Planner("General", "#7EA16B"));
+    displayPlannersInSidebar();
+    displayTasksInMain();
     displayPlannersInSelect();
-    changeMode();
 }
 
 window.addEventListener("load", function() {

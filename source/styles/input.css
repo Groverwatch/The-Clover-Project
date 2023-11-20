@@ -1,4 +1,6 @@
+/* General Button Styling */
 .button {
+    cursor: pointer;
     border: none;
     font-family: 'Lusitana', serif;
 }
@@ -11,6 +13,7 @@
     filter: brightness(96%);
 }
 
+/* General Input Styling */
 .input {
     font-family: 'Lusitana', serif;
     font-size: 16px;
@@ -25,15 +28,54 @@
     outline: none;
 }
 
+/* General Checkbox Styling */
 .checkbox {
     accent-color: var(--text);
+    cursor: pointer;
 }
 
+/* General Select Styling */
 .select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    cursor: pointer;
     font-family: 'Lusitana', serif;
+    font-size: 14px;
+    border: none;
+    outline:0px;
+    text-align: center;
+}
+
+.select:hover {
+    filter: brightness(98%);
+}
+
+/* General Colour Input Styling */
+.color {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    border: none;
+    cursor: pointer;
+}
+
+.color::-webkit-color-swatch {
+    border-radius: 40px;
     border: none;
 }
 
+.color:hover { 
+    filter: brightness(98%);
+}
+
+.color:active {
+    filter: brightness(96%);
+}
+
+/* General Icon Styling for Mode Radio */
 .material-symbols-outlined {
     font-variation-settings:
     'FILL' 1,
@@ -44,6 +86,7 @@
     color: var(--selectedColor);
 }
 
+/* Mode Radio Styling */
 input[name="Mode"] { 
     position: absolute;
     opacity: 0;
@@ -52,7 +95,6 @@ input[name="Mode"] {
 }
 
 input[name="Mode"]:checked + .mode_radio {
-    /* color: #2bb375; */
     color: var(--text);
 }
 
@@ -67,4 +109,32 @@ input[name="Mode"]:checked + .mode_radio {
 
 .mode_radio:active {
     filter: brightness(94%);
+}
+
+::-webkit-scrollbar {
+    background-color: transparent;
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--sidebar);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+::-moz-scrollbar {
+    background-color: transparent;
+    width: 10px;
+}
+
+::-moz-scrollbar-thumb {
+    background-color: var(--sidebar);
+    border-radius: 10px;
+}
+
+::-moz-scrollbar-button {
+    display: none;
 }
