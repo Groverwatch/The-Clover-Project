@@ -1,17 +1,6 @@
 window.onload = function()
 {
     planners.push(new Planner("General", "#7EA16B"));
-    planners.push(new Planner("asd", "#432AAA"));
-
-    tasks.push(new Task("1", planners[0]));
-    tasks.push(new Task("2", planners[0]));
-    tasks.push(new Task("3", planners[0]));
-    tasks.push(new Task("4", planners[0]));
-    tasks.push(new Task("5", planners[0]));
-    tasks.push(new Task("6", planners[1]));
-    tasks.push(new Task("7", planners[1]));
-    tasks.push(new Task("8", planners[1]));
-
     displayPlannersInSidebar();
     displayTasksInMain();
     displayPlannersInSelect();
