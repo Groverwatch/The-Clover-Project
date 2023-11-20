@@ -205,13 +205,4 @@ function toggleMode() {
 
         rootCSS.style.setProperty('--selectedColor', 'var(--taskColor)');
     }
-
-    else if (selectedMode == "Calendar") {
-        plannerInput.style.display = "none";
-        colorInput.style.display = "none";
-        textInput.style.display = "none";
-        buttonAdd.style.display = "none";
-
-        rootCSS.style.setProperty('--selectedColor', 'var(--taskColor)');
-    }
 }
