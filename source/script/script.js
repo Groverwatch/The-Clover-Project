@@ -49,101 +49,104 @@ tasks = [];
 planners = [];
 
 function displayTasksInMain() {
-    document.getElementById("taskList").innerHTML = "";
     document.getElementById("title").innerHTML = "Task List";
+    document.getElementById("taskList").innerHTML = "";
 
     for (let i = 0; i < tasks.length; i++) {
         if (tasks[i].getPlannerVisiblity() == true) {
-            let aside = document.createElement('aside'); 
-            let div = document.createElement('div'); 
-            let h3 = document.createElement('h3');
-            let span = document.createElement('span');
-            let div2 = document.createElement('div'); 
-            let p = document.createElement('p');
-            let input = document.createElement('input');
+            let container = document.createElement('aside'); 
+            let section = document.createElement('div'); 
+            let title = document.createElement('h3');
+            let subtitle = document.createElement('span');
+            let color = document.createElement('div'); 
+            let button = document.createElement('input');
         
-            aside.appendChild(div);
-            div.appendChild(h3);
-            div.appendChild(span);
+            title.append(tasks[i].getName());
+            subtitle.append(color, tasks[i].getPlannerName());
+            section.append(title, subtitle);
+            container.append(section, button);
 
-            span.append(div2, p)
-            span.appendChild(div2);
-            span.appendChild(p);
-            aside.appendChild(input);
-        
-            aside.setAttribute('class', 'task_container');
-            div2.setAttribute('class', 'task_colour');
-            span.setAttribute('class', 'task-subtitle');
-            input.setAttribute('class', 'task_button button');
-            input.setAttribute('type', 'button');
-        
-            div2.setAttribute('style', `background-color: ${tasks[i].getPlannerColor()}`);
-            input.setAttribute('id', i);
-            input.setAttribute('onclick', `deleteTask(${i})`);
+            container.setAttribute('class', 'task_container');
+            subtitle.setAttribute('class', 'task_subtitle');
+            color.setAttribute('class', 'task_colour');
+            button.setAttribute('class', 'task_button button');
+            color.setAttribute('style', `background-color: ${tasks[i].getPlannerColor()}`);
             
-            h3.textContent = tasks[i].getName();
-            p.textContent = tasks[i].getPlannerName();
-
-            document.getElementById("taskList").appendChild(aside);
+            button.setAttribute('type', 'button');
+            button.setAttribute('id', i);
+            button.setAttribute('onclick', `deleteTask(${i})`);
+            
+            document.getElementById("taskList").appendChild(container);
         }
     }
-    // for (let i = 0; i < tasks.length; i++) {
-    //     if (tasks[i].getPlannerVisiblity() == true) {
-    //         // html += 
-    //         // `<aside class="task_container"> 
-    //         //     <div> 
-    //         //         <h3> ${tasks[i].getName()} </h3>  
-    //         //         <span> <div class="task_colour" style="background-color: ${tasks[i].getPlannerColor()}"> </div> ${tasks[i].getPlannerName()}
-    //         //         </span> 
-    //         //     </div> 
-                
-    //         //     <input type="button" class="task_button button" id="${i}" onclick="deleteTask(${i})"> 
-    //         // </aside>`;    
-    //     }
-    // }
 }
 
 function displayPlannersInMain() {
-    html = "";
+    document.getElementById("title").innerHTML = "Planner List";
+    document.getElementById("taskList").innerHTML = "";
 
     for (let i = 0; i < planners.length; i++) {
-        html += 
-        `<aside class="task_container"> 
-            <div> 
-                <h3> ${planners[i].getName()} </h3>  
-                <span> <div class="task_colour" style="background-color: ${planners[i].getColor()}"> </div> Planner ${i+1} </span> 
-            </div> 
-            
-            <input type="button" class="task_button button" id="${i}" onclick="deletePlanner(${i})"> 
-        </aside>`;
-    }
+        let container = document.createElement('aside'); 
+        let section = document.createElement('div'); 
+        let title = document.createElement('h3');
+        let subtitle = document.createElement('span');
+        let color = document.createElement('div'); 
+        let button = document.createElement('input');
+    
+        title.append(planners[i].getName());
+        subtitle.append(color, `Planner ${i}, `, planners[i].getColor());
+        section.append(title, subtitle);
+        container.append(section, button);
 
-    document.getElementById("title").innerHTML = "Planner List";
-    document.getElementById("taskList").innerHTML = html;
+        container.setAttribute('class', 'task_container');
+        subtitle.setAttribute('class', 'task_subtitle');
+        color.setAttribute('class', 'task_colour');
+        button.setAttribute('class', 'task_button button');
+        color.setAttribute('style', `background-color: ${planners[i].getColor()}`);
+        
+        button.setAttribute('type', 'button');
+        button.setAttribute('id', i);
+        button.setAttribute('onclick', `deletePlanner(${i})`);
+        
+        document.getElementById("taskList").appendChild(container);
+    }
 }
 
 function displayPlannersInSidebar() {
-    html = "";
-
+    document.getElementById("plannerList").innerHTML = "";
+    
     for (let i = 0; i < planners.length; i++) {
-        html += 
-        `<aside class="flex">
-            <input type="checkbox" value="${i}" name="${planners[i].getName()}" class="planners_checkbox checkbox" style="accent-color: ${planners[i].getColor()}" onclick="togglePlanner(this)" checked> 
-            <p class="planners_name"> ${planners[i].getName()} </p>
-        </aside>`;
-    }
+        let container = document.createElement('aside'); 
+        let checkbox = document.createElement('input'); 
+        let title = document.createElement('p')
 
-    document.getElementById("plannerList").innerHTML = html;
+        container.setAttribute('class', 'flex');
+        checkbox.setAttribute('type', 'checkbox');
+        checkbox.setAttribute('value', i);
+        checkbox.setAttribute('name', planners[i].getName());
+        checkbox.setAttribute('class', 'planners_checkbox checkbox');
+        checkbox.setAttribute('style', `accent-color: ${planners[i].getColor()}`);
+        checkbox.setAttribute('onclick', 'togglePlanner(this)');
+        checkbox.setAttribute('checked', 'checked');
+        title.setAttribute('class', 'planners_name');
+        title.append(planners[i].getName());
+        container.append(checkbox, title);
+
+        document.getElementById("plannerList").appendChild(container);
+    }
 }
 
 function displayPlannersInSelect() {
-    html = "";
+    document.getElementById("plannerInput").innerHTML = "";
 
     for (let i = 0; i < planners.length; i++) {
-        html += `<option class="option"> ${planners[i].getName()} </option>`;
+        let option = document.createElement('option'); 
+
+        option.setAttribute('class', 'option');
+        option.append(planners[i].getName());
+
+        document.getElementById("plannerInput").appendChild(option);
     }
-    
-    document.getElementById("plannerInput").innerHTML = html;
 }
 
 function addTask() {

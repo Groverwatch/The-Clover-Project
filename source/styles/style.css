@@ -90,7 +90,7 @@ body {
     border-radius: 20px;
 }
 
-.task-subtitle {
+.task_subtitle {
     display: inline-flex;
     align-items: center;
 }
