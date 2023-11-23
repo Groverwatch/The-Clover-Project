@@ -48,101 +48,161 @@ class Planner {
 tasks = [];
 planners = [];
 
+deleteSound = new Audio('files/delete.mp3');
+
 function displayTasksInMain() {
-    html = "";
-    
+    document.getElementById("title").innerHTML = "Task List";
+    document.getElementById("taskList").innerHTML = "";
+
     for (let i = 0; i < tasks.length; i++) {
         if (tasks[i].getPlannerVisiblity() == true) {
-            html += 
-            `<aside class="task_container"> 
-                <div> 
-                    <h3> ${tasks[i].getName()} </h3>  
-                    <span> <div class="task_colour" style="background-color: ${tasks[i].getPlannerColor()}"> </div> ${tasks[i].getPlannerName()}
-                    </span> 
-                </div> 
-                
-                <input type="button" class="task_button button" id="${i}" onclick="deleteTask(${i})"> 
-            </aside>`;    
+            let container = document.createElement('aside'); 
+            let section = document.createElement('div'); 
+            let title = document.createElement('h3');
+            let subtitle = document.createElement('span');
+            let color = document.createElement('div'); 
+            let button = document.createElement('input');
+        
+            title.append(tasks[i].getName());
+            subtitle.append(color, tasks[i].getPlannerName());
+            section.append(title, subtitle);
+            container.append(section, button);
+
+            container.setAttribute('class', 'task_container');
+            subtitle.setAttribute('class', 'task_subtitle');
+            color.setAttribute('class', 'task_colour');
+            button.setAttribute('class', 'task_button button');
+            color.setAttribute('style', `background-color: ${tasks[i].getPlannerColor()}`);
+            
+            button.setAttribute('type', 'button');
+            button.setAttribute('id', i);
+            button.setAttribute('onclick', `deleteTask(${i})`);
+            
+            document.getElementById("taskList").appendChild(container);
         }
     }
-
-    document.getElementById("title").innerHTML = "Task List";
-    document.getElementById("taskList").innerHTML = html;
 }
 
 function displayPlannersInMain() {
-    html = "";
+    document.getElementById("title").innerHTML = "Planner List";
+    document.getElementById("taskList").innerHTML = "";
 
     for (let i = 0; i < planners.length; i++) {
-        html += 
-        `<aside class="task_container"> 
-            <div> 
-                <h3> ${planners[i].getName()} </h3>  
-                <span> <div class="task_colour" style="background-color: ${planners[i].getColor()}"> </div> Planner ${i+1} </span> 
-            </div> 
-            
-            <input type="button" class="task_button button" id="${i}" onclick="deletePlanner(${i})"> 
-        </aside>`;
-    }
+        let container = document.createElement('aside'); 
+        let section = document.createElement('div'); 
+        let title = document.createElement('h3');
+        let subtitle = document.createElement('span');
+        let color = document.createElement('div'); 
+        let button = document.createElement('input');
+    
+        title.append(planners[i].getName());
+        subtitle.append(color, `Planner ${i+1}, `, planners[i].getColor());
+        section.append(title, subtitle);
+        container.append(section, button);
 
-    document.getElementById("title").innerHTML = "Planner List";
-    document.getElementById("taskList").innerHTML = html;
+        container.setAttribute('class', 'task_container');
+        subtitle.setAttribute('class', 'task_subtitle');
+        color.setAttribute('class', 'task_colour');
+        button.setAttribute('class', 'task_button button');
+        color.setAttribute('style', `background-color: ${planners[i].getColor()}`);
+        button.setAttribute('type', 'button');
+        button.setAttribute('id', i);
+        button.setAttribute('onclick', `deletePlanner(${i})`);
+        
+        document.getElementById("taskList").appendChild(container);
+    }
 }
 
 function displayPlannersInSidebar() {
-    html = "";
-
+    document.getElementById("plannerList").innerHTML = "";
+    
     for (let i = 0; i < planners.length; i++) {
-        html += 
-        `<aside class="flex">
-            <input type="checkbox" value="${i}" name="${planners[i].getName()}" class="planners_checkbox checkbox" style="accent-color: ${planners[i].getColor()}" onclick="togglePlanner(this)" checked> 
-            <p class="planners_name"> ${planners[i].getName()} </p>
-        </aside>`;
-    }
+        let container = document.createElement('aside'); 
+        let checkbox = document.createElement('input'); 
+        let title = document.createElement('p')
 
-    document.getElementById("plannerList").innerHTML = html;
+        container.setAttribute('class', 'flex');
+        checkbox.setAttribute('type', 'checkbox');
+        checkbox.setAttribute('value', i);
+        checkbox.setAttribute('name', planners[i].getName());
+        checkbox.setAttribute('class', 'planners_checkbox checkbox');
+        checkbox.setAttribute('style', `accent-color: ${planners[i].getColor()}`);
+        checkbox.setAttribute('onclick', 'togglePlanner(this)');
+        checkbox.setAttribute('checked', 'checked');
+        title.setAttribute('class', 'planners_name');
+        
+        title.append(planners[i].getName());
+        container.append(checkbox, title);
+
+        document.getElementById("plannerList").appendChild(container);
+    }
 }
 
 function displayPlannersInSelect() {
-    html = "";
+    document.getElementById("plannerInput").innerHTML = "";
 
     for (let i = 0; i < planners.length; i++) {
-        html += `<option class="option"> ${planners[i].getName()} </option>`;
+        let option = document.createElement('option'); 
+        option.setAttribute('class', 'option');
+        option.append(planners[i].getName());
+
+        document.getElementById("plannerInput").appendChild(option);
     }
-    
-    document.getElementById("plannerInput").innerHTML = html;
 }
 
 function addTask() {
-    taskName = document.getElementById("textInput").value;
-    plannerName = document.getElementById("plannerInput").value;
-    
-    for (let i = 0; i < planners.length; i++) {
-        if (planners[i].getName() == plannerName) {
-            newTask = new Task(taskName, planners[i]);
-            tasks.push(newTask);
-        }
+    let taskName = document.getElementById("textInput").value.trim();
+    let plannerName = document.getElementById("plannerInput").value;
+    let chosenPlanner = planners.find(planner => planner.getName() == plannerName); 
+
+    if (taskName == "") {
+        let errorMessage = "Empty input, type something to add a task. "
+        createErrorMessage(errorMessage);
+        return;
     }
 
-    displayTasksInMain();
+    if (chosenPlanner == undefined) {
+        let errorMessage = "Can't find planner, choose a different planner. "
+        createErrorMessage(errorMessage);
+        return;
+    }
 
+    newTask = new Task(taskName, chosenPlanner);
+    tasks.push(newTask);    
+
+    displayTasksInMain();
     document.getElementById("textInput").value = "";
 }
 
 function addPlanner() {
-    plannerName = document.getElementById("textInput").value;
-    plannerColour = document.getElementById("colorInput").value;
+    let plannerName = document.getElementById("textInput").value.trim();
+    let plannerColour = document.getElementById("colorInput").value;
+    let chosenPlanner = planners.find(planner => planner.getName() == plannerName); 
 
-    planners.push(new Planner(plannerName, plannerColour));
+    if (plannerName == "") {
+        let errorMessage = "Empty input, type something to add a planner. "
+        createErrorMessage(errorMessage);
+        return;  
+    }
+
+    if (chosenPlanner != undefined) {
+        let errorMessage = "Planner already exists, try a new name."
+        createErrorMessage(errorMessage);
+        return;
+    }
+
+    newPlanner = new Planner(plannerName, plannerColour);
+    planners.push(newPlanner);
 
     displayPlannersInMain();
     displayPlannersInSelect();
     displayPlannersInSidebar();
-
     document.getElementById("textInput").value = "";
 }
 
 function deletePlanner(position) {
+    deleteSound.play();
+    
     for (let i = tasks.length - 1; i >= 0; i--) {
         if (tasks[i].getPlannerName() == planners[position].getName()) {
             deleteTask(i);
@@ -157,13 +217,15 @@ function deletePlanner(position) {
 }
 
 function deleteTask(position) {
+    deleteSound.play();
+
     tasks.splice(position, 1);
     displayTasksInMain();
 }
 
 function togglePlanner(input) {
-    selectedMode = document.querySelector("input[name='Mode']:checked").value;
-    index = input.value;
+    let selectedMode = document.querySelector("input[name='Mode']:checked").value;
+    let index = input.value;
 
     if (input.checked == true) {
         planners[index].setVisiblity(true);
@@ -179,11 +241,11 @@ function togglePlanner(input) {
 }
 
 function toggleMode() {   
-    selectedMode = document.querySelector("input[name='Mode']:checked").value;
-    plannerInput = document.getElementById("plannerInput");
-    colorInput = document.getElementById("colorInput");
-    textInput = document.getElementById("textInput");
-    buttonAdd = document.getElementById("buttonAdd");
+    let selectedMode = document.querySelector("input[name='Mode']:checked").value;
+    let plannerInput = document.getElementById("plannerInput");
+    let colorInput = document.getElementById("colorInput");
+    let textInput = document.getElementById("textInput");
+    let buttonAdd = document.getElementById("buttonAdd");
 
     if (selectedMode == "Task") {
         displayTasksInMain();
@@ -202,4 +264,18 @@ function toggleMode() {
         textInput.style.display = "block";
         textInput.placeholder = "Add a new planner.";
     }
+}
+
+function createErrorMessage(errorMessage) {
+    let container = document.getElementById('error');
+    const waitTime = 1500;
+
+    container.innerHTML = "";
+    container.append(errorMessage);
+
+    container.setAttribute('style', 'display: flex'); 
+
+    setTimeout(() => { 
+        container.setAttribute('style', 'display: none'); 
+    }, waitTime);
 }

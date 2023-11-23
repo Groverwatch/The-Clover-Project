@@ -3,11 +3,9 @@
     --text: black;
     --sidebar: white;
     
-    --taskColor: #e2e7cd;
-    --calendarColor: #c1c0db;
-    --plannerColor: #caa4a4;
+    --error: #eebdbd;
 
-    --selectedColor: var(--taskColor);
+    --selectedColor: #e2e7cd;
 }
 
 /* General Properties */
@@ -20,6 +18,7 @@ body {
     background-color: var(--sidebar);    
     font-weight: 400;
     font-family: 'Lusitana', serif;
+    height: 100%;
 }
 
 .flex {
@@ -29,12 +28,11 @@ body {
 /* Sidebar Styling */
 .sidebar {
     padding: 20px;
-    width: 20%;
-    min-width: 20%; 
     background-color: var(--sidebar);  
     display: flex;
     justify-content: space-between;  
     flex-direction: column;
+    flex: 1;
 }   
 
 .sidebar_title {
@@ -43,7 +41,7 @@ body {
 
 /* Planner Styling */
 .planners {
-    min-height: 500px;
+    height: 60%;
 }
 
 .planners_title {
@@ -64,11 +62,13 @@ body {
 
 /* Main Styling */
 .main {
-    width: 110%; 
-    min-width: 10%;
     background-color: var(--selectedColor);
     padding: 30px 30px 30px 30px;
     border-radius: 40px 0px 0px 40px;
+    display: flex;
+    flex: 3;
+    justify-content: space-between;
+    flex-direction: column;
 }
 
 .main_title {
@@ -78,9 +78,8 @@ body {
 
 /* Task Styling */
 .task {
-    min-height: 725px;
-    max-height: 725px;
     overflow-y: scroll;
+    height: clamp(65%, 100%, 85%);
 }
 
 .task_container {
@@ -88,6 +87,11 @@ body {
     justify-content: space-between;
     padding: 10px 10px 10px 14px;
     border-radius: 20px;
+}
+
+.task_subtitle {
+    display: inline-flex;
+    align-items: center;
 }
 
 .task_container:hover {
@@ -111,12 +115,13 @@ body {
     background-color: white;
 }
 
+
 /* Inputs Styling */
 .inputs {
     display: flex;
     justify-content: space-between;
 
-    padding: 10px 10px 0px 10px;
+    padding: 10px 10px 15px 10px;
     margin: 5px 5px 5px 5px;
 }
 
@@ -153,6 +158,19 @@ body {
     border-radius: 0px 40px 40px 0px;
     background-color: var(--sidebar);
     font-size: 18px;
+}
+
+.inputs_error {
+    height: 40px;
+    width: 340px;
+    justify-content: left;
+    align-items: center;
+    border-radius: 40px 40px 40px 40px;
+    margin: 0px 0px 0px 20px;
+    padding: 0px 0px 0px 15px;
+    background-color: var(--error);
+    color: var(--text);
+    display: none;
 }
 
 .mode {
