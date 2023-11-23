@@ -48,6 +48,8 @@ class Planner {
 tasks = [];
 planners = [];
 
+deleteSound = new Audio('files/delete.mp3');
+
 function displayTasksInMain() {
     document.getElementById("title").innerHTML = "Task List";
     document.getElementById("taskList").innerHTML = "";
@@ -94,7 +96,7 @@ function displayPlannersInMain() {
         let button = document.createElement('input');
     
         title.append(planners[i].getName());
-        subtitle.append(color, `Planner ${i}, `, planners[i].getColor());
+        subtitle.append(color, `Planner ${i+1}, `, planners[i].getColor());
         section.append(title, subtitle);
         container.append(section, button);
 
@@ -150,10 +152,16 @@ function displayPlannersInSelect() {
 }
 
 function addTask() {
-    taskName = document.getElementById("textInput").value;
-    plannerName = document.getElementById("plannerInput").value;
+    let taskName = document.getElementById("textInput").value.trim();
+    let plannerName = document.getElementById("plannerInput").value;
+    let taskAdded = false; 
     
     for (let i = 0; i < planners.length; i++) {
+        // if (taskName != "") {
+        //     let errorMessage = "Can't input any empty characters."
+        //     createErrorMessage(errorMessage)
+        // }
+
         if (planners[i].getName() == plannerName) {
             newTask = new Task(taskName, planners[i]);
             tasks.push(newTask);
@@ -166,10 +174,24 @@ function addTask() {
 }
 
 function addPlanner() {
-    plannerName = document.getElementById("textInput").value;
-    plannerColour = document.getElementById("colorInput").value;
+    let plannerName = document.getElementById("textInput").value.trim();
+    let plannerColour = document.getElementById("colorInput").value;
+    let plannerFound = false; 
 
-    planners.push(new Planner(plannerName, plannerColour));
+    for (let i = 0; i < planners.length; i++) {
+        if (planners[i].getName() == plannerName) {
+            plannerFound = true;
+        }
+    }
+
+    if (plannerFound == false) {
+        planners.push(new Planner(plannerName, plannerColour));
+    }
+
+    else if (plannerFound == true) {
+        let errorMessage = "Planner already exists, try a new name."
+        createErrorMessage(errorMessage);
+    }
 
     displayPlannersInMain();
     displayPlannersInSelect();
@@ -179,6 +201,8 @@ function addPlanner() {
 }
 
 function deletePlanner(position) {
+    deleteSound.play();
+    
     for (let i = tasks.length - 1; i >= 0; i--) {
         if (tasks[i].getPlannerName() == planners[position].getName()) {
             deleteTask(i);
@@ -193,13 +217,15 @@ function deletePlanner(position) {
 }
 
 function deleteTask(position) {
+    deleteSound.play();
+
     tasks.splice(position, 1);
     displayTasksInMain();
 }
 
 function togglePlanner(input) {
-    selectedMode = document.querySelector("input[name='Mode']:checked").value;
-    index = input.value;
+    let selectedMode = document.querySelector("input[name='Mode']:checked").value;
+    let index = input.value;
 
     if (input.checked == true) {
         planners[index].setVisiblity(true);
@@ -215,11 +241,11 @@ function togglePlanner(input) {
 }
 
 function toggleMode() {   
-    selectedMode = document.querySelector("input[name='Mode']:checked").value;
-    plannerInput = document.getElementById("plannerInput");
-    colorInput = document.getElementById("colorInput");
-    textInput = document.getElementById("textInput");
-    buttonAdd = document.getElementById("buttonAdd");
+    let selectedMode = document.querySelector("input[name='Mode']:checked").value;
+    let plannerInput = document.getElementById("plannerInput");
+    let colorInput = document.getElementById("colorInput");
+    let textInput = document.getElementById("textInput");
+    let buttonAdd = document.getElementById("buttonAdd");
 
     if (selectedMode == "Task") {
         displayTasksInMain();
@@ -238,4 +264,16 @@ function toggleMode() {
         textInput.style.display = "block";
         textInput.placeholder = "Add a new planner.";
     }
+}
+
+function createErrorMessage(errorMessage) {
+    let container = document.getElementById('error');
+    container.innerHTML = "";
+    container.append(errorMessage);
+
+    container.setAttribute('style', 'display: flex'); 
+
+    setTimeout(() => { 
+        container.setAttribute('style', 'display: none'); 
+    }, 2000);
 }

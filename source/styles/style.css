@@ -3,11 +3,9 @@
     --text: black;
     --sidebar: white;
     
-    --taskColor: #e2e7cd;
-    --calendarColor: #c1c0db;
-    --plannerColor: #caa4a4;
+    --error: #eebdbd;
 
-    --selectedColor: var(--taskColor);
+    --selectedColor: #e2e7cd;
 }
 
 /* General Properties */
@@ -160,6 +158,19 @@ body {
     border-radius: 0px 40px 40px 0px;
     background-color: var(--sidebar);
     font-size: 18px;
+}
+
+.inputs_error {
+    height: 40px;
+    width: 300px;
+    justify-content: left;
+    align-items: center;
+    border-radius: 40px 40px 40px 40px;
+    margin: 0px 0px 0px 20px;
+    padding: 0px 0px 0px 15px;
+    background-color: var(--error);
+    color: var(--text);
+    display: none;
 }
 
 .mode {
