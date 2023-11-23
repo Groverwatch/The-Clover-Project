@@ -143,7 +143,6 @@ function displayPlannersInSelect() {
 
     for (let i = 0; i < planners.length; i++) {
         let option = document.createElement('option'); 
-
         option.setAttribute('class', 'option');
         option.append(planners[i].getName());
 
@@ -154,49 +153,50 @@ function displayPlannersInSelect() {
 function addTask() {
     let taskName = document.getElementById("textInput").value.trim();
     let plannerName = document.getElementById("plannerInput").value;
-    let taskAdded = false; 
-    
-    for (let i = 0; i < planners.length; i++) {
-        // if (taskName != "") {
-        //     let errorMessage = "Can't input any empty characters."
-        //     createErrorMessage(errorMessage)
-        // }
+    let chosenPlanner = planners.find(planner => planner.getName() == plannerName); 
 
-        if (planners[i].getName() == plannerName) {
-            newTask = new Task(taskName, planners[i]);
-            tasks.push(newTask);
-        }
+    if (taskName == "") {
+        let errorMessage = "Empty Input, type something to add a task. "
+        createErrorMessage(errorMessage);
+        return;
     }
 
-    displayTasksInMain();
+    if (chosenPlanner == undefined) {
+        let errorMessage = "Can't find planner, choose a different planner. "
+        createErrorMessage(errorMessage);
+        return;
+    }
 
+    newTask = new Task(taskName, chosenPlanner);
+    tasks.push(newTask);    
+
+    displayTasksInMain();
     document.getElementById("textInput").value = "";
 }
 
 function addPlanner() {
     let plannerName = document.getElementById("textInput").value.trim();
     let plannerColour = document.getElementById("colorInput").value;
-    let plannerFound = false; 
+    let chosenPlanner = planners.find(planner => planner.getName() == plannerName); 
 
-    for (let i = 0; i < planners.length; i++) {
-        if (planners[i].getName() == plannerName) {
-            plannerFound = true;
-        }
+    if (plannerName == "") {
+        let errorMessage = "Empty Input, type something to add a planner. "
+        createErrorMessage(errorMessage);
+        return;  
     }
 
-    if (plannerFound == false) {
-        planners.push(new Planner(plannerName, plannerColour));
-    }
-
-    else if (plannerFound == true) {
+    if (chosenPlanner != undefined) {
         let errorMessage = "Planner already exists, try a new name."
         createErrorMessage(errorMessage);
+        return;
     }
+
+    newPlanner = new Planner(plannerName, plannerColour);
+    planners.push(newPlanner);
 
     displayPlannersInMain();
     displayPlannersInSelect();
     displayPlannersInSidebar();
-
     document.getElementById("textInput").value = "";
 }
 
@@ -268,6 +268,8 @@ function toggleMode() {
 
 function createErrorMessage(errorMessage) {
     let container = document.getElementById('error');
+    const waitTime = 1500;
+
     container.innerHTML = "";
     container.append(errorMessage);
 
@@ -275,5 +277,5 @@ function createErrorMessage(errorMessage) {
 
     setTimeout(() => { 
         container.setAttribute('style', 'display: none'); 
-    }, 2000);
+    }, waitTime);
 }
