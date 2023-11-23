@@ -105,7 +105,6 @@ function displayPlannersInMain() {
         color.setAttribute('class', 'task_colour');
         button.setAttribute('class', 'task_button button');
         color.setAttribute('style', `background-color: ${planners[i].getColor()}`);
-        
         button.setAttribute('type', 'button');
         button.setAttribute('id', i);
         button.setAttribute('onclick', `deletePlanner(${i})`);
@@ -131,6 +130,7 @@ function displayPlannersInSidebar() {
         checkbox.setAttribute('onclick', 'togglePlanner(this)');
         checkbox.setAttribute('checked', 'checked');
         title.setAttribute('class', 'planners_name');
+        
         title.append(planners[i].getName());
         container.append(checkbox, title);
 
@@ -156,7 +156,7 @@ function addTask() {
     let chosenPlanner = planners.find(planner => planner.getName() == plannerName); 
 
     if (taskName == "") {
-        let errorMessage = "Empty Input, type something to add a task. "
+        let errorMessage = "Empty input, type something to add a task. "
         createErrorMessage(errorMessage);
         return;
     }
@@ -180,7 +180,7 @@ function addPlanner() {
     let chosenPlanner = planners.find(planner => planner.getName() == plannerName); 
 
     if (plannerName == "") {
-        let errorMessage = "Empty Input, type something to add a planner. "
+        let errorMessage = "Empty input, type something to add a planner. "
         createErrorMessage(errorMessage);
         return;  
     }

@@ -1,8 +1,7 @@
 window.onload = function()
 {
     planners.push(new Planner("General", "#7EA16B"));
-    planners.push(new Planner("Arco", "#7EA16B"));
-    planners.push(new Planner("Maresis", "#7EA16B"));
+    
     displayPlannersInSidebar();
     displayTasksInMain();
     displayPlannersInSelect();
