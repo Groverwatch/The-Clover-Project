@@ -1,5 +1,3 @@
-deleteSound = new Audio('files/delete.mp3');
-
 function displayTasksInMain() {
     document.getElementById("title").innerHTML = "Task List";
     document.getElementById("taskList").innerHTML = "";
@@ -119,7 +117,7 @@ function addTask() {
 
     newTask = new Task(taskName, chosenPlanner);
     tasks.push(newTask);   
-    localStorage.setItem('tasks', JSON.stringify(tasks)); 
+    refreshStorage();
 
     displayTasksInMain();
     document.getElementById("textInput").value = "";
@@ -153,6 +151,7 @@ function addPlanner() {
 }
 
 function deleteTask(position) {
+    deleteSound = new Audio('files/delete.mp3');
     deleteSound.play();
 
     tasks.splice(position, 1);
@@ -162,6 +161,7 @@ function deleteTask(position) {
 }
 
 function deletePlanner(position) {
+    deleteSound = new Audio('files/delete.mp3');
     deleteSound.play();
     
     for (let i = tasks.length - 1; i >= 0; i--) {

@@ -1,5 +1,10 @@
 window.onload = function()
 {
+    if (planners.length == 0) {
+        planners.push(new Planner("General", "#7EA16B"));    
+        refreshStorage();
+    }
+
     displayPlannersInSidebar();
     displayTasksInMain();
     displayPlannersInSelect();

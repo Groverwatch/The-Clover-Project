@@ -47,12 +47,12 @@ class Planner {
 }
 
 
-// Variables, 
+// Variables
 tasks = [];
 planners = [];
 
 
-// Planners, 
+// Planners
 var storedPlanners = JSON.parse(localStorage.getItem('planners'));
 
 if (storedPlanners != undefined) {
@@ -65,23 +65,15 @@ if (storedPlanners != undefined) {
     }
 }
 
-else {
-    planners.push(new Planner("General", "#7EA16B"));
-}
-
-
-// Tasks, 
+// Tasks
 var storedTasks = JSON.parse(localStorage.getItem('tasks'));
 
 if (storedTasks != undefined) {
     for (let i = 0; i < storedTasks.length; i++) {
         let taskName = storedTasks[i].name;
-        // let taskPlanner = storedTasks[i].planner;
         let plannerName = storedTasks[i].planner.name;
-
         let chosenPlanner = planners.find(planner => planner.getName() == plannerName); 
 
-        // newPlanner = new Planner(plannerName, plannerColor);
         newTask = new Task(taskName, chosenPlanner);
         tasks.push(newTask); 
     }

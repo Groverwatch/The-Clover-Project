@@ -1,14 +1,14 @@
-
+/* Importing fonts and logos from Google.  */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Lusitana:wght@400;700&family=Merriweather:wght@300;400;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
 /* Setting Variables */
 :root {
     --text: black;
     --sidebar: white;
-    
+    --main: #e2e7cd;
+    --secondary: white;
     --error: #eebdbd;
-
-    --selectedColor: #e2e7cd;
 }
 
 /* General Properties */
@@ -30,7 +30,7 @@ body {
 
 /* Sidebar Styling */
 .sidebar {
-    padding: 20px;
+    padding: 20px 20px 20px 20px;
     background-color: var(--sidebar);  
     display: flex;
     justify-content: space-between;  
@@ -40,6 +40,7 @@ body {
 
 .sidebar_title {
     font-size: 40px;
+    color: var(--text);
 }
 
 /* Planner Styling */
@@ -50,6 +51,7 @@ body {
 .planners_title {
     font-size: 28px;
     padding: 0px 0px 10px 0px;
+    color: var(--text);
 }
 
 .planners_checkbox {
@@ -61,11 +63,13 @@ body {
 
 .planners_name {
     font-size: 18px;
+    color: var(--text);
 }
 
 /* Main Styling */
 .main {
-    background-color: var(--selectedColor);
+    background-color: var(--main);
+    color: var(--text);
     padding: 30px 30px 30px 30px;
     border-radius: 40px 0px 0px 40px;
     display: flex;
@@ -76,6 +80,7 @@ body {
 
 .main_title {
     padding: 10px 10px 10px 12px;
+    color: var(--text);
     font-family: Inter;
 }
 
@@ -89,16 +94,17 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 10px 10px 10px 14px;
-    border-radius: 20px;
+    border-radius: 20px 20px 20px 20px;
 }
 
 .task_subtitle {
     display: inline-flex;
     align-items: center;
+    color: var(--text);
 }
 
 .task_container:hover {
-    background-color: var(--selectedColor);
+    background-color: var(--main);
     filter:brightness(95%);
 }
 
@@ -106,7 +112,7 @@ body {
     display: inline-block;
     height: 10px;
     width: 10px;
-    background-color: var(--sidebar);
+    background-color: var(--secondary);
     border-radius: 8px 8px 8px 8px;
     margin: 0px 5px 0px 2px;
 }
@@ -114,8 +120,8 @@ body {
 .task_button {
     width: 40px;
     height: 40px;
-    border-radius: 40px;
-    background-color: white;
+    border-radius: 40px 40px 40px 40px;
+    background-color: var(--secondary);
 }
 
 
@@ -123,7 +129,6 @@ body {
 .inputs {
     display: flex;
     justify-content: space-between;
-
     padding: 10px 10px 15px 10px;
     margin: 5px 5px 5px 5px;
 }
@@ -133,12 +138,15 @@ body {
     height: 40px;
     border-radius: 40px 0px 0px 40px;
     background-color: var(--sidebar);
+    color: var(--secondary);
 }
 
 .inputs_text {
     height: 40px;
     width: 500px;
     border-radius: 40px 0px 0px 40px;
+    background-color: var(--sidebar);
+    color: var(--secondary);
 }
 
 .inputs_color {
@@ -147,7 +155,8 @@ body {
     height: 40px;
     padding: 5px 30px 5px 30px;
     border: none;
-    background-color: var(--sidebar)
+    background-color: var(--sidebar);
+    color: var(--secondary);
 }
 
 .inputs_select {
@@ -160,6 +169,7 @@ body {
     width: 50px;
     border-radius: 0px 40px 40px 0px;
     background-color: var(--sidebar);
+    color: var(--secondary);
     font-size: 18px;
 }
 
@@ -181,6 +191,7 @@ body {
     align-items: center;
 
     background-color: white;
+    color: var(--sidebar);
     height: 40px;
     width: 90px;
 
