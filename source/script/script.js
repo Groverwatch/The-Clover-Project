@@ -1,54 +1,3 @@
-class Task { 
-    constructor (name, planner) {
-        this.name = name;
-        this.planner = planner;
-    }
-
-    getName() {
-        return this.name;
-    }
-    
-    getPlannerName() {
-        return this.planner.getName();
-    }
-
-    getPlannerColor() {
-        return this.planner.getColor();
-    }
-
-    getPlannerVisiblity() {
-        return this.planner.getVisiblity();
-    }
-}
-
-class Planner {
-    constructor (name, color) {
-        this.name = name;
-        this.color = color; 
-        this.visiblity = true;
-    }
-
-    getName() {
-        return this.name;
-    }
-    
-    getColor() {
-        return this.color;
-    }
-    
-    getVisiblity() {
-        return this.visiblity;
-    }
-
-    setVisiblity(value) {
-        this.visiblity = value;
-    }
-}
-
-// tasks = JSON.parse(localStorage.getItem('tasks'));
-tasks = [];
-planners = [];
-
 deleteSound = new Audio('files/delete.mp3');
 
 function displayTasksInMain() {
@@ -195,12 +144,21 @@ function addPlanner() {
 
     newPlanner = new Planner(plannerName, plannerColour);
     planners.push(newPlanner);
-    localStorage.setItem('planners', JSON.stringify(planners)); 
+    refreshStorage();
 
     displayPlannersInMain();
     displayPlannersInSelect();
     displayPlannersInSidebar();
     document.getElementById("textInput").value = "";
+}
+
+function deleteTask(position) {
+    deleteSound.play();
+
+    tasks.splice(position, 1);
+    refreshStorage();
+
+    displayTasksInMain();
 }
 
 function deletePlanner(position) {
@@ -213,17 +171,11 @@ function deletePlanner(position) {
     }
 
     planners.splice(position, 1); 
+    refreshStorage();
 
     displayPlannersInMain();
     displayPlannersInSelect();
     displayPlannersInSidebar();
-}
-
-function deleteTask(position) {
-    deleteSound.play();
-
-    tasks.splice(position, 1);
-    displayTasksInMain();
 }
 
 function togglePlanner(input) {
