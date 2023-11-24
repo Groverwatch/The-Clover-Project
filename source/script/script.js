@@ -45,6 +45,7 @@ class Planner {
     }
 }
 
+// tasks = JSON.parse(localStorage.getItem('tasks'));
 tasks = [];
 planners = [];
 
@@ -168,7 +169,8 @@ function addTask() {
     }
 
     newTask = new Task(taskName, chosenPlanner);
-    tasks.push(newTask);    
+    tasks.push(newTask);   
+    localStorage.setItem('tasks', JSON.stringify(tasks)); 
 
     displayTasksInMain();
     document.getElementById("textInput").value = "";
@@ -193,6 +195,7 @@ function addPlanner() {
 
     newPlanner = new Planner(plannerName, plannerColour);
     planners.push(newPlanner);
+    localStorage.setItem('planners', JSON.stringify(planners)); 
 
     displayPlannersInMain();
     displayPlannersInSelect();

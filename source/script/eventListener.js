@@ -1,7 +1,8 @@
 window.onload = function()
 {
     planners.push(new Planner("General", "#7EA16B"));
-    
+    // tasks.push(new Task("Hello, I am testing task.", planners[0]));
+
     displayPlannersInSidebar();
     displayTasksInMain();
     displayPlannersInSelect();
