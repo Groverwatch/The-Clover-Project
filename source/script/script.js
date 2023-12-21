@@ -1,6 +1,7 @@
 function displayTasksInMain() {
     document.getElementById("title").innerHTML = "Task List";
     document.getElementById("taskList").innerHTML = "";
+    document.getElementById("taskList").setAttribute('class', 'task');
 
     for (let i = 0; i < tasks.length; i++) {
         if (tasks[i].getPlannerVisiblity() == true) {
@@ -16,12 +17,12 @@ function displayTasksInMain() {
             section.append(title, subtitle);
             container.append(section, button);
 
-            container.setAttribute('class', 'task_container');
+            container.setAttribute('class', 'task_container flex');
             subtitle.setAttribute('class', 'task_subtitle');
             color.setAttribute('class', 'task_colour');
             button.setAttribute('class', 'task_button button');
             color.setAttribute('style', `background-color: ${tasks[i].getPlannerColor()}`);
-            
+
             button.setAttribute('type', 'button');
             button.setAttribute('id', i);
             button.setAttribute('onclick', `deleteTask(${i})`);
@@ -34,6 +35,7 @@ function displayTasksInMain() {
 function displayPlannersInMain() {
     document.getElementById("title").innerHTML = "Planner List";
     document.getElementById("taskList").innerHTML = "";
+    document.getElementById("taskList").setAttribute('class', 'task');
 
     for (let i = 0; i < planners.length; i++) {
         let container = document.createElement('aside'); 
@@ -44,11 +46,11 @@ function displayPlannersInMain() {
         let button = document.createElement('input');
     
         title.append(planners[i].getName());
-        subtitle.append(color, `Planner ${i+1}, `, planners[i].getColor());
+        subtitle.append(color, `Planner ${i+1}, `, planners[i].getColor().toUpperCase());
         section.append(title, subtitle);
         container.append(section, button);
 
-        container.setAttribute('class', 'task_container');
+        container.setAttribute('class', 'task_container flex');
         subtitle.setAttribute('class', 'task_subtitle');
         color.setAttribute('class', 'task_colour');
         button.setAttribute('class', 'task_button button');
@@ -102,9 +104,16 @@ function addTask() {
     let taskName = document.getElementById("textInput").value.trim();
     let plannerName = document.getElementById("plannerInput").value;
     let chosenPlanner = planners.find(planner => planner.getName() == plannerName); 
+    let maximumInputLength = 100;
 
     if (taskName == "") {
         let errorMessage = "Empty input, type something to add a task. "
+        createErrorMessage(errorMessage);
+        return;
+    }
+
+    if (taskName.length > maximumInputLength) {
+        let errorMessage = `The input length is over ${taskName.length - maximumInputLength} words`;
         createErrorMessage(errorMessage);
         return;
     }
@@ -127,11 +136,18 @@ function addPlanner() {
     let plannerName = document.getElementById("textInput").value.trim();
     let plannerColour = document.getElementById("colorInput").value;
     let chosenPlanner = planners.find(planner => planner.getName() == plannerName); 
+    let maximumInputLength = 100;
 
     if (plannerName == "") {
         let errorMessage = "Empty input, type something to add a planner. "
         createErrorMessage(errorMessage);
         return;  
+    }
+
+    if (plannerName.length > maximumInputLength) {
+        let errorMessage = `The input length is over ${taskName.length - maximumInputLength} words`;
+        createErrorMessage(errorMessage);
+        return;
     }
 
     if (chosenPlanner != undefined) {
@@ -151,6 +167,8 @@ function addPlanner() {
 }
 
 function deleteTask(position) {
+    event.stopPropagation();
+
     deleteSound = new Audio('files/delete.mp3');
     deleteSound.play();
 
@@ -161,6 +179,7 @@ function deleteTask(position) {
 }
 
 function deletePlanner(position) {
+    event.stopPropagation();
     deleteSound = new Audio('files/delete.mp3');
     deleteSound.play();
     
@@ -197,27 +216,51 @@ function togglePlanner(input) {
 
 function toggleMode() {   
     let selectedMode = document.querySelector("input[name='Mode']:checked").value;
+    let monthSubtract = document.getElementById("monthSubtract");
+    let monthAddition = document.getElementById("monthAddition");
     let plannerInput = document.getElementById("plannerInput");
     let colorInput = document.getElementById("colorInput");
     let textInput = document.getElementById("textInput");
     let buttonAdd = document.getElementById("buttonAdd");
+    let date = document.getElementById("date");
 
     if (selectedMode == "Task") {
         displayTasksInMain();
+        displayPlannersInSelect();
+
+        monthSubtract.style.display = "none";
+        monthAddition.style.display = "none";
         plannerInput.style.display = "block";
         colorInput.style.display = "none";
         buttonAdd.style.display = "block";
         textInput.style.display = "block";
         textInput.placeholder = "Add a new task.";
+        date.style.display = "none";
     }
 
     else if (selectedMode == "Planner") {
         displayPlannersInMain();
+
+        monthSubtract.style.display = "none";
+        monthAddition.style.display = "none";
         plannerInput.style.display = "none";
         colorInput.style.display = "block";
         buttonAdd.style.display = "block";
         textInput.style.display = "block";
         textInput.placeholder = "Add a new planner.";
+        date.style.display = "none";
+    }
+
+    else if (selectedMode == "Calendar") {
+        displayCalendarsInMain();
+
+        monthSubtract.style.display = "block";
+        monthAddition.style.display = "block";
+        plannerInput.style.display = "none";
+        colorInput.style.display = "none";
+        buttonAdd.style.display = "none";
+        textInput.style.display = "none";
+        date.style.display = "block";        
     }
 }
 

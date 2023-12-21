@@ -2,14 +2,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Lusitana:wght@400;700&family=Merriweather:wght@300;400;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
-/* Setting Variables */
-:root {
-    --text: black;
-    --sidebar: white;
-    --main: #e2e7cd;
-    --secondary: white;
-    --error: #eebdbd;
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primaryText: #ffc5cf;     
+        --secondaryText: #fff2f4;
+        --tertiaryText: #f0f0f0;
+
+        --primaryBackground: #1a1818;
+        --secondaryBackground: #121212;     
+        
+        --hover: 115%;
+        --active: 110%;
+    }
 }
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --primaryText: black;
+
+        --hover: 98%;
+        --active: 96%;
+    }
+}
+
+:root {
+    color-scheme: light;
+}
+
+/* Colour variables that are used across the website. */
+/* :root {
+    --primaryText: #efe2e2;
+    --primaryBackground: #0a0606;
+    --secondaryBackground: #0a0606;
+    --secondary: #673972;
+    --accent: #b76e97;
+    --error: #eebdbd;
+} */
+
 
 /* General Properties */
 * {
@@ -17,31 +47,39 @@
 }
 
 body {
-    color: var(--text);
-    background-color: var(--sidebar);    
-    font-weight: 400;
-    font-family: 'Lusitana', serif;
     height: 100%;
+
+    background-color: var(--secondaryBackground);    
+    color: var(--primaryText);
+
+    font-family: 'Lusitana', serif;
+    font-weight: 400;
 }
 
 .flex {
     display: flex;
 }
 
+
 /* Sidebar Styling */
 .sidebar {
-    padding: 20px 20px 20px 20px;
-    background-color: var(--sidebar);  
-    display: flex;
+    width: 20%;
+    min-width: 20%;
+
+    padding: 25px 20px 20px 20px;
+
+    background-color: var(--secondaryBackground);  
+
     justify-content: space-between;  
     flex-direction: column;
-    flex: 1;
 }   
 
 .sidebar_title {
+    color: var(--primaryText);
+
     font-size: 40px;
-    color: var(--text);
 }
+
 
 /* Planner Styling */
 .planners {
@@ -49,149 +87,107 @@ body {
 }
 
 .planners_title {
-    font-size: 28px;
     padding: 0px 0px 10px 0px;
-    color: var(--text);
+
+    color: var(--primaryText);
+
+    font-size: 28px;
 }
 
 .planners_checkbox {
-    width: 20px;
     height: 20px;
+    width: 20px;
+
     margin: 0px 10px 10px 2px;
-    background-color: black;
+
+    background-color: var(--primaryText);
 }
 
 .planners_name {
+    color: var(--secondaryText);
+
     font-size: 18px;
-    color: var(--text);
 }
+
 
 /* Main Styling */
 .main {
-    background-color: var(--main);
-    color: var(--text);
-    padding: 30px 30px 30px 30px;
+    width: clamp(80%, 80%, 80%);
+    width: 80%;
+
     border-radius: 40px 0px 0px 40px;
-    display: flex;
-    flex: 3;
+    padding: 30px 30px 30px 30px;
+
+    background-color: var(--primaryBackground);
+    color: var(--primaryText);
+
     justify-content: space-between;
     flex-direction: column;
 }
 
 .main_title {
     padding: 10px 10px 10px 12px;
-    color: var(--text);
+
+    color: var(--primaryText);
+
     font-family: Inter;
 }
 
+
 /* Task Styling */
 .task {
+    height: clamp(100%, 100%, 100%);
+
     overflow-y: scroll;
-    height: clamp(65%, 100%, 85%);
 }
 
-.task_container {
-    display: flex;
-    justify-content: space-between;
+.task_container {  
+    color: var(--secondaryText);
+
     padding: 10px 10px 10px 14px;
     border-radius: 20px 20px 20px 20px;
+
+    justify-content: space-between;
 }
 
 .task_subtitle {
+    color: var(--tertiaryText);
+
     display: inline-flex;
     align-items: center;
-    color: var(--text);
 }
 
 .task_container:hover {
-    background-color: var(--main);
-    filter:brightness(95%);
+    background-color: var(--primaryBackground);
+    filter: brightness(var(--hover));
 }
 
 .task_colour {
-    display: inline-block;
     height: 10px;
     width: 10px;
-    background-color: var(--secondary);
-    border-radius: 8px 8px 8px 8px;
+
     margin: 0px 5px 0px 2px;
+    border-radius: 8px 8px 8px 8px;
+
+    background-color: var(--secondary);
 }
 
 .task_button {
-    width: 40px;
-    height: 40px;
+    height: 43px;
+    width: 43px;
+
     border-radius: 40px 40px 40px 40px;
+
+    background-color: var(--secondaryText);
+}
+
+/* Task Details */
+.detail {
+    width: clamp(20%, 20%, 20%);
+    border-radius: 40px 0px 0px 40px;
+    padding: 30px;
+
     background-color: var(--secondary);
-}
 
-
-/* Inputs Styling */
-.inputs {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 10px 15px 10px;
-    margin: 5px 5px 5px 5px;
-}
-
-.inputs_mode {
-    width: 80px;
-    height: 40px;
-    border-radius: 40px 0px 0px 40px;
-    background-color: var(--sidebar);
-    color: var(--text);
-}
-
-.inputs_text {
-    height: 40px;
-    width: 500px;
-    border-radius: 40px 0px 0px 40px;
-    background-color: var(--sidebar);
-    color: var(--text);
-}
-
-.inputs_color {
     display: none;
-    width: 120px;
-    height: 40px;
-    padding: 5px 30px 5px 30px;
-    border: none;
-    background-color: var(--sidebar);
-    color: var(--text);
-}
-
-.inputs_select {
-    height: 40px;
-    width: 120px;
-}
-
-.inputs_add {
-    height: 40px;
-    width: 50px;
-    border-radius: 0px 40px 40px 0px;
-    background-color: var(--sidebar);
-    color: var(--text);
-    font-size: 18px;
-}
-
-.inputs_error {
-    height: 40px;
-    width: 340px;
-    justify-content: left;
-    align-items: center;
-    border-radius: 40px 40px 40px 40px;
-    margin: 0px 0px 0px 20px;
-    padding: 0px 0px 0px 15px;
-    background-color: var(--error);
-    color: var(--text);
-    display: none;
-}
-
-.mode {
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: white;
-    color: var(--sidebar);
-    height: 40px;
-    width: 90px;
-    border-radius: 40px;
 }

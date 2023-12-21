@@ -6,11 +6,11 @@
 }
 
 .button:hover { 
-    filter: brightness(98%);
+    filter: brightness(var(--hover));
 }
 
 .button:active {
-    filter: brightness(96%);
+    filter: brightness(var(--active));
 }
 
 /* General Input Styling */
@@ -30,7 +30,7 @@
 
 /* General Checkbox Styling */
 .checkbox {
-    accent-color: var(--text);
+    accent-color: var(--primaryText);
     cursor: pointer;
 }
 
@@ -46,6 +46,7 @@
     border: none;
     outline:0px;
     text-align: center;
+    background-color: var(--primaryInput);
 }
 
 .select:hover {
@@ -83,7 +84,7 @@
     'GRAD' 0,
     'opsz' 24;
     
-    color: var(--main);
+    color: var(--accent);
 }
 
 /* Mode Radio Styling */
@@ -95,20 +96,7 @@ input[name="Mode"] {
 }
 
 input[name="Mode"]:checked + .mode_radio {
-    color: var(--text);
-}
-
-.mode_radio {
-    cursor: pointer;
-}
-
-.mode_radio:hover { 
-    filter: brightness(96%);
-    cursor: pointer;
-}
-
-.mode_radio:active {
-    filter: brightness(94%);
+    color: var(--primaryText);
 }
 
 /* Scrollbar Styling */
@@ -118,7 +106,7 @@ input[name="Mode"]:checked + .mode_radio {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--sidebar);
+    background-color: var(--secondaryBackground);
     border-radius: 10px;
 }
 
@@ -132,7 +120,7 @@ input[name="Mode"]:checked + .mode_radio {
 }
 
 ::-moz-scrollbar-thumb {
-    background-color: var(--sidebar);
+    background-color: var(--secondaryBackground);
     border-radius: 10px;
 }
 

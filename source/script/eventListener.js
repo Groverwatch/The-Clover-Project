@@ -6,8 +6,7 @@ window.onload = function()
     }
 
     displayPlannersInSidebar();
-    displayTasksInMain();
-    displayPlannersInSelect();
+    toggleMode();
 }
 
 window.addEventListener("load", function() {

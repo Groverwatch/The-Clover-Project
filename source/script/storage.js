@@ -45,12 +45,10 @@ class Planner {
         this.visiblity = value;
     }
 }
-
-
+  
 // Variables
 tasks = [];
 planners = [];
-
 
 // Planners
 var storedPlanners = JSON.parse(localStorage.getItem('planners'));

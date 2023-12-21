@@ -1,0 +1,26 @@
+.calendar {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    grid-template-rows: 50px auto auto auto auto auto auto;
+    margin: 0px 0px 0px 5px;
+}
+
+.calendar_date {
+    background-color: var(--secondaryBackground);
+    margin: 5px 5px 5px 5px;
+    padding: 10px 10px 10px 10px;
+    border-radius: 20px 20px 20px 20px;
+}
+
+.calendar_other {
+    background-color: var(--secondary);
+}
+
+.calendar_current {
+    background-color: var(--accent);
+    font-weight: 800;
+}
+
+.calendar_day {
+    text-align: center;
+}
