@@ -1,0 +1,71 @@
+/* Task Styling */
+.task {
+    height: clamp(100%, 100%, 100%);
+
+    overflow-y: scroll;
+}
+
+.task_container {  
+    color: var(--primaryText);
+
+    padding: 10px 10px 10px 14px;
+    border-radius: 20px 20px 20px 20px;
+
+    justify-content: space-between;
+}
+
+.task_subtitle {
+    color: var(--primaryText);
+
+    display: inline-flex;
+    align-items: center;
+}
+
+.task_container:hover {
+    background-color: var(--primarySurface);
+}
+
+.task_colour {
+    height: 10px;
+    width: 10px;
+
+    margin: 0px 5px 0px 2px;
+    border-radius: 8px 8px 8px 8px;
+
+    background-color: var(--primaryColor);
+}
+
+.task_button {
+    height: 43px;
+    width: 43px;
+
+    border-radius: 40px 40px 40px 40px;
+
+    background-color: var(--secondaryColor);
+}
+
+/* Planner Styling */
+.planners {
+    height: 60%;
+}
+
+.planners_title {
+    padding: 0px 0px 10px 0px;
+
+    color: var(--primaryText);
+
+    font-size: 28px;
+}
+
+.planners_checkbox {
+    height: 20px;
+    width: 20px;
+
+    margin: 0px 10px 10px 2px;
+}
+
+.planners_name {
+    color: var(--primaryText);
+
+    font-size: 18px;
+}

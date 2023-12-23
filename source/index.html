@@ -3,15 +3,15 @@
         <title> Clover. </title>
 
         <link rel="icon" href="files/icon.png" type="image/x-icon">
-        <link rel="stylesheet" href="styles/style.css">
-        <link rel="stylesheet" href="styles/inputs.css">
-        <link rel="stylesheet" href="styles/inputStyle.css">
         <link rel="stylesheet" href="styles/calendar.css">
+        <link rel="stylesheet" href="styles/input.css">
+        <link rel="stylesheet" href="styles/sidebarMain.css">
+        <link rel="stylesheet" href="styles/taskPlanner.css">
 
-        <script src="script/script.js"> </script>
-        <script src="script/storage.js"> </script>
-        <script src="script/eventListener.js"> </script>      
-        <script src="script/calendar.js"> </script>      
+        <script src="script/calendar.js"> </script>
+        <script src="script/storage.js"> </script>      
+        <script src="script/taskPlanner.js"> </script>      
+        <script src="script/events.js"> </script>
     </head>
 
     <body class="flex">
@@ -32,32 +32,43 @@
 
             <nav class="bottom flex"> 
                 <div class="inputs flex" id="input"> 
-                    <input type="button" id="monthSubtract" value="<" class="inputs_add button" onclick="goToPreviousMonth()"> 
+                    <div id="monthSubtract" class="inputs_add button" onclick="goToPreviousMonth()">
+                        <span class="material-symbols-outlined mode_symbol mode_radio unselectable"> chevron_left </span>                    
+                    </div>
+
                     <p class="inputs_date" id="date"></p>
-                    <input type="button" id="monthAddition" value=">" class="inputs_add button" onclick="goToFollowingMonth()"> 
+
+                    <div id="monthAddition" class="inputs_add button" onclick="goToFollowingMonth()">
+                        <span class="material-symbols-outlined mode_symbol mode_radio unselectable"> chevron_right </span>                    
+                    </div>
 
                     <input type="text" id="textInput" class="inputs_text input" placeholder="Add a new task."> 
+
                     <input type="color" id="colorInput" class="inputs_color color">
-                    <select id="plannerInput" class="inputs_select select"> </select>
-                    <input type="button" id="buttonAdd" value="+" class="inputs_add button"> 
+
+                    <select id="plannerInput" class="inputs_select select unselectable"> </select>
                     
-                    <div class="inputs_error flex" id="error"> </div> 
+                    <div id="buttonAdd" class="inputs_add button" onclick="goToPreviousMonth()">
+                        <span class="material-symbols-outlined mode_symbol mode_radio unselectable"> add </span>                    
+                    </div>
+
+                    <div class="inputs_error" id="error"> </div> 
                 </div>
 
                 <div class="mode flex">
                     <label> 
                         <input type="radio" name="Mode" value="Task" onchange="toggleMode()" checked>
-                        <span class="material-symbols-outlined mode_radio"> check_box </span>                    
+                        <span class="material-symbols-outlined mode_radio unselectable" > check_box </span>                    
                     </label>
                     
                     <label> 
                         <input type="radio" name="Mode" value="Planner" onchange="toggleMode()">
-                        <span class="material-symbols-outlined mode_radio"> inventory_2 </span> 
+                        <span class="material-symbols-outlined mode_radio unselectable"> inventory_2 </span> 
                     </label>   
                     
                     <label> 
                         <input type="radio" name="Mode" value="Calendar" onchange="toggleMode()">
-                        <span class="material-symbols-outlined mode_radio"> calendar_month </span> 
+                        <span class="material-symbols-outlined mode_radio unselectable"> calendar_month </span> 
                     </label>   
                 </div>
             </nav>

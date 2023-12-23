@@ -1,3 +1,43 @@
+window.onload = function()
+{
+    if (planners.length == 0) {
+        planners.push(new Planner("General", "#7EA16B"));    
+        refreshStorage();
+    }
+
+    displayPlannersInSidebar();
+    toggleMode();
+}
+
+window.addEventListener("load", function() {
+    let textInput = document.getElementById("textInput");
+    let buttonAdd = document.getElementById("buttonAdd");
+
+    textInput.addEventListener("keydown", function(event) {
+        selectedMode = document.querySelector("input[name='Mode']:checked").value;
+
+        if (event.key == "Enter") { 
+            if (selectedMode == "Task") {
+                addTask();
+            }
+
+            else if (selectedMode == "Planner") {
+                addPlanner();
+            }
+        }
+    }); 
+
+    buttonAdd.addEventListener("click", function() {
+        if (selectedMode == "Task") {
+            addTask();
+        }
+    
+        else if (selectedMode == "Planner") {
+            addPlanner();
+        }
+    }); 
+});
+
 function displayTasksInMain() {
     document.getElementById("title").innerHTML = "Task List";
     document.getElementById("taskList").innerHTML = "";
@@ -100,119 +140,49 @@ function displayPlannersInSelect() {
     }
 }
 
-function addTask() {
-    let taskName = document.getElementById("textInput").value.trim();
-    let plannerName = document.getElementById("plannerInput").value;
-    let chosenPlanner = planners.find(planner => planner.getName() == plannerName); 
-    let maximumInputLength = 100;
+function displayCalendarsInMain() {
+    let html = "";
+    let addedDays = 0;
+    let daysInWeek = days.length;
+    let previousDaysInMonth = new Date(year, month, 0).getDate() + 1;
+    let previousFirstDay = previousDaysInMonth - new Date(year, month, 0).getDay();
+    let currentDayInMonth = new Date(year, month + 1, 0).getDate();
+    let currentfirstDay = 1;
+    let currentDay = new Date();
+    let futureDaysInMonth = 42;
 
-    if (taskName == "") {
-        let errorMessage = "Empty input, type something to add a task. "
-        createErrorMessage(errorMessage);
-        return;
+    for (i = 0; i < daysInWeek; i++) {
+        html += `<div class='calendar_day'> ${days[i]} </div>`;
     }
 
-    if (taskName.length > maximumInputLength) {
-        let errorMessage = `The input length is over ${taskName.length - maximumInputLength} words`;
-        createErrorMessage(errorMessage);
-        return;
+    for (let i = previousFirstDay; i < previousDaysInMonth; i++) {
+        html += `<div class='calendar_normal calendar_other'> ${i} </div>`;
+        addedDays++;
     }
 
-    if (chosenPlanner == undefined) {
-        let errorMessage = "Can't find planner, choose a different planner. "
-        createErrorMessage(errorMessage);
-        return;
-    }
+    for (let i = currentfirstDay; i <= currentDayInMonth; i++) {
+        if (i == currentDay.getDate() && year == currentDay.getFullYear()) {
+            html += `<div class='calendar_normal calendar_current'> ${i} </div>`;
+            addedDays++;
+        }
 
-    newTask = new Task(taskName, chosenPlanner);
-    tasks.push(newTask);   
-    refreshStorage();
-
-    displayTasksInMain();
-    document.getElementById("textInput").value = "";
-}
-
-function addPlanner() {
-    let plannerName = document.getElementById("textInput").value.trim();
-    let plannerColour = document.getElementById("colorInput").value;
-    let chosenPlanner = planners.find(planner => planner.getName() == plannerName); 
-    let maximumInputLength = 100;
-
-    if (plannerName == "") {
-        let errorMessage = "Empty input, type something to add a planner. "
-        createErrorMessage(errorMessage);
-        return;  
-    }
-
-    if (plannerName.length > maximumInputLength) {
-        let errorMessage = `The input length is over ${taskName.length - maximumInputLength} words`;
-        createErrorMessage(errorMessage);
-        return;
-    }
-
-    if (chosenPlanner != undefined) {
-        let errorMessage = "Planner already exists, try a new name."
-        createErrorMessage(errorMessage);
-        return;
-    }
-
-    newPlanner = new Planner(plannerName, plannerColour);
-    planners.push(newPlanner);
-    refreshStorage();
-
-    displayPlannersInMain();
-    displayPlannersInSelect();
-    displayPlannersInSidebar();
-    document.getElementById("textInput").value = "";
-}
-
-function deleteTask(position) {
-    event.stopPropagation();
-
-    deleteSound = new Audio('files/delete.mp3');
-    deleteSound.play();
-
-    tasks.splice(position, 1);
-    refreshStorage();
-
-    displayTasksInMain();
-}
-
-function deletePlanner(position) {
-    event.stopPropagation();
-    deleteSound = new Audio('files/delete.mp3');
-    deleteSound.play();
-    
-    for (let i = tasks.length - 1; i >= 0; i--) {
-        if (tasks[i].getPlannerName() == planners[position].getName()) {
-            deleteTask(i);
+        else {
+            html += `<div class='calendar_normal'> ${i} </div>`;
+            addedDays++;   
         }
     }
+    
+    futureDaysInMonth -= addedDays;
 
-    planners.splice(position, 1); 
-    refreshStorage();
-
-    displayPlannersInMain();
-    displayPlannersInSelect();
-    displayPlannersInSidebar();
-}
-
-function togglePlanner(input) {
-    let selectedMode = document.querySelector("input[name='Mode']:checked").value;
-    let index = input.value;
-
-    if (input.checked == true) {
-        planners[index].setVisiblity(true);
-    } 
-
-    else if (input.checked == false) {
-        planners[index].setVisiblity(false);
+    for (let i = 1; i <= futureDaysInMonth; i++) {
+        html += `<div class='calendar_normal calendar_other'> ${i} </div>`;
     }
 
-    if (selectedMode == "Task") {
-        displayTasksInMain();
-    }
+    document.getElementById("taskList").setAttribute('class', 'task calendar');
+    document.getElementById("date").innerHTML = `${months[month]} ${year}`;
+    document.getElementById("taskList").innerHTML = html;
 }
+
 
 function toggleMode() {   
     let selectedMode = document.querySelector("input[name='Mode']:checked").value;

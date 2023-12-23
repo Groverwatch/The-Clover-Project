@@ -5,22 +5,29 @@
     margin: 0px 0px 0px 5px;
 }
 
-.calendar_date {
-    background-color: var(--secondaryBackground);
+.calendar_day {
+    background-color: var(--primaryColor);
+    color: var(--secondaryColor);
+    text-align: center;
+
+    margin: 5px 5px 5px 5px;
+    padding: 10px 10px 10px 10px;
+    border-radius: 20px 20px 20px 20px;
+}
+
+.calendar_normal {
+    background-color: var(--tertiaryColor);
+    color: var(--primaryText);
     margin: 5px 5px 5px 5px;
     padding: 10px 10px 10px 10px;
     border-radius: 20px 20px 20px 20px;
 }
 
 .calendar_other {
-    background-color: var(--secondary);
+    background-color: var(--primarySurface);
 }
 
 .calendar_current {
-    background-color: var(--accent);
+    background-color: var(--secondaryColor);
     font-weight: 800;
-}
-
-.calendar_day {
-    text-align: center;
 }
