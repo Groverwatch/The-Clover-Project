@@ -1,12 +1,17 @@
 // Classes
 class Task { 
-    constructor (name, planner) {
+    constructor (name, planner, dueDate) {
         this.name = name;
         this.planner = planner;
+        this.dueDate = dueDate;
     }
 
     getName() {
         return this.name;
+    }
+
+    getDueDate() { 
+        return this.dueDate;
     }
     
     getPlannerName() {
@@ -71,8 +76,10 @@ if (storedTasks != undefined) {
         let taskName = storedTasks[i].name;
         let plannerName = storedTasks[i].planner.name;
         let chosenPlanner = planners.find(planner => planner.getName() == plannerName); 
-
-        newTask = new Task(taskName, chosenPlanner);
+        let chosenDueDate =  new Date(`${storedTasks[i].dueDate}`,);
+        chosenDueDate.setHours(0,0,0,0);
+    
+        newTask = new Task(taskName, chosenPlanner, chosenDueDate);
         tasks.push(newTask); 
     }
 }

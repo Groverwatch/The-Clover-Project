@@ -2,8 +2,8 @@ let date = new Date();
 let year = date.getFullYear();
 let month = date.getMonth();
 
-const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 function goToPreviousMonth() {
     if (month <= 0) {
@@ -17,8 +17,7 @@ function goToPreviousMonth() {
 
     displayCalendarsInMain();
 
-    var currentDate = new Date(year, month);
-    document.getElementById("date").innerHTML = `${months[month]} ${year}`;
+    document.getElementById("dateText").innerHTML = `${months[month]} ${year}`;
 }
 
 function goToFollowingMonth() {
@@ -33,7 +32,7 @@ function goToFollowingMonth() {
     
     displayCalendarsInMain();
     var currentDate = new Date(year, month);
-    document.getElementById("date").innerHTML = `${months[month]} ${year}`;
+    document.getElementById("dateText").innerHTML = `${months[month]} ${year}`;
 }
 
 function daysInMonth(year, month) {

@@ -103,6 +103,7 @@ input[name="Mode"] {
 
 input[name="Mode"]:checked + .mode_radio {
     color: var(--tertiaryColor);
+    cursor: pointer;
 }
 
 /* Scrollbar Styling */
@@ -134,6 +135,32 @@ input[name="Mode"]:checked + .mode_radio {
     display: none;
 }
 
+/* Date Input */
+.date {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    border: none;
+    font-family: 'Lusitana', serif;
+    font-size: 14px;
+}
+
+.date:hover {
+    filter: var(--hover);
+    border: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+input[type="date"]:focus-visible {
+    border: none;
+    outline: none;
+}
+
+/* Other Section */
 .bottom {
     padding: 10px 10px 15px 10px;
     margin: 5px 5px 5px 0px;
@@ -151,7 +178,7 @@ input[name="Mode"]:checked + .mode_radio {
     border-radius: 40px 40px 40px 40px;
 }
 
-.inputs_date {
+.inputs_day {
     padding: 10px;
     font-size: 16px;
 }
@@ -164,6 +191,15 @@ input[name="Mode"]:checked + .mode_radio {
 
     background-color: var(--primaryColor);
     color: var(--secondaryText);
+}
+
+.inputs_date {
+    min-width: 90px;
+    height: 40px;
+
+    background-color: var(--primaryColor);
+    color: var(--secondaryText);
+    text-align: center;
 }
 
 .inputs_color {
@@ -183,7 +219,6 @@ input[name="Mode"]:checked + .mode_radio {
     height: 40px;
     width: 200px;
 
-    /* padding: 10px 10px 10px 10px; */
     background-color: var(--primaryColor);
     color: var(--secondaryText);
 }

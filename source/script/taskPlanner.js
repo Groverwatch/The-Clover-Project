@@ -2,6 +2,7 @@ function addTask() {
     let taskName = document.getElementById("textInput").value.trim();
     let plannerName = document.getElementById("plannerInput").value;
     let chosenPlanner = planners.find(planner => planner.getName() == plannerName); 
+    let chosenDueDate = document.getElementById("dateInput").valueAsDate;
     let maximumInputLength = 100;
 
     if (taskName == "") {
@@ -22,10 +23,13 @@ function addTask() {
         return;
     }
 
-    newTask = new Task(taskName, chosenPlanner);
+    newTask = new Task(taskName, chosenPlanner, chosenDueDate);
     tasks.push(newTask);   
     refreshStorage();
 
+    console.log(tasks);
+    
+    displayCalendarsInMain();
     displayTasksInMain();
     document.getElementById("textInput").value = "";
 }

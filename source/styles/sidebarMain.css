@@ -91,7 +91,7 @@ body {
 .main_title {
     padding: 10px 10px 10px 12px;
 
-    color: var(--primaryColor);
+    color: var(--primaryText);
 
     font-family: Inter;
 }

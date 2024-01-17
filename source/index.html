@@ -36,13 +36,15 @@
                         <span class="material-symbols-outlined mode_symbol mode_radio unselectable"> chevron_left </span>                    
                     </div>
 
-                    <p class="inputs_date" id="date"></p>
+                    <p class="inputs_day" id="dateText"> </p>
 
                     <div id="monthAddition" class="inputs_add button" onclick="goToFollowingMonth()">
                         <span class="material-symbols-outlined mode_symbol mode_radio unselectable"> chevron_right </span>                    
                     </div>
 
                     <input type="text" id="textInput" class="inputs_text input" placeholder="Add a new task."> 
+                    
+                    <input type="date" class="inputs_date date" onclick="this.showPicker()" id="dateInput"> 
 
                     <input type="color" id="colorInput" class="inputs_color color">
 

@@ -14,7 +14,7 @@ window.addEventListener("load", function() {
     let buttonAdd = document.getElementById("buttonAdd");
 
     textInput.addEventListener("keydown", function(event) {
-        selectedMode = document.querySelector("input[name='Mode']:checked").value;
+        let selectedMode = document.querySelector("input[name='Mode']:checked").value;
 
         if (event.key == "Enter") { 
             if (selectedMode == "Task") {
@@ -28,6 +28,8 @@ window.addEventListener("load", function() {
     }); 
 
     buttonAdd.addEventListener("click", function() {
+        let selectedMode = document.querySelector("input[name='Mode']:checked").value;
+
         if (selectedMode == "Task") {
             addTask();
         }
@@ -53,7 +55,7 @@ function displayTasksInMain() {
             let button = document.createElement('input');
         
             title.append(tasks[i].getName());
-            subtitle.append(color, tasks[i].getPlannerName());
+            subtitle.append(color, tasks[i].getPlannerName(), `, ${days[tasks[i].getDueDate().getDay()]}, ${tasks[i].getDueDate().getDate()} ${months[tasks[i].getDueDate().getMonth()]} ${tasks[i].getDueDate().getFullYear()} `);
             section.append(title, subtitle);
             container.append(section, button);
 
@@ -103,6 +105,68 @@ function displayPlannersInMain() {
     }
 }
 
+function displayCalendarsInMain() {
+    document.getElementById("taskList").innerHTML = "";
+    document.getElementById("dateText").innerHTML = `${months[month]} ${year}`;
+    document.getElementById("taskList").setAttribute('class', 'task calendar');
+
+    let html = "";
+    let addedDays = 0;
+    let daysInWeek = days.length;
+    let previousDaysInMonth = new Date(year, month, 0).getDate() + 1;
+    let previousFirstDay = previousDaysInMonth - new Date(year, month, 0).getDay();
+    let currentDayInMonth = new Date(year, month + 1, 0).getDate();
+    let currentfirstDay = 1;
+    let currentDay = new Date();
+    let futureDaysInMonth = 42;
+
+    for (i = 0; i < daysInWeek; i++) {
+        html += `<div class='calendar_day'> ${days[i]} </div>`;
+    }
+
+    for (let i = previousFirstDay; i < previousDaysInMonth; i++) {
+        html += `<div class='calendar_normal calendar_other'> ${i} </div>`;
+        addedDays++;
+    }
+
+    for (let i = currentfirstDay; i <= currentDayInMonth; i++) {
+        let currentDate = new Date(year, month, i);
+
+        if (i == currentDay.getDate() && year == currentDay.getFullYear()) {
+            html += `<div class='calendar_normal calendar_current'> ${i} ${displayTasksinCalendar(currentDate)}</div>`;
+            addedDays++;
+        }
+
+        else {
+            html += `<div class='calendar_normal'> ${i} ${displayTasksinCalendar(currentDate)} </div>`;
+            addedDays++;   
+        }
+    }
+    
+    futureDaysInMonth -= addedDays;
+
+    for (let i = 1; i <= futureDaysInMonth; i++) {
+        html += `<div class='calendar_normal calendar_other'> ${i} </div>`;
+    }
+
+    document.getElementById("taskList").innerHTML = html;
+}
+
+function displayTasksinCalendar(date) { 
+    html = " ";
+    html += "<div class='calendar-task'>"
+
+    for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i].getDueDate().toString() == date.toString()) {
+            html += `<div class="calendar-name" style="background-color: ${tasks[i].getPlannerColor()}"> ${tasks[i].getName()} </div>`
+        }
+    }
+
+    html += "</div>"
+
+    return html; 
+}
+
 function displayPlannersInSidebar() {
     document.getElementById("plannerList").innerHTML = "";
     
@@ -140,50 +204,6 @@ function displayPlannersInSelect() {
     }
 }
 
-function displayCalendarsInMain() {
-    let html = "";
-    let addedDays = 0;
-    let daysInWeek = days.length;
-    let previousDaysInMonth = new Date(year, month, 0).getDate() + 1;
-    let previousFirstDay = previousDaysInMonth - new Date(year, month, 0).getDay();
-    let currentDayInMonth = new Date(year, month + 1, 0).getDate();
-    let currentfirstDay = 1;
-    let currentDay = new Date();
-    let futureDaysInMonth = 42;
-
-    for (i = 0; i < daysInWeek; i++) {
-        html += `<div class='calendar_day'> ${days[i]} </div>`;
-    }
-
-    for (let i = previousFirstDay; i < previousDaysInMonth; i++) {
-        html += `<div class='calendar_normal calendar_other'> ${i} </div>`;
-        addedDays++;
-    }
-
-    for (let i = currentfirstDay; i <= currentDayInMonth; i++) {
-        if (i == currentDay.getDate() && year == currentDay.getFullYear()) {
-            html += `<div class='calendar_normal calendar_current'> ${i} </div>`;
-            addedDays++;
-        }
-
-        else {
-            html += `<div class='calendar_normal'> ${i} </div>`;
-            addedDays++;   
-        }
-    }
-    
-    futureDaysInMonth -= addedDays;
-
-    for (let i = 1; i <= futureDaysInMonth; i++) {
-        html += `<div class='calendar_normal calendar_other'> ${i} </div>`;
-    }
-
-    document.getElementById("taskList").setAttribute('class', 'task calendar');
-    document.getElementById("date").innerHTML = `${months[month]} ${year}`;
-    document.getElementById("taskList").innerHTML = html;
-}
-
-
 function toggleMode() {   
     let selectedMode = document.querySelector("input[name='Mode']:checked").value;
     let monthSubtract = document.getElementById("monthSubtract");
@@ -191,12 +211,14 @@ function toggleMode() {
     let plannerInput = document.getElementById("plannerInput");
     let colorInput = document.getElementById("colorInput");
     let textInput = document.getElementById("textInput");
+    let dateInput = document.getElementById("dateInput");
     let buttonAdd = document.getElementById("buttonAdd");
-    let date = document.getElementById("date");
+    let dateText = document.getElementById("dateText");
 
     if (selectedMode == "Task") {
         displayTasksInMain();
         displayPlannersInSelect();
+        let currentDay = new Date(); 
 
         monthSubtract.style.display = "none";
         monthAddition.style.display = "none";
@@ -205,7 +227,9 @@ function toggleMode() {
         buttonAdd.style.display = "block";
         textInput.style.display = "block";
         textInput.placeholder = "Add a new task.";
-        date.style.display = "none";
+        dateInput.style.display = "block";
+        dateInput.valueAsDate = currentDay;
+        dateText.style.display = "none";
     }
 
     else if (selectedMode == "Planner") {
@@ -218,10 +242,12 @@ function toggleMode() {
         buttonAdd.style.display = "block";
         textInput.style.display = "block";
         textInput.placeholder = "Add a new planner.";
-        date.style.display = "none";
+        dateInput.style.display = "none";
+        dateText.style.display = "none";
     }
 
     else if (selectedMode == "Calendar") {
+        refreshStorage();
         displayCalendarsInMain();
 
         monthSubtract.style.display = "block";
@@ -230,7 +256,8 @@ function toggleMode() {
         colorInput.style.display = "none";
         buttonAdd.style.display = "none";
         textInput.style.display = "none";
-        date.style.display = "block";        
+        dateInput.style.display = "none";
+        dateText.style.display = "block";        
     }
 }
 

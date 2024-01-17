@@ -1,11 +1,13 @@
 .calendar {
     display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto;
-    grid-template-rows: 50px auto auto auto auto auto auto;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 0.4fr repeat(6, 1fr);
     margin: 0px 0px 0px 5px;
 }
 
 .calendar_day {
+    max-height: 120px;
+
     background-color: var(--primaryColor);
     color: var(--secondaryColor);
     text-align: center;
@@ -21,6 +23,8 @@
     margin: 5px 5px 5px 5px;
     padding: 10px 10px 10px 10px;
     border-radius: 20px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .calendar_other {
@@ -30,4 +34,15 @@
 .calendar_current {
     background-color: var(--secondaryColor);
     font-weight: 800;
+}
+
+.calendar-task {
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-name {
+    width: 100%;
+    height: 20px;
+    font-size: 10px;
 }
