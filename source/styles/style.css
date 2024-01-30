@@ -1,0 +1,573 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Lusitana:wght@400;700&family=Merriweather:wght@300;400;900&display=swap');  
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+html {
+    height: 100%;
+}
+
+:root {
+    --sidebar: #F9EAEF;
+    --onSidebar: #000000;
+
+    --main: #FFF8F8;
+    --onMain: #000000;
+
+    --interfaceContainer: var(--main); 
+    --onInterfaceContainer: var(--onMain);
+    --hoverInterfaceContainer: #F8EBEB;
+    
+    --buttonOnInterfaceContainer: #eed0d0;
+    --buttonHover: brightness(92%);
+    --buttonActive: brightness(90%);
+
+    --information: var(--main);
+    --onInformfationContainer: var(--onMain);
+
+    --scrollbar: var(--sidebar); 
+    --scrollbarThumb: var(--buttonOnInterfaceContainer);
+    --scrollbarThumbHover: #e2cfd5;
+
+    --input: var(--buttonOnInterfaceContainer);
+    --inputPlaceholder: #353535;
+    --inputFocus: brightness(96%);
+}
+
+body {
+    background-color: var(--sidebar);
+    color: var(--onSidebar);
+    display: flex;
+    height: 100%;
+    font-family: 'Lusitana', serif;
+}
+
+/* The Sidebar Section */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+    padding: 1.5rem 1rem 1.5rem 1.5rem;
+}
+
+.sidebar__title {
+    font-size: 2.5em;
+}
+
+.planners__section {
+    height: 24em;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    margin-left: -0.4em;
+}
+
+.planners__container {
+    /* background-color: var(--buttonOnInterfaceContainer); */
+    padding: 0.3em;
+    display: flex;
+    align-items: center;
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+    border-radius: 1em;
+}
+
+.planners__subtitle {
+    font-size: 1.1em;
+}
+
+.planners__container:hover {
+    background-color: var(--buttonOnInterfaceContainer);
+}
+
+.planners__checkbox {
+    height: 1.5em;
+    width: 1.5em;
+    margin-right: 0.5rem;
+    margin-left: 0.2rem;
+    accent-color: var(--onSidebar);
+}
+
+input[name="Mode"] {
+    display: none;
+}
+
+.mode {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2.2em;
+}
+
+input[name="Mode"]:checked + .mode__button {
+    background-color: var(--scrollbarThumb);
+    transition: 0.3s;
+    /* cursor: pointer; */
+}
+
+
+.mode__button {
+    background-color: var(--main);
+    height: 1.5em;
+    width: 4.5em;
+    border-radius: 3em 3em 3em 3em; 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0.1em;
+}
+
+.mode__button:hover {
+    background-color: var(--scrollbarThumbHover);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+/* The Main Section */
+.main {
+    background-color: var(--main);
+    color: var(--onMain);
+    flex: 4;
+    flex-direction: column;
+    border-radius: 3em 3em 3em 3em;
+    padding: 2rem 2rem 2rem 2rem;
+    margin: 1em 1em 1em 1em;
+}
+
+.main__close { 
+    transition: all 0.3s;
+    opacity: 0;
+    display: none;
+}
+
+.main__open {
+    transition: all 0.3s;
+    opacity: 100;
+    display: flex;
+}
+
+.main__title {
+    font-size: 1.5em;
+    font-family: 'Inter', sans-serif;
+    padding: 0em 0em 0em 0.6em;
+}
+
+/* The interface class represents both tasks and planners as they use the same elements. */
+.main__interface {
+    flex: 5;
+    overflow-y: scroll;
+    margin: 0em 0em 1.5em 0em;
+}
+
+.interface__title {
+    font-size: 1.3em;
+}
+
+.interface__container {
+    background-color: var(--interfaceContainer);
+    color: var(--onInterfaceContainer);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0.5rem 0.5em 1em;
+    margin: 0.5em 0.5em 0.5em 0em;
+    border-radius: 2rem 2rem 2rem 2rem;
+}
+
+.interface__container:hover {
+    background-color: var(--hoverInterfaceContainer);
+    cursor: pointer;
+}
+
+.interface__subtitle {
+    display: flex; 
+}
+
+.subtitle__color {
+    background-color: var(--onInterfaceContainer);
+
+    height: 1em; 
+    width: 1em;
+    border-radius: 1em 1em 1em 1em;
+    margin: 1px 0.4em 0em 0em;
+}
+
+.interface__button {
+    background-color: var(--buttonOnInterfaceContainer);
+    height: 3em;
+    width: 3em;
+    border-radius: 3em 3em 3em 3em; 
+    margin: 0em 0.5em 0em 0em;
+    border: none;
+}
+
+
+.interface__button:hover {
+    filter: var(--buttonHover);
+    transition: 0.3s;
+}
+
+.interface__button:active {
+    filter: var(--buttonActive);
+    transition: 0.3s;
+}
+
+.inputs {
+    display: flex;
+    margin: 0em 0em 0.8em 0em;
+    width: 50em;
+}
+
+.inputs__text {
+    width: 25em;
+    border-radius: 3em 3em 3em 3em;
+    background-color: var(--input);
+    padding: 0em 0em 0em 1em;
+    margin: 0em 0em 0em 0.7em;
+    font-family: 'Lusitana', serif;
+    font-size: 1em;
+
+    outline: none;
+    border: none;
+}
+
+.inputs__text::placeholder {
+    color: var(--inputPlaceholder);
+}
+
+.inputs__text:focus-visible {
+    filter: var(--inputFocus);
+    transition: 0.3s;
+    outline: none;
+    border: none;
+}
+
+.inputs_date {
+    background-color: var(--input);
+    margin: 0em 0 0em 1em;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    border-radius: 3em 3em 3em 3em;
+    border: none;
+    outline: none;
+    width: 9em;
+    font-family: 'Lusitana', serif;
+    font-size: 0.9em;
+}
+
+.inputs_date:hover {
+    filter: var(--buttonHover);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.inputs_date:focus-visible {
+    filter: var(--buttonActive);
+    transition: 0.3s;
+}
+
+.inputs_select {
+    background-color: var(--input);
+    margin: 0em 0.8em 0em 0.8em;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    border-radius: 3em 3em 3em 3em;
+    border: none;
+    outline: none;
+    width: 9em;
+    font-family: 'Lusitana', serif;
+    font-size: 1em;
+}
+
+.inputs_select:hover {
+    filter: var(--buttonHover);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.inputs__button:focus-visible {
+    filter: var(--buttonActive);
+    transition: 0.3s;
+}
+
+.inputs__button {
+    background-color: var(--input);
+    height: 3em;
+    width: 3em;
+    border-radius: 3em 3em 3em 3em; 
+    border: none;
+}
+
+.inputs__button:hover {
+    filter: var(--buttonHover);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.inputs__button:active {
+    filter: var(--buttonActive);
+    transition: 0.3s;
+}
+
+.inputs__color {
+    background-color: var(--input);
+    height: 40px;
+    width: 9em;
+    margin: 0em 0.8em 0em 0.8em;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    border-radius: 3em 3em 3em 3em;
+    outline: none;
+    border: none;
+}
+
+.inputs__color::-webkit-color-swatch {
+    border-radius: 40px;
+    border: none;
+}
+
+.inputs__color:hover {
+    filter: var(--buttonHover);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.inputs__color:active {
+    filter: var(--buttonActive);
+    transition: 0.3s;
+}
+
+.input__month {
+    background-color: var(--input);
+    height: 3em;
+    width: 3em;
+    border-radius: 3em 3em 3em 3em; 
+    border: none;
+    margin-left: 0.7em;
+}
+
+.input__month:hover {
+    filter: var(--buttonHover);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.input__month:active {
+    filter: var(--buttonActive);
+    transition: 0.3s;
+}
+
+.input__day {
+    width: 25em;
+    border-radius: 3em 3em 3em 3em;
+    background-color: var(--input);
+    margin-left: 0.7em;
+    padding-top: 0.6em;
+    padding-left: 1em;
+    font-family: 'Lusitana', serif;
+    font-size: 1em;
+}
+
+.inputs__color:hover {
+    filter: var(--buttonHover);
+    transition: 0.3s;
+}
+
+.inputs__color:active {
+    filter: var(--buttonActive);
+    transition: 0.3s;
+}
+
+.calendar__interface {
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 0.2fr repeat(6, 1fr);
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.calendar__days {
+    background-color: var(--hoverInterfaceContainer);
+    text-align: center;
+    padding: 0.8rem;
+    border-radius: 2em;
+    margin-left: 0.5em;
+}
+
+.calendar__other {
+    background-color: var(--hoverInterfaceContainer);
+    text-align: center;
+    padding: 0.8rem;
+    border-radius: 1.5em;
+    margin-top: 0.5em;
+    margin-left: 0.5em;  
+}
+
+.calendar__date {
+    background-color: var(--buttonOnInterfaceContainer);
+    text-align: center;
+    padding: 0.8rem;
+    border-radius: 1.5em;
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+}
+
+.calendar__current {
+    background-color: var(--scrollbarThumbHover);
+    text-align: center;
+    padding: 0.8rem;
+    border-radius: 1.5em;
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+}
+
+.calendar__task {
+    overflow-y: scroll;
+    height: 3em;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    /* background-color: #353535; */
+}
+
+.calendar__task::-webkit-scrollbar {
+    display: none;
+}
+
+.calendar__name {
+    font-size: 0.8em;
+    margin-top: 0.2em;
+    /* margin-bottom: 0.2em; */
+    border-radius: 0.5em;
+    padding: 0.2em;
+}
+
+/* The information section that shows details about tasks, planners or days */
+.information {
+    background-color: var(--information);
+    color: var(--onInformfationContainer);
+    overflow: hidden;
+    border-radius: 3em 3em 3em 3em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.information__open {
+    transition: all 0.3s;
+    flex: 1;
+    opacity: 100;
+    padding: 2rem 2rem 2rem 2rem;
+    margin: 1em 1em 1em 0em;
+}
+
+.information__close {
+    transition: all 0.3s;
+    flex: 0;
+    opacity: 0;
+    padding: 0rem 0rem 0rem 0rem;
+    margin: 0em 0em 0em 0em;
+}
+
+.information__title {
+    font-size: 1.5em;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+}
+
+.information__exit {
+    text-align: center;
+}
+
+.exit_button {
+    background-color: var(--input);
+    height: 3em;
+    width: 3em;
+    border-radius: 3em 3em 3em 3em; 
+    border: none;
+    text-align: center;
+}
+
+.exit_button:hover {
+    filter: var(--buttonHover);
+    transition: 0.3s;
+}
+
+.exit_button:active {
+    filter: var(--buttonActive);
+    transition: 0.3s;
+}
+
+.information__container {
+    margin: 1.5em 0.5em 1.5em 0.5em;
+}
+
+.container__title {
+    font-size: 1.2em;
+    padding-left: 0.1em;
+}
+
+.container__text {
+    width: 94%;
+    height: 2.5em;
+    border-radius: 3em 3em 3em 3em;
+    background-color: var(--input);
+    padding: 0em 0.5em 0em 0.5em;
+    font-family: 'Lusitana', serif;
+    font-size: 1em;
+
+    outline: none;
+    border: none;
+}
+
+.container__text::placeholder {
+    color: var(--inputPlaceholder);
+}
+
+.container__text:focus-visible {
+    filter: var(--inputFocus);
+    transition: 0.3s;
+    outline: none;
+    border: none;
+}
+
+
+.container__select {
+    background-color: var(--input);
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    border-radius: 3em 3em 3em 3em;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 2.5em;
+    font-family: 'Lusitana', serif;
+    font-size: 1em;
+}
+
+.container__select:hover {
+    filter: var(--buttonHover);
+    transition: 0.3s;
+}
+
+.container_date {
+    background-color: var(--input);
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    border-radius: 3em 3em 3em 3em;
+    border: none;
+    outline: none;
+    width: 95%;
+    height: 2em;
+    font-family: 'Lusitana', serif;
+    font-size: 0.9em;
+}
+
+.container_date:hover {
+    filter: var(--buttonHover);
+    transition: 0.3s;
+}
+
+.container_date:focus-visible {
+    filter: var(--buttonActive);
+    transition: 0.3s;
+}

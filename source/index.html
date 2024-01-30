@@ -1,79 +1,130 @@
+<!DOCTYPE html>
+
 <html>
     <head>
-        <title> Clover. </title>
-
+        <title> Clover - New </title>
         <link rel="icon" href="files/icon.png" type="image/x-icon">
-        <link rel="stylesheet" href="styles/calendar.css">
-        <link rel="stylesheet" href="styles/input.css">
-        <link rel="stylesheet" href="styles/sidebarMain.css">
-        <link rel="stylesheet" href="styles/taskPlanner.css">
-
-        <script src="script/calendar.js"> </script>
-        <script src="script/storage.js"> </script>      
-        <script src="script/taskPlanner.js"> </script>      
-        <script src="script/events.js"> </script>
+        <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="styles/others.css">
     </head>
 
-    <body class="flex">
-        <section class="sidebar flex"> 
-            <h1 class="sidebar_title"> Clover. </h1>
+    <body>
+        <section class="sidebar"> 
+            <h1 class="sidebar__title"> Clover. </h1>
 
-            <article class="planners">
-                <h1 class="planners_title"> Planner. </h1>
+            <div>
+                <h2> Planners. </h2>
 
-                <form id="plannerList"> </form>
-            </article>
+                <div class="planners__section" id="sidebarPlanner"> <!-- Planners appear here --> </div>
+            </div>
+
+            <div class="mode"> 
+                <label> 
+                    <input type="radio" name="Mode" value="Planner" onchange="toggleMode()">
+                    <span class="material-symbols-outlined mode__button"> inventory_2 </span> 
+                </label>   
+
+                <label> 
+                    <input type="radio" name="Mode" value="Task" onchange="toggleMode()" checked>
+                    <span class="material-symbols-outlined mode__button" > check_box </span>                    
+                </label>
+                
+                <label> 
+                    <input type="radio" name="Mode" value="Calendar" onchange="toggleMode()">
+                    <span class="material-symbols-outlined mode__button"> calendar_month </span> 
+                </label>   
+            </div>
+        </section>
+        
+        <section id="taskContainer" class="main main__open">
+            <h1 class="main__title"> Task List </h1>
+
+            <div class="main__interface" id="taskInterface"> <!-- Tasks appear here --> </div>
+
+            <div class="inputs">
+                <input id="taskTextInput" type="text" placeholder="Add a new task." class="inputs__text"> 
+
+                <input id="taskDateInput" type="date" class="inputs_date" >
+
+                <select id="taskPlannerInput" class="inputs_select"> <!-- Planners appear here --> </select>
+
+                <button id="taskAddInput" type="button" class="inputs__button"> 
+                    <span class="material-symbols-outlined"> add </span>                
+                </button>
+            </div>
+
+        </section>
+        
+        <section id="plannerContainer" class="main main__close">
+            <h1 class="main__title"> Planner List </h1>
+
+            <div class="main__interface" id="plannerInterface"> <!-- Planners appear here --> </div>
+
+            <div class="inputs">
+                <input id="plannerTextInput" type="text" placeholder="Add a new planner." class="inputs__text"> 
+                
+                <input id="plannerColorInput" type="color" class="inputs__color">
+
+                <button id="plannerAddInput" type="button" class="inputs__button"> 
+                    <span class="material-symbols-outlined"> add </span>                
+                </button>
+            </div>
         </section>
 
-        <section class="main flex">
-            <h2 class="main_title" id="title"> Task List </h2>
+        <section id="calendarContainer" class="main main__close">
+            <h1 class="main__title"> Calendar </h1>
 
-            <article id="taskList" class="task"> </article>
+            <div id="calendarInterface" class="calendar__interface">  <!-- Calendar appears here -->  </div>
+            
+            <div class="inputs">
+                <div id="plannerDayText" class="input__day"> <!-- Date appear here --> </div>
 
-            <nav class="bottom flex"> 
-                <div class="inputs flex" id="input"> 
-                    <div id="monthSubtract" class="inputs_add button" onclick="goToPreviousMonth()">
-                        <span class="material-symbols-outlined mode_symbol mode_radio unselectable"> chevron_left </span>                    
-                    </div>
+                <button id="plannerAddInput" onclick="goToPreviousMonth()" type="button" class="input__month"> 
+                    <span class="material-symbols-outlined"> arrow_back </span>                
+                </button>
 
-                    <p class="inputs_day" id="dateText"> </p>
-
-                    <div id="monthAddition" class="inputs_add button" onclick="goToFollowingMonth()">
-                        <span class="material-symbols-outlined mode_symbol mode_radio unselectable"> chevron_right </span>                    
-                    </div>
-
-                    <input type="text" id="textInput" class="inputs_text input" placeholder="Add a new task."> 
-                    
-                    <input type="date" class="inputs_date date" onclick="this.showPicker()" id="dateInput"> 
-
-                    <input type="color" id="colorInput" class="inputs_color color">
-
-                    <select id="plannerInput" class="inputs_select select unselectable"> </select>
-                    
-                    <div id="buttonAdd" class="inputs_add button" onclick="goToPreviousMonth()">
-                        <span class="material-symbols-outlined mode_symbol mode_radio unselectable"> add </span>                    
-                    </div>
-
-                    <div class="inputs_error" id="error"> </div> 
-                </div>
-
-                <div class="mode flex">
-                    <label> 
-                        <input type="radio" name="Mode" value="Task" onchange="toggleMode()" checked>
-                        <span class="material-symbols-outlined mode_radio unselectable" > check_box </span>                    
-                    </label>
-                    
-                    <label> 
-                        <input type="radio" name="Mode" value="Planner" onchange="toggleMode()">
-                        <span class="material-symbols-outlined mode_radio unselectable"> inventory_2 </span> 
-                    </label>   
-                    
-                    <label> 
-                        <input type="radio" name="Mode" value="Calendar" onchange="toggleMode()">
-                        <span class="material-symbols-outlined mode_radio unselectable"> calendar_month </span> 
-                    </label>   
-                </div>
-            </nav>
+                <button id="plannerAddInput" onclick="goToFollowingMonth()" type="button" class="input__month"> 
+                    <span class="material-symbols-outlined"> arrow_forward </span>                
+                </button>
+            </div>
         </section>
-    </body> 
+
+        <section class="information information__close" id="information"> 
+            <div> 
+                <h1 class="information__title"> Details </h1>
+
+                <div class="information__container"> 
+                    <h2 class="container__title"> Task Name </h2>
+                    <input id="informationTextInput" class="container__text">
+                </div>
+
+                <div class="information__container"> 
+                    <h2 class="container__title"> Planner </h2>
+                    <select id="informationPlannerInput" class="container__select">
+                        <option> planner 1</option>
+                        <option> planner 1</option>
+                        <option> planner 1</option>
+                    </select>
+                </div>
+
+                <div class="information__container"> 
+                    <h2 class="container__title"> Date </h2>
+                    <input id="informationDateInput" type="date" class="container_date">
+                </div>
+            </div>
+
+            <div class="information__exit">
+                <button class="exit_button" type="button" onclick="test()"> 
+                    <span class="material-symbols-outlined"> close </span>                
+                </button>    
+            </div>    
+        </section>
+    </body>
 </html>
+
+
+<script src="script/storage.js"> </script>
+<script src="script/planners.js"> </script>
+<script src="script/tasks.js"> </script>
+<script src="script/events.js"> </script>
+<script src="script/calendar.js"> </script>

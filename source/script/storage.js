@@ -55,6 +55,9 @@ class Planner {
 tasks = [];
 planners = [];
 
+const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
 // Planners
 var storedPlanners = JSON.parse(localStorage.getItem('planners'));
 
@@ -87,4 +90,93 @@ if (storedTasks != undefined) {
 function refreshStorage() {
     localStorage.setItem('planners', JSON.stringify(planners)); 
     localStorage.setItem('tasks', JSON.stringify(tasks)); 
+}
+
+function addTask() {
+    let taskName = document.getElementById("taskTextInput").value.trim();
+    let plannerName = document.getElementById("taskPlannerInput").value;
+    let chosenPlanner = planners.find(planner => planner.getName() == plannerName); 
+    let chosenDueDate = document.getElementById("taskDateInput").valueAsDate;
+    let maximumInputLength = 100;
+
+    if (taskName == "") {
+        alert("Empty input, type something to add a task."); // temp
+        return;
+    }
+
+    if (taskName.length > maximumInputLength) {
+        alert("Can't find planner, choose a different planner."); // temp
+        return;
+    }
+
+    if (chosenPlanner == undefined) {
+        alert("Can't find planner, choose a different planner."); // temp
+        return;
+    }
+
+    if (chosenDueDate === null) {
+        chosenDueDate = new Date();
+    }
+
+    newTask = new Task(taskName, chosenPlanner, chosenDueDate);
+    tasks.push(newTask);   
+    refreshStorage();
+
+    displayTasksOnMain();
+    displayCalendarOnMain();
+    document.getElementById("taskTextInput").value = "";
+    console.log(tasks.length);
+}
+
+function deleteTask(button) {
+    let deletePosition = button.value;
+    event.stopPropagation();
+
+    tasks.splice(deletePosition, 1);
+    refreshStorage();
+
+    displayTasksOnMain();
+    displayCalendarOnMain();
+}
+
+function addPlanner() {
+    let plannerName = document.getElementById("plannerTextInput").value.trim();
+    let plannerColour = document.getElementById("plannerColorInput").value;
+    let chosenPlanner = planners.find(planner => planner.getName() == plannerName); 
+    let maximumInputLength = 100;
+
+    if (plannerName == "") {
+        alert("Empty input, type something to add a planner."); // temp
+        return;  
+    }
+
+    if (plannerName.length > maximumInputLength) {
+        alert(`The input length is over ${taskName.length - maximumInputLength} words`); // temp
+        return;
+    }
+
+    if (chosenPlanner != undefined) {
+        alert("Planner already exists, try a new name.");
+        return;
+    }
+
+    newPlanner = new Planner(plannerName, plannerColour);
+    planners.push(newPlanner);
+    refreshStorage();
+
+    displayPlannersOnMain();
+    displayPlannersOnSidebar();
+
+    document.getElementById("plannerTextInput").value = "";
+}
+
+function deletePlanner(button) {
+    let deletePosition = button.value;
+    event.stopPropagation();
+
+    planners.splice(deletePosition, 1);
+    refreshStorage();
+
+    displayPlannersOnMain();
+    displayPlannersOnSidebar();
 }
