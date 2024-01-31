@@ -122,10 +122,7 @@ function addTask() {
     tasks.push(newTask);   
     refreshStorage();
 
-    displayTasksOnMain();
-    displayCalendarOnMain();
     document.getElementById("taskTextInput").value = "";
-    console.log(tasks.length);
 }
 
 function deleteTask(button) {
@@ -180,3 +177,4 @@ function deletePlanner(button) {
     displayPlannersOnMain();
     displayPlannersOnSidebar();
 }
+

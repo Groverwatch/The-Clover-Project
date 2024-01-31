@@ -6,15 +6,15 @@ function displayPlannersOnMain() {
     main.innerHTML = "";
 
     for (i = 0; i < planners.length; i++) { // This loops through the planners's informations and puts into content for the user to see. 
-        content += `<div class="interface__container">`;
+        content += `<div class="planner__container">`;
         content +=      `<div>`;
-        content +=          `<h2 class="interface__title"> ${planners[i].getName()} </h2>`;
-        content +=          `<span class="interface__subtitle">`;
-        content +=              `<div class="subtitle__color" style="background-color: ${planners[i].getColor()}"> </div>`;
+        content +=          `<h2 class="planner__title"> ${planners[i].getName()} </h2>`;
+        content +=          `<span class="planner__subtitle">`;
+        content +=              `<div class="planner__color" style="background-color: ${planners[i].getColor()}"> </div>`;
         content +=              `<p> ${planners[i].getColor().toUpperCase()} </p>`;
         content +=          `</span>`;
         content +=      `</div>`;
-        content +=      `<button class="interface__button" value="${i}" onclick="deletePlanner(this)"> </button>`; // This button is used to delete the task. 
+        content +=      `<button class="planner__button" value="${i}" onclick="deletePlanner(this)"> </button>`; // This button is used to delete the task. 
         content += `</div>`;
     }
 

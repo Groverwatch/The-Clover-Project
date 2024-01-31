@@ -1,94 +1,219 @@
-let date = new Date();
-let year = date.getFullYear();
-let month = date.getMonth();
+window.addEventListener("load", function() {
+    let taskTextInput = document.getElementById("taskTextInput");
+    let taskButtonAdd = document.getElementById("taskAddInput");
+    let plannerTextInput = document.getElementById("plannerTextInput");
+    let plannerButtonAdd = document.getElementById("plannerAddInput");
 
-
-function displayCalendarOnMain() {
-    let main = document.getElementById("calendarInterface");
-    document.getElementById("calendarInterface").innerHTML = "";    
-    let content = "";
-
-    let addedDays = 0;
-    let previousDaysInMonth = new Date(year, month, 0).getDate() + 1;
-    let previousFirstDay = previousDaysInMonth - new Date(year, month, 0).getDay();
-    let currentDayInMonth = new Date(year, month + 1, 0).getDate();
-    let currentfirstDay = 1;
-    let currentDay = new Date();
-    let futureDaysInMonth = 42;
-
-    for (let i = 0; i < days.length; i++) {
-        content += `<div class="calendar__days"> ${days[i]} </div>`;
-    }
-
-    for (let i = previousFirstDay; i < previousDaysInMonth; i++) {
-        content += `<div class='calendar__other'> ${i} </div>`;
-        addedDays++;
-    }
-
-    for (let i = currentfirstDay; i <= currentDayInMonth; i++) {
-        let currentDate = new Date(year, month, i);
-
-        if (i == currentDay.getDate() && month == currentDay.getMonth() && year == currentDay.getFullYear()) {
-            content += `<div class='calendar__current'> ${i} ${displayTasksinCalendar(currentDate)}</div>`;
-            addedDays++;
+    taskTextInput.addEventListener("keydown", function(event) {
+        if (event.key == "Enter") { 
+            addTask();
+            toggleMode();
         }
+    }); 
 
-        else {
-            content += `<div class='calendar__date'> ${i} ${displayTasksinCalendar(currentDate)} </div>`;
-            addedDays++;   
+    taskButtonAdd.addEventListener("click", function() {
+        addTask();
+        toggleMode();
+    }); 
+
+    plannerTextInput.addEventListener("keydown", function(event) {
+        if (event.key == "Enter") { 
+            addPlanner();
+            toggleMode();
         }
+    }); 
+
+    plannerButtonAdd.addEventListener("click", function() {
+        addPlanner();
+        toggleMode();
+    }); 
+});
+
+function toggleMode() {
+    let selectedMode = document.querySelector("input[name='Mode']:checked").value;
+
+    let taskContainer = document.getElementById("taskContainer");
+    let plannerContainer = document.getElementById("plannerContainer");
+    let calendarContainer = document.getElementById("calendarContainer");
+
+    if (selectedMode == 'Task') {
+        taskContainer.setAttribute('class', 'main main--reveal')
+        plannerContainer.setAttribute('class', 'main main--hide');
+        calendarContainer.setAttribute('class', 'main main--hide');
+        
+        displayTasksOnMain();
     }
     
-    futureDaysInMonth -= addedDays;
+    if (selectedMode == 'Planner') {
+        taskContainer.setAttribute('class', 'main main--hide');
+        plannerContainer.setAttribute('class', 'main main--reveal');
+        calendarContainer.setAttribute('class', 'main main--hide');
 
-    for (let i = 1; i <= futureDaysInMonth; i++) {
-        content += `<div class='calendar__other'> ${i} </div>`;
+        displayPlannersOnMain();
+        displayPlannersOnSidebar();
     }
 
-    main.innerHTML = content;
-    document.getElementById("plannerDayText").innerHTML = `${months[month]} ${year}`;
+    if (selectedMode == 'Calendar') {
+        displayCalendarOnMain(displayedYear, displayedMonth);
+        taskContainer.setAttribute('class', 'main main--hide');
+        plannerContainer.setAttribute('class', 'main main--hide');
+        calendarContainer.setAttribute('class', 'main main--reveal');
+    }
 }
 
-function displayTasksinCalendar(date) { 
-    let content = "";
-    content += "<div class='calendar__task'>"
+var displayedYear = 2024;
+var displayedMonth = 0;
+var totalDaysOnCalendar = 42;  
 
-    for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i].getDueDate().toString() == date.toString()) {
-            content += `<div class="calendar__name" style="background-color: ${tasks[i].getPlannerColor()}"> ${tasks[i].getName()} </div>`
-        }
+// This function creates a calendar on the main interface. 
+function displayCalendarOnMain(year, month) {
+    let content = ``;
+    totalDaysOnCalendar = 42; 
+
+    // This function creates the days in the week such as 'Monday'.
+    content = createDaysInWeek();
+
+    // This function creates the days leading up to the new month. 
+    content += createDaysBeforeNewMonth(year, month);
+
+    // This function creates the days in the month.
+    content += createDaysForNewMonth(year, month);
+    
+    // This function creates the days after the month. 
+    content += createDaysAfterNewMonth(year, month);
+
+    // This code changes the text of the input and title to match the current date that is displayed on the calendar. 
+    document.getElementById("calendarTitle").innerHTML = `Calendar - ${months[month]} ${year}`;
+    // document.getElementById("calendarDayText").innerHTML = `${months[month]} ${year}`;
+
+    // This part clears the calendar interface so that new information can be placed on the interface. 
+    document.getElementById("calendarInterface").innerHTML = ``;
+    document.getElementById("calendarInterface").innerHTML = content;
+}
+
+// This loops through and displays each day of the week such as 'Sunday'. 
+function createDaysInWeek() {
+    let content = ``;
+
+    for (let day of days) { 
+        content += `<div class='calendar__days'> ${day} </div>`; 
     }
 
-    content += "</div>"
-
-    return content; 
+    return content;
 }
 
-function goToPreviousMonth() {
-    if (month <= 0) {
-        month = 11; 
-        year--;
+// This function creates the days leading up to the start of the month by looping from the first day of the calendar to the last day of the previous month.
+function createDaysBeforeNewMonth(year, month) {
+    let content = ``;
+    let lastDayOfPreviousMonth = new Date(year, month, 0).getDate();
+    let firstDayOfTheCalendar = lastDayOfPreviousMonth - new Date(year, month, 0).getDay() + 1;
+    
+    if (month - 1 == -1) {
+        month = 11;
+        year--; 
     }
 
     else {
         month--;
     }
 
-    displayCalendarOnMain();
+    for (let day = firstDayOfTheCalendar; day <= lastDayOfPreviousMonth; day++) {
+        content += `<div class='calendar__other'> ${day} ${showTasksOnDate(year, month, day)} </div>`;
+        totalDaysOnCalendar--;
+    }
 
-    document.getElementById("plannerDayText").innerHTML = `${months[month]} ${year}`;
+    return content;
 }
 
-function goToFollowingMonth() {
-    if (month >= 11) {
-        month = 0;
-        year++;
+// This section gets the amount of days in a month and loops through each day to display them on the calendar.
+function createDaysForNewMonth(year, month) {
+    let content = ``;
+    let currentAmountOfDays = new Date(year, month + 1, 0).getDate();
+
+    for (let day = 1; day <= currentAmountOfDays; day++) {
+        content += `<div class='calendar__date'> ${day} ${showTasksOnDate(year, month, day)} </div>`
+        totalDaysOnCalendar--;
     }
-    
+
+    return content;
+}
+
+function createDaysAfterNewMonth(year, month) {
+    let content = ``;
+
+    if (month + 1 >= 12) {
+        month = 0;
+        year++; 
+    }
+
     else {
         month++;
     }
-    
-    displayCalendarOnMain();
-    document.getElementById("plannerDayText").innerHTML = `${months[month]} ${year}`;
+
+    for (let day = 1; day <= totalDaysOnCalendar; day++) {
+        content += `<div class='calendar__other'> ${day} ${showTasksOnDate(year, month, day)} </div>`
+    }
+
+    return content;
 }
+
+function showTasksOnDate(year, month, day) {
+    let content = ``;
+    let currentDate = new Date(year, month, day, 0, 0, 0);
+    let revealedTasks = 0;
+    let hiddenTasks = 0;
+
+    content += `<div>`;
+
+    for (let i = 0; i < tasks.length; i++) {
+        let taskDueDate = tasks[i].getDueDate(); 
+
+        if (taskDueDate.toDateString() == currentDate.toDateString()) {
+            revealedTasks++;
+
+            if (revealedTasks <= 2) {
+                content += `<div class="calendar__name" style="background-color: ${tasks[i].getPlannerColor()}"> ${tasks[i].getName()} </div>`;
+            }
+
+            else {
+                hiddenTasks++; 
+            }
+        }
+    }
+
+    if (revealedTasks > 2) {
+        content += `<div class="calendar__name"> ${hiddenTasks} more tasks. </div>`;
+    }
+
+    content += `</div>`;
+
+    return content; 
+}
+
+function goToPreviousMonth() {
+    if (displayedMonth <= 0) {
+        displayedMonth = 11; 
+        displayedYear--;
+    }
+
+    else {
+        displayedMonth--;
+    }
+
+    displayCalendarOnMain(displayedYear, displayedMonth);
+}
+
+function goToFollowingMonth() {
+    if (displayedMonth >= 11) {
+        displayedMonth = 0;
+        displayedYear++;
+    }
+    
+    else {
+        displayedMonth++;
+    }
+
+    displayCalendarOnMain(displayedYear, displayedMonth);
+}
+
+toggleMode();
