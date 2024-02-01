@@ -25,6 +25,18 @@ class Task {
     getPlannerVisiblity() {
         return this.planner.getVisiblity();
     }
+
+    setName(name) {
+        this.name = name;
+    }
+
+    setDueDate(dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    setPlanner(planner) {
+        this.planner = planner;
+    }
 }
 
 class Planner {
@@ -44,6 +56,14 @@ class Planner {
     
     getVisiblity() {
         return this.visiblity;
+    }
+
+    setName(name) {
+        this.name = name;
+    }
+
+    setColor(color) {
+        this.color = color; 
     }
 
     setVisiblity(value) {

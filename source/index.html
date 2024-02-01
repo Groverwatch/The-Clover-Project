@@ -5,7 +5,6 @@
         <title> Clover - New </title>
         <link rel="icon" href="files/icon.png" type="image/x-icon">
         <link rel="stylesheet" href="styles/style.css">
-        <link rel="stylesheet" href="styles/others.css">
     </head>
 
     <body>
@@ -20,7 +19,7 @@
 
             <div class="sidebar__mode"> 
                 <label> 
-                    <input type="radio" name="Mode" value="Planner" onchange="toggleMode()">
+                    <input type="radio" name="Mode" value="Planner" onchange="toggleMode()" checked>
                     <span class="material-symbols-outlined mode__button"> inventory_2 </span> 
                 </label>   
 
@@ -30,7 +29,7 @@
                 </label>
                 
                 <label> 
-                    <input type="radio" name="Mode" value="Calendar" onchange="toggleMode()" checked>
+                    <input type="radio" name="Mode" value="Calendar" onchange="toggleMode()">
                     <span class="material-symbols-outlined mode__button"> calendar_month </span> 
                 </label>   
             </div>
@@ -104,42 +103,42 @@
                 </div>
             </main>
 
-            <aside id="plannerInformation" class="main__information main__information--hide"> 
-                <div> 
-                    <h1 class="information__title"> Details </h1>
-    
-                    <div class="information__container"> 
-                        <h2 class="container__title"> Task Name </h2>
-                        <input id="plannerInformationTextInput" class="container__text">
+            <aside id="plannerInformation" class="main__information main__information--reveal"> 
+                <div>
+                    <h2> Planner Details </h2>
+
+                    <div class="information__container">
+                        <h3> Name: </h3>
+                        <p id="plannerInformationName"> </p>
                     </div>
-    
-                    <div class="information__container"> 
-                        <h2 class="container__title"> Planner </h2>
-                        <select id="plannerInformationPlannerInput" class="container__select">
-                            <option> planner 1</option>
-                            <option> planner 1</option>
-                            <option> planner 1</option>
-                        </select>
+        
+                    <div class="information__container">
+                        <h3> Color: </h3>
+                        <span class="information__subtitle" id="plannerInformationColor"> </span>
                     </div>
-    
+        
                     <div class="information__container"> 
-                        <h2 class="container__title"> Date </h2>
-                        <input id="plannerInformationDateInput" type="date" class="container_date">
-                    </div>
+                        <h3> Tasks: </h3>
+                        <div class="information__interface" id="plannerInformationTasks"> </div>
+                    </div>        
                 </div>
-    
-                <div class="information__exit">
-                    <button class="exit_button" type="button" onclick="test()"> 
-                        <span class="material-symbols-outlined"> close </span>                
-                    </button>    
-                </div>    
+                
+                <div class="information__buttons">
+                    <button class="information__button" onclick="hideInformation('plannerInformation')"> 
+                        <span class="material-symbols-outlined"> close </span> 
+                    </button>
+
+                    <button id="plannerInformationEdit" class="information__button"> 
+                        <span class="material-symbols-outlined"> edit </span> 
+                    </button>
+                </div>
             </aside>
 
         </section>
 
         <section id="calendarContainer" class="main main--hide">
             <main class="main__section"> 
-                <div style="display: flex; justify-content: space-between;"> 
+                <div class="main__dates"> 
                     <h1 class="main__title" id="calendarTitle"> Calendar </h1>
                     
                     <div>
@@ -155,49 +154,9 @@
                 </div>
 
                 <div id="calendarInterface" class="main__calendar">  <!-- Calendar appears here -->  </div>
-                
-                <!-- <div class="main__inputs">
-                    <div id="calendarDayText" class="input__day"> </div>
-
-                    <button id="calendarAddInput" onclick="goToPreviousMonth()" type="button" class="inputs__month"> 
-                        <span class="material-symbols-outlined"> arrow_back </span>                
-                    </button>
-
-                    <button id="calendarAddInput" onclick="goToFollowingMonth()" type="button" class="inputs__month"> 
-                        <span class="material-symbols-outlined"> arrow_forward </span>                
-                    </button>
-                </div> -->
             </main>
 
-            <aside id="calendarInformation" class="main__information main__information--hide"> 
-                <div> 
-                    <h1 class="information__title"> Details </h1>
-    
-                    <div class="information__container"> 
-                        <h2 class="container__title"> Task Name </h2>
-                        <input id="calendarInformationTextInput" class="container__text">
-                    </div>
-    
-                    <div class="information__container"> 
-                        <h2 class="container__title"> Planner </h2>
-                        <select id="calendarInformationPlannerInput" class="container__select">
-                            <option> planner 1</option>
-                            <option> planner 1</option>
-                            <option> planner 1</option>
-                        </select>
-                    </div>
-    
-                    <div class="information__container"> 
-                        <h2 class="container__title"> Date </h2>
-                        <input id="calendarInformationDateInput" type="date" class="container_date">
-                    </div>
-                </div>
-    
-                <div class="information__exit">
-                    <button class="exit_button" type="button" onclick="test()"> 
-                        <span class="material-symbols-outlined"> close </span>                
-                    </button>    
-                </div>    
+            <aside id="calendarInformation" class="main__information main__information--hide">      
             </aside>
 
         </section>

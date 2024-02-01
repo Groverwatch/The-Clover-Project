@@ -1,5 +1,8 @@
+/* These links import icons and fonts from Google Icons. */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Lusitana:wght@400;700&family=Merriweather:wght@300;400;900&display=swap');  
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
+
+/*  */
 * {
     margin: 0px;
     padding: 0px;
@@ -10,68 +13,68 @@ html {
 }
 
 :root {
-    --sidebar: #F9EAEF;
-    --onSidebar: #000000;
+    /* Primary colors the website. */
+    --primary: #F9EAEF;
+    --onPrimary: #444141;
+    --hoverOnPrimary: #ebd7d7;
 
-    --main: #FFF8F8;
-    --onMain: #000000;
+    --primaryContainer: #e0d0d5;
+    --hoverOnPrimaryContainer: #cfc3c7;
+    --selectOnPrimaryContainer: #e9c5d1;
 
-    --interfaceContainer: var(--main); 
-    --onInterfaceContainer: var(--onMain);
-    --hoverInterfaceContainer: #F8EBEB;
-    
-    --buttonOnInterfaceContainer: #eed0d0;
-    --buttonHover: brightness(92%);
-    --buttonActive: brightness(90%);
+    /* Secondary colors of the website. */
+    --secondary: #FFF8F8;
+    --onSecondary: #2e2c2c;
+    --hoverOnSecondary: #F8EBEB;
 
-    --information: var(--main);
-    --onInformfationContainer: var(--onMain);
+    --secondaryContainer: #eed0d0;
+    --onSecondaryContainer: #2e2c2c;
+    --placeholderOnSecondaryContainer: #474545;
+    --hoverOnSecondaryContainer: brightness(92%);
+    --selectOnSecondaryContainer: brightness(90%);
 
-    --scrollbar: var(--sidebar); 
-    --scrollbarThumb: var(--buttonOnInterfaceContainer);
-    --scrollbarThumbHover: #e2cfd5;
-
-    --input: var(--buttonOnInterfaceContainer);
-    --inputPlaceholder: #353535;
-    --inputFocus: brightness(96%);
+    /* Teritary colors of the website */
+    --teritary: #F9EAEF;
+    --teritaryContainer: #F9EAEF;
 }
 
 body {
-    background-color: var(--sidebar);
-    color: var(--onSidebar);
+    background-color: var(--primary);
+    color: var(--onPrimary);
     display: flex;
     height: 100%;
     font-family: 'Lusitana', serif;
 }
 
-/* The Sidebar Section */
+/* This section belongs to the sidebar that stores the planners and mode buttons. */
 .sidebar {
     display: flex;
     flex-direction: column;
     flex: 1;
     justify-content: space-between;
-    padding: 1.5rem 1rem 1.5rem 1.5rem;
+    padding: 1.5rem;
 }
 
 .sidebar__title {
     font-size: 2.5em;
 }
 
+/* This part stores the planner toggle buttons */
 .sidebar__planners {
     height: 24em;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
-    margin-left: -0.4em;
+    margin-left: -0.5em;
 }
 
 .planners__container {
-    padding: 0.3em;
     display: flex;
     align-items: center;
+    border-radius: 1em;
     margin-top: 0.2em;
     margin-bottom: 0.2em;
-    border-radius: 1em;
+    padding: 0.3em;
 }
 
 .planners__subtitle {
@@ -79,38 +82,38 @@ body {
 }
 
 .planners__container:hover {
-    background-color: var(--buttonOnInterfaceContainer);
+    background-color: var(--hoverOnPrimary);
 }
 
 .planners__checkbox {
     height: 1.5em;
     width: 1.5em;
+    accent-color: var(--onPrimary);
     margin-right: 0.5rem;
     margin-left: 0.2rem;
-    accent-color: var(--onSidebar);
 }
 
+/* This part is about the buttons that changes mode for the website. */
 .sidebar__mode {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 2.2em;
+    margin-bottom: 2em;
 }
 
 .mode__button {
-    background-color: var(--main);
+    background-color: var(--primaryContainer);
     height: 1.5em;
     width: 4.5em;
-    border-radius: 3em 3em 3em 3em; 
+    border-radius: 3em; 
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin: 0.1em;
 }
 
 .mode__button:hover {
-    background-color: var(--scrollbarThumbHover);
+    background-color: var(--hoverOnPrimaryContainer);
     transition: 0.3s;
     cursor: pointer;
 }
@@ -120,7 +123,7 @@ input[name="Mode"] {
 }
 
 input[name="Mode"]:checked + .mode__button {
-    background-color: var(--scrollbarThumb);
+    background-color: var(--selectOnPrimaryContainer);
     transition: 0.3s;
 }
 
@@ -128,7 +131,7 @@ input[name="Mode"]:checked + .mode__button {
 .main {
     flex: 4;
     flex-direction: row;
-    border-radius: 3em 3em 3em 3em;
+    border-radius: 3em;
 }
 
 .main--reveal {
@@ -144,18 +147,18 @@ input[name="Mode"]:checked + .mode__button {
 }
 
 .main__section {
-    background-color: var(--main);
-    color: var(--onMain);
+    background-color: var(--secondary);
+    color: var(--onSecondary);
     flex: 4;
-    padding: 2rem 2rem 2rem 2rem;
-    margin: 1em 1em 1em 1em;
-    border-radius: 3em 3em 3em 3em;
+    padding: 2rem;
+    margin: 1em;
+    border-radius: 3em;
 }
 
 .main__title {
     font-size: 1.5em;
     font-family: 'Inter', sans-serif;
-    padding: 0em 0em 0em 0.6em;
+    padding-left: 0.6em;
 }
 
 /* This section belongs to the single task / planner that is displayed across the task's interface */
@@ -163,22 +166,25 @@ input[name="Mode"]:checked + .mode__button {
     flex: 5;
     height: 87%;
     overflow-y: scroll;
-    margin: 0em 0em 1.5em 0em;
+    margin-bottom: 1.5em;
 }
 
 .task__container, .planner__container {
-    background-color: var(--interfaceContainer);
-    color: var(--onInterfaceContainer);
+    background-color: var(--secondary);
+    color: var(--onSecondary);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 0.5rem 0.5em 1em;
-    margin: 0.5em 0.5em 0.5em 0em;
-    border-radius: 2rem 2rem 2rem 2rem;
+    padding: 0.5rem;
+    padding-left: 1em;
+    margin: 0.5em;
+    margin-left: 0em;
+    border-radius: 2rem;
 }
 
 .task__container:hover, .planner__container:hover{
-    background-color: var(--hoverInterfaceContainer);
+    background-color: var(--hoverOnSecondary);
+    transition: 0.3s;
     cursor: pointer;
 }
 
@@ -186,94 +192,87 @@ input[name="Mode"]:checked + .mode__button {
     font-size: 1.3em;
 }
 
-.task__subtitle, .planner__subtitle {
+.task__subtitle, .planner__subtitle, .information__subtitle {
     display: flex; 
 }
 
-.task__color, .planner__color {
-    background-color: var(--onInterfaceContainer);
+.task__color, .planner__color, .information__color {
+    background-color: var(--onSecondary);
     height: 1.1em; 
     width: 1.1em;
-    border-radius: 1em 1em 1em 1em;
+    border-radius: 1em;
     margin-right: 0.3em;
 }
 
 .task__button, .planner__button {
-    background-color: var(--buttonOnInterfaceContainer);
+    background-color: var(--secondaryContainer);
     height: 3em;
     width: 3em;
-    border-radius: 3em 3em 3em 3em; 
-    margin: 0em 0.5em 0em 0em;
+    border-radius: 3em; 
+    margin-left: 0.5em;
+    margin-right: 0.5em;
     border: none;
 }
 
 .task__button:hover, .planner__button:hover {
-    filter: var(--buttonHover);
+    filter: var(--hoverOnSecondaryContainer);
     transition: 0.3s;
 }
 
 .task__button:active, .planner__button:active {
-    filter: var(--buttonActive);
+    filter: var(--selectOnSecondaryContainer);
     transition: 0.3s;
 }
 
 /* This section belongs to the calendar's interface. */
 .main__calendar {
-    height: 100%;
+    height: 90%;
     display: grid;
-    grid-gap: 0.1em;
+    grid-gap: 0.3em;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 0.2fr repeat(6, 1fr);
     margin-top: 1em;
-    margin-bottom: 1em;
     margin-left: 0.6em;
+    background-color: var(--main);
+}
 
-    background-color: var(--buttonOnInterfaceContainer);
+.main__dates {
+    display: flex; 
+    justify-content: space-between;
+}
+
+.calendar__other, .calendar__date, .calendar__current {
+    text-align: left;
+    padding: 0.8rem;
+    border-radius: 1.5em;
 }
 
 .calendar__days {
-    /* background-color: var(--hoverInterfaceContainer); */
-    text-align: left;
-    padding: 0.8rem;
-    /* border-radius: 2em; */
-    /* margin: 0.2em; */
-    background-color: var(--main);
-    /* border: 1px solid black; */
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 1.5em;
+    background-color: var(--secondary);   
 }
 
 .calendar__other {
-    /* background-color: var(--hoverInterfaceContainer); */
-    text-align: left;
-    padding: 0.8rem;
-    /* border-radius: 1.5em; */
-    /* margin: 0.2em; */
-    background-color: var(--main);
-    /* border: 1px solid black; */
+    background-color: var(--teritary);
 }
 
 .calendar__date {
-    /* background-color: var(--buttonOnInterfaceContainer); */
-    text-align: left;
-    padding: 0.8rem;
-    /* border-radius: 1.5em; */
-    /* margin: 0.2em; */
-    background-color: var(--main);
-    /* border: 1px solid black; */
+    background-color: var(--secondaryContainer);
+    font-weight: 800;
 }
 
 .calendar__current {
-    /* background-color: var(--scrollbarThumbHover); */
-    text-align: left;
-    padding: 0.8rem;
-    /* border-radius: 1.5em; */
-    /* margin-top: 0.5em;
-    margin-left: 0.5em; */
-    background-color: var(--main);
-    /* border: 1px solid black; */
+    background-color: var(--selectOnPrimaryContainer);
+}
+
+.calendar__task {
+    height: 4em;
 }
 
 .calendar__name {
-    background-color: var(--input);
+    font-weight: normal;
     font-size: 0.8em;
     margin-top: 0.2em;
     border-radius: 0.5em;
@@ -282,10 +281,10 @@ input[name="Mode"]:checked + .mode__button {
 
 /* The information section that shows details about tasks, planners or days */
 .main__information {
-    background-color: var(--information);
-    color: var(--onInformfationContainer);
+    background-color: var(--secondary);
+    color: var(--onSecondary);
     overflow: hidden;
-    border-radius: 3em 3em 3em 3em;
+    border-radius: 3em;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -295,136 +294,108 @@ input[name="Mode"]:checked + .mode__button {
     transition: all 0.3s;
     flex: 1;
     opacity: 100;
-    padding: 2rem 2rem 2rem 2rem;
-    margin: 1em 1em 1em 0em;
+    padding: 2rem;
+    margin: 1em;
+    margin-left: 0em;
 }
 
 .main__information--hide {
     transition: all 0.3s;
     flex: 0;
     opacity: 0;
-    padding: 0rem 0rem 0rem 0rem;
-    margin: 0em 0em 0em 0em;
+    padding: 0rem;
+    margin: 0em;
 }
 
-.information__title {
-    font-size: 1.5em;
-    font-family: 'Inter', sans-serif;
+.information__buttons {
     text-align: center;
 }
 
-.information__exit {
-    text-align: center;
+.information__button {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
 }
 
 .information__container {
-    margin: 1.5em 0.5em 1.5em 0.5em;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
-.container__title {
-    font-size: 1.2em;
-    padding-left: 0.1em;
+.information__interface {
+    height: 20em;
+    overflow-y: scroll;
+    margin-left: -0.5em 
 }
 
-.container__text {
-    width: 94%;
-    height: 2.5em;
-    border-radius: 3em 3em 3em 3em;
-    background-color: var(--input);
-    padding: 0em 0.5em 0em 0.5em;
-    font-family: 'Lusitana', serif;
-    font-size: 1em;
-
-    outline: none;
-    border: none;
+.interface__container {
+    background-color: var(--secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 0.5em;
+    margin-bottom: 0.5em;
+    padding: 0.5em;
+    border-radius: 2em; 
 }
 
-.container__text::placeholder {
-    color: var(--inputPlaceholder);
-}
-
-.container__text:focus-visible {
-    filter: var(--inputFocus);
-    transition: 0.3s;
-    outline: none;
-    border: none;
-}
-
-.container__select {
-    background-color: var(--input);
-    padding: 0.5em 0.5em 0.5em 0.5em;
-    border-radius: 3em 3em 3em 3em;
-    border: none;
-    outline: none;
-    width: 100%;
-    height: 2.5em;
-    font-family: 'Lusitana', serif;
-    font-size: 1em;
-}
-
-.container__select:hover {
-    filter: var(--buttonHover);
+.interface__container:hover {
+    background-color: var(--hoverOnSecondary);
     transition: 0.3s;
 }
 
-.container_date {
-    background-color: var(--input);
-    padding: 0.5em 0.5em 0.5em 0.5em;
-    border-radius: 3em 3em 3em 3em;
-    border: none;
-    outline: none;
-    width: 95%;
+.interface__button {
+    background-color: var(--secondaryContainer);
     height: 2em;
-    font-family: 'Lusitana', serif;
-    font-size: 0.9em;
+    width: 2em;
+    border-radius: 3em; 
+    border: none;
 }
 
-.container_date:hover {
-    filter: var(--buttonHover);
+.task__button:hover, .planner__button:hover {
+    filter: var(--hoverOnSecondaryContainer);
     transition: 0.3s;
 }
 
-.container_date:focus-visible {
-    filter: var(--buttonActive);
+.task__button:active, .planner__button:active {
+    filter: var(--selectOnSecondaryContainer);
     transition: 0.3s;
 }
+
 
 /* This section belongs to the inputs that are under each mode.  */
 .main__inputs {
     display: flex;
-    margin: 0em 0em 0.8em 0em;
     width: 50em;
 }
 
 .inputs__text {
     width: 25em;
     border-radius: 3em 3em 3em 3em;
-    background-color: var(--input);
-    padding: 0em 0em 0em 1em;
-    margin: 0em 0em 0em 0.7em;
+    background-color: var(--secondaryContainer);
+    padding-left: 1em;
+    margin-left: 0.7em;
     font-family: 'Lusitana', serif;
     font-size: 1em;
-
     outline: none;
     border: none;
 }
 
 .inputs__text::placeholder {
-    color: var(--inputPlaceholder);
+    color: var(--placeholderOnSecondaryContainer);
 }
 
 .inputs__text:focus-visible {
-    filter: var(--inputFocus);
+    filter: var(--selectOnSecondaryContainer);
     transition: 0.3s;
     outline: none;
     border: none;
 }
 
 .inputs_date {
-    background-color: var(--input);
-    margin: 0em 0 0em 1em;
-    padding: 0.5em 0.5em 0.5em 0.5em;
-    border-radius: 3em 3em 3em 3em;
+    background-color: var(--secondaryContainer);
+    margin-left: 1em;
+    padding: 0.5em;
+    border-radius: 3em;
     border: none;
     outline: none;
     width: 9em;
@@ -433,21 +404,22 @@ input[name="Mode"]:checked + .mode__button {
 }
 
 .inputs_date:hover {
-    filter: var(--buttonHover);
+    filter: var(--hoverOnSecondaryContainer);
     transition: 0.3s;
     cursor: pointer;
 }
 
 .inputs_date:focus-visible {
-    filter: var(--buttonActive);
+    filter: var(--selectOnSecondaryContainer);
     transition: 0.3s;
 }
 
 .inputs_select {
-    background-color: var(--input);
-    margin: 0em 0.8em 0em 0.8em;
-    padding: 0.5em 0.5em 0.5em 0.5em;
-    border-radius: 3em 3em 3em 3em;
+    background-color: var(--secondaryContainer);
+    margin-left: 0.8em;
+    margin-right: 0.8em;
+    padding: 0.5em;
+    border-radius: 3em;
     border: none;
     outline: none;
     width: 9em;
@@ -456,42 +428,43 @@ input[name="Mode"]:checked + .mode__button {
 }
 
 .inputs_select:hover {
-    filter: var(--buttonHover);
+    filter: var(--hoverOnSecondaryContainer);
     transition: 0.3s;
     cursor: pointer;
 }
 
-.inputs__button, .exit_button {
-    background-color: var(--input);
+.inputs__button, .information__button {
+    background-color: var(--secondaryContainer);
     height: 3em;
     width: 3em;
-    border-radius: 3em 3em 3em 3em; 
+    border-radius: 3em; 
     border: none;
 }
 
-.inputs__button:focus-visible, .exit_button:focus-visible {
-    filter: var(--buttonActive);
-    transition: 0.3s;
-}
-
-.inputs__button:hover, .exit_button:hover {
-    filter: var(--buttonHover);
+.inputs__button:hover, .information__button:hover {
+    filter: var(--hoverOnSecondaryContainer);
     transition: 0.3s;
     cursor: pointer;
 }
 
+.inputs__button:focus-visible, .exit_button:focus-visible {
+    filter: var(--selectOnSecondaryContainer);
+    transition: 0.3s;
+}
+
 .inputs__button:active, .exit_button:active {
-    filter: var(--buttonActive);
+    filter: var(--selectOnSecondaryContainer);
     transition: 0.3s;
 }
 
 .inputs__color {
-    background-color: var(--input);
+    background-color: var(--secondaryContainer);
     height: 40px;
     width: 9em;
-    margin: 0em 0.8em 0em 0.8em;
-    padding: 0.5em 0.5em 0.5em 0.5em;
-    border-radius: 3em 3em 3em 3em;
+    margin-left: 0.8em;
+    margin-right: 0.8em;
+    padding: 0.5em;
+    border-radius: 3em;
     outline: none;
     border: none;
 }
@@ -502,41 +475,41 @@ input[name="Mode"]:checked + .mode__button {
 }
 
 .inputs__color:hover {
-    filter: var(--buttonHover);
+    filter: var(--hoverOnSecondaryContainer);
     transition: 0.3s;
     cursor: pointer;
 }
 
 .inputs__color:active {
-    filter: var(--buttonActive);
+    filter: var(--selectOnSecondaryContainer);
     transition: 0.3s;
 }
 
 .inputs__month {
-    background-color: var(--input);
-    height: 3em;
-    width: 3em;
-    border-radius: 3em 3em 3em 3em; 
+    background-color: var(--secondaryContainer);
+    height: 2.5em;
+    width: 2.5em;
+    border-radius: 3em; 
     border: none;
     margin-left: 0.7em;
     padding-top: 0.2em;
 }
 
 .inputs__month:hover {
-    filter: var(--buttonHover);
+    filter: var(--hoverOnSecondaryContainer);
     transition: 0.3s;
     cursor: pointer;
 }
 
 .inputs__month:active {
-    filter: var(--buttonActive);
+    filter: var(--selectOnSecondaryContainer);
     transition: 0.3s;
 }
 
 .input__day {
     width: 25em;
-    border-radius: 3em 3em 3em 3em;
-    background-color: var(--input);
+    border-radius: 3em;
+    background-color: var(--secondaryContainer);
     margin-left: 0.7em;
     padding-top: 0.6em;
     font-family: 'Lusitana', serif;
@@ -545,11 +518,31 @@ input[name="Mode"]:checked + .mode__button {
 }
 
 .inputs__color:hover {
-    filter: var(--buttonHover);
+    filter: var(--hoverOnSecondaryContainer);
     transition: 0.3s;
 }
 
 .inputs__color:active {
-    filter: var(--buttonActive);
+    filter: var(--selectOnSecondaryContainer);
     transition: 0.3s;
 }
+
+/* This styling relates to the scrollbar on the side of the page. */
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: var(--primary); 
+}
+   
+::-webkit-scrollbar-thumb {
+    background: var(--primaryContainer); 
+    border-radius: 10px;
+}
+  
+::-webkit-scrollbar-thumb:hover {
+    background: var(--hoverOnPrimaryContainer); 
+}
+  

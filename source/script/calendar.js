@@ -61,8 +61,11 @@ function toggleMode() {
     }
 }
 
-var displayedYear = 2024;
-var displayedMonth = 0;
+let date = new Date();
+var displayedYear = date.getFullYear();
+var displayedMonth = date.getMonth();
+var displayedDate = date.getDate();
+
 var totalDaysOnCalendar = 42;  
 
 // This function creates a calendar on the main interface. 
@@ -84,7 +87,6 @@ function displayCalendarOnMain(year, month) {
 
     // This code changes the text of the input and title to match the current date that is displayed on the calendar. 
     document.getElementById("calendarTitle").innerHTML = `Calendar - ${months[month]} ${year}`;
-    // document.getElementById("calendarDayText").innerHTML = `${months[month]} ${year}`;
 
     // This part clears the calendar interface so that new information can be placed on the interface. 
     document.getElementById("calendarInterface").innerHTML = ``;
@@ -118,7 +120,7 @@ function createDaysBeforeNewMonth(year, month) {
     }
 
     for (let day = firstDayOfTheCalendar; day <= lastDayOfPreviousMonth; day++) {
-        content += `<div class='calendar__other'> ${day} ${showTasksOnDate(year, month, day)} </div>`;
+        content += `<div class='calendar__other' onclick='displayCalendarInformation(${year}, ${month}, ${day})'onclick='displayCalendarInformation(${year}, ${month}, ${day})'> ${day} ${showTasksOnDate(year, month, day)} </div>`;
         totalDaysOnCalendar--;
     }
 
@@ -131,7 +133,14 @@ function createDaysForNewMonth(year, month) {
     let currentAmountOfDays = new Date(year, month + 1, 0).getDate();
 
     for (let day = 1; day <= currentAmountOfDays; day++) {
-        content += `<div class='calendar__date'> ${day} ${showTasksOnDate(year, month, day)} </div>`
+        if (day == displayedDate && month == displayedMonth && year == displayedYear) {
+            content += `<div class='calendar__current' onclick='displayCalendarInformation(${year}, ${month}, ${day})'> ${day} ${showTasksOnDate(year, month, day)} </div>`
+        }
+
+        else {
+            content += `<div class='calendar__date' onclick='displayCalendarInformation(${year}, ${month}, ${day})'> ${day} ${showTasksOnDate(year, month, day)} </div>`
+        }
+
         totalDaysOnCalendar--;
     }
 
@@ -151,7 +160,7 @@ function createDaysAfterNewMonth(year, month) {
     }
 
     for (let day = 1; day <= totalDaysOnCalendar; day++) {
-        content += `<div class='calendar__other'> ${day} ${showTasksOnDate(year, month, day)} </div>`
+        content += `<div class='calendar__other' onclick='displayCalendarInformation(${year}, ${month}, ${day})'> ${day} ${showTasksOnDate(year, month, day)} </div>`
     }
 
     return content;
@@ -163,7 +172,7 @@ function showTasksOnDate(year, month, day) {
     let revealedTasks = 0;
     let hiddenTasks = 0;
 
-    content += `<div>`;
+    content += `<div class="calendar__task">`;
 
     for (let i = 0; i < tasks.length; i++) {
         let taskDueDate = tasks[i].getDueDate(); 
@@ -214,6 +223,43 @@ function goToFollowingMonth() {
     }
 
     displayCalendarOnMain(displayedYear, displayedMonth);
+}
+
+var currentDay;
+
+// function displayCalendarInformation(year, month, day) {
+//     let content = '';
+
+//     if (currentDay == day) {
+//         currentDay = '';
+//         hideInformation('calendarInformation');
+//     }
+
+//     else {
+
+//         currentDay = day;
+//         revealInformation('calendarInformation');
+
+//         for (let i = 0; i < tasks.length; i++) {
+//             let currentDate = new Date(year, month, day, 0, 0, 0);
+//             let taskDueDate = tasks[i].getDueDate(); 
+
+//             if (taskDueDate.toDateString() == currentDate.toDateString()) {
+//                 content += createTaskDisplay(i);
+//             }    
+//         }
+
+//         document.getElementById('calendarInformation').innerHTML = '';
+//         document.getElementById('calendarInformation').innerHTML = content;
+//     }
+// }
+
+function revealInformation(container) {
+    document.getElementById(container).setAttribute('class', 'main__information main__information--reveal');
+}
+
+function hideInformation(container) {
+    document.getElementById(container).setAttribute('class', 'main__information main__information--hide');
 }
 
 toggleMode();

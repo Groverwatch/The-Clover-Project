@@ -6,7 +6,7 @@ function displayPlannersOnMain() {
     main.innerHTML = "";
 
     for (i = 0; i < planners.length; i++) { // This loops through the planners's informations and puts into content for the user to see. 
-        content += `<div class="planner__container">`;
+        content += `<div class="planner__container" onclick="displayPlannerInformation(${i})">`;
         content +=      `<div>`;
         content +=          `<h2 class="planner__title"> ${planners[i].getName()} </h2>`;
         content +=          `<span class="planner__subtitle">`;
@@ -27,7 +27,6 @@ function displayPlannersOnSidebar() {
     let sidebar = document.getElementById("sidebarPlanner");
     let content = "";
 
-    sidebar.innerHTML = "";
 
     for (let i = 0; i < planners.length; i++) { // This loops through the planner's information and presents it as content for the user experience. 
         content += `<label for="planner_${i}" class="planners__container">`;
@@ -36,6 +35,7 @@ function displayPlannersOnSidebar() {
         content += `</label>`;
     }
 
+    sidebar.innerHTML = "";
     sidebar.innerHTML = content; // After the looping, the content will then be placed on the websites for the user to see. 
 }
 
@@ -54,19 +54,49 @@ function togglePlanners(checkbox) {
     displayTasksOnMain();
 }
 
-function displayPlannersInSelect() {
-    let select = document.getElementById("taskPlannerInput");
+function displayPlannersInSelect(selectPosition) {
+    let select = document.getElementById(selectPosition);
     let content = "";
-    select.innerHTML = "";
 
     for (let i = 0; i < planners.length; i++) {
         content += `<option> ${planners[i].getName()} </option>`;
     }
 
+    select.innerHTML = "";
     select.innerHTML = content;
 }
 
+var currentPlanner = '';
 
+function displayPlannerInformation(index) {
+    let content = '';
+
+    if (currentPlanner == planners[index].getName()) {
+        currentPlanner = '';
+        hideInformation('plannerInformation');
+    }
+
+    else {
+        currentPlanner = planners[index].getName();
+        
+        document.getElementById(`plannerInformationName`).innerHTML = planners[index].getName();
+
+        document.getElementById(`plannerInformationColor`).innerHTML = `<div class="information__color" style="background-color: ${planners[index].getColor()}"> </div> <p> ${planners[index].getColor().toUpperCase()} </p>`;
+
+        for (i = 0; i < tasks.length; i++) { 
+            if (tasks[i].getPlannerName() == planners[index].getName()) { 
+                content += `<div class="interface__container">`;
+                content += `    <p> ${tasks[i].getName()} </p>`;
+                content += `    <button class="interface__button" value="${index}" onclick="deleteTask(this)"> </button>`;
+                content += `</div>`;
+            }
+        }
+
+        document.getElementById('plannerInformationTasks').innerHTML = content;
+        
+        revealInformation('plannerInformation');
+    }
+}
 
 displayPlannersOnSidebar();
-displayPlannersInSelect();
+displayPlannersInSelect('taskPlannerInput');
