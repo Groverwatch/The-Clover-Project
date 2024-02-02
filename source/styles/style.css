@@ -83,6 +83,7 @@ body {
 
 .planners__container:hover {
     background-color: var(--hoverOnPrimary);
+    transition: 0.3s;
 }
 
 .planners__checkbox {
@@ -324,7 +325,7 @@ input[name="Mode"]:checked + .mode__button {
 }
 
 .information__interface {
-    height: 20em;
+    height: 33em;
     overflow-y: scroll;
     margin-left: -0.5em 
 }
@@ -385,40 +386,30 @@ input[name="Mode"]:checked + .mode__button {
 }
    
 .information__color {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.color__input {
     background-color: var(--secondary);
     outline: none;
     border: none;
+    width: 8em;    
 }
 
-.color__input::-webkit-color-swatch {
+.information__color::-webkit-color-swatch {
     height: 1.5em;
-    width: 1.5em;    
+    width: 8em;    
     border-radius: 1.5em;
     outline: none;
     border: none;
 }
 
-.color__input:hover {
+.information__color:hover {
     filter: var(--hoverOnSecondaryContainer);
     transition: 0.3s;
     cursor: pointer;
     border-radius: 2em;
-
 }
 
-.color__input:active {
+.information__color:active {
     filter: var(--selectOnSecondaryContainer);
     transition: 0.3s;
-}
-
-.color__text {
-    margin-left: 0.2em;
 }
 
 .interface__button {
