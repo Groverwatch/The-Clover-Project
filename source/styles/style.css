@@ -192,11 +192,11 @@ input[name="Mode"]:checked + .mode__button {
     font-size: 1.3em;
 }
 
-.task__subtitle, .planner__subtitle, .information__subtitle {
+.task__subtitle, .planner__subtitle, .information__subtitle, .interface__subtitle {
     display: flex; 
 }
 
-.task__color, .planner__color, .information__color {
+.task__color, .planner__color, .information__color, .interface__color {
     background-color: var(--onSecondary);
     height: 1.1em; 
     width: 1.1em;
@@ -265,6 +265,7 @@ input[name="Mode"]:checked + .mode__button {
 
 .calendar__current {
     background-color: var(--selectOnPrimaryContainer);
+    font-weight: 800;
 }
 
 .calendar__task {
@@ -277,6 +278,7 @@ input[name="Mode"]:checked + .mode__button {
     margin-top: 0.2em;
     border-radius: 0.5em;
     padding: 0.2em;
+    white-space: nowrap;
 }
 
 /* The information section that shows details about tasks, planners or days */
@@ -335,7 +337,7 @@ input[name="Mode"]:checked + .mode__button {
     margin-right: 0.5em;
     margin-bottom: 0.5em;
     padding: 0.5em;
-    border-radius: 2em; 
+    border-radius: 1.5em; 
 }
 
 .interface__container:hover {
@@ -343,10 +345,86 @@ input[name="Mode"]:checked + .mode__button {
     transition: 0.3s;
 }
 
+.information__text {
+    background-color: var(--secondary);
+    font-family: 'Lusitana', serif;
+    border: none;
+    font-size: 1em;
+    width: 100%;
+}
+
+.information__text:focus-visible {
+    border: none;
+    outline: none;
+}
+
+.information__date {
+    background-color: var(--secondary);
+    font-family: 'Lusitana', serif;
+    border: none;
+    font-size: 1em;
+}
+
+.information__date::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
+.information__date:focus-visible {
+    border: none;
+    outline: none;
+}
+
+.information__select {
+    background-color: var(--secondary);
+    font-family: 'Lusitana', serif;
+    border: none;
+    font-size: 1em;
+    margin-left: -0.2em;
+    width: 100%;
+}
+   
+.information__color {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.color__input {
+    background-color: var(--secondary);
+    outline: none;
+    border: none;
+}
+
+.color__input::-webkit-color-swatch {
+    height: 1.5em;
+    width: 1.5em;    
+    border-radius: 1.5em;
+    outline: none;
+    border: none;
+}
+
+.color__input:hover {
+    filter: var(--hoverOnSecondaryContainer);
+    transition: 0.3s;
+    cursor: pointer;
+    border-radius: 2em;
+
+}
+
+.color__input:active {
+    filter: var(--selectOnSecondaryContainer);
+    transition: 0.3s;
+}
+
+.color__text {
+    margin-left: 0.2em;
+}
+
 .interface__button {
     background-color: var(--secondaryContainer);
-    height: 2em;
-    width: 2em;
+    height: 2.5em;
+    width: 2.5em;
     border-radius: 3em; 
     border: none;
 }

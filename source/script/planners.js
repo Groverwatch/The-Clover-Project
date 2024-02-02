@@ -14,7 +14,7 @@ function displayPlannersOnMain() {
         content +=              `<p> ${planners[i].getColor().toUpperCase()} </p>`;
         content +=          `</span>`;
         content +=      `</div>`;
-        content +=      `<button class="planner__button" value="${i}" onclick="deletePlanner(this)"> </button>`; // This button is used to delete the task. 
+        content +=      `<button class="planner__button" onclick="deletePlanner(${i})"> </button>`; // This button is used to delete the task. 
         content += `</div>`;
     }
 
@@ -76,26 +76,39 @@ function displayPlannerInformation(index) {
         hideInformation('plannerInformation');
     }
 
-    else {
+    else {  
         currentPlanner = planners[index].getName();
-        
-        document.getElementById(`plannerInformationName`).innerHTML = planners[index].getName();
 
-        document.getElementById(`plannerInformationColor`).innerHTML = `<div class="information__color" style="background-color: ${planners[index].getColor()}"> </div> <p> ${planners[index].getColor().toUpperCase()} </p>`;
+        document.getElementById(`plannerInformationName`).value = planners[index].getName();
+        document.getElementById(`plannerInformationColor`).value = `${planners[index].getColor()}`;
+        document.getElementById(`plannerInformationColorText`).innerHTML = document.getElementById(`plannerInformationColor`).value;
 
         for (i = 0; i < tasks.length; i++) { 
+            let taskFormattedDate = `Date: ${tasks[i].getDueDate().getDate()} ${months[tasks[i].getDueDate().getMonth()]} ${tasks[i].getDueDate().getFullYear()}`;
+
             if (tasks[i].getPlannerName() == planners[index].getName()) { 
                 content += `<div class="interface__container">`;
-                content += `    <p> ${tasks[i].getName()} </p>`;
-                content += `    <button class="interface__button" value="${index}" onclick="deleteTask(this)"> </button>`;
+                content += `    <div>`;
+                content += `        <p> ${tasks[i].getName()} </p>`;
+                content += `        <span class="interface__subtitle">`;
+                content += `            <p> ${taskFormattedDate} </p>`;
+                content += `        </span>`;            
+                content += `    </div>`;
+                content += `    <button class="interface__button" onclick="deleteTask(${index})"> </button>`;
                 content += `</div>`;
             }
+        }
+
+        if (content == '') {
+            content += `<div class="interface__container"> There are no tasks inside this planner. :( </div>`;
         }
 
         document.getElementById('plannerInformationTasks').innerHTML = content;
         
         revealInformation('plannerInformation');
     }
+
+    document.getElementById(`plannerEdit`).setAttribute(`onclick`, `editPlanner(${index})`);
 }
 
 displayPlannersOnSidebar();

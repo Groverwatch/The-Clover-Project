@@ -37,36 +37,32 @@ function toggleMode() {
     let calendarContainer = document.getElementById("calendarContainer");
 
     if (selectedMode == 'Task') {
+        displayTasksOnMain();
+        displayPlannersOnSidebar();
+
         taskContainer.setAttribute('class', 'main main--reveal')
         plannerContainer.setAttribute('class', 'main main--hide');
         calendarContainer.setAttribute('class', 'main main--hide');
-        
-        displayTasksOnMain();
     }
     
     if (selectedMode == 'Planner') {
+        displayPlannersOnMain();
+        displayPlannersOnSidebar();
+
         taskContainer.setAttribute('class', 'main main--hide');
         plannerContainer.setAttribute('class', 'main main--reveal');
         calendarContainer.setAttribute('class', 'main main--hide');
-
-        displayPlannersOnMain();
-        displayPlannersOnSidebar();
     }
 
     if (selectedMode == 'Calendar') {
         displayCalendarOnMain(displayedYear, displayedMonth);
+        displayPlannersOnSidebar();
+
         taskContainer.setAttribute('class', 'main main--hide');
         plannerContainer.setAttribute('class', 'main main--hide');
         calendarContainer.setAttribute('class', 'main main--reveal');
     }
 }
-
-let date = new Date();
-var displayedYear = date.getFullYear();
-var displayedMonth = date.getMonth();
-var displayedDate = date.getDate();
-
-var totalDaysOnCalendar = 42;  
 
 // This function creates a calendar on the main interface. 
 function displayCalendarOnMain(year, month) {
@@ -225,34 +221,47 @@ function goToFollowingMonth() {
     displayCalendarOnMain(displayedYear, displayedMonth);
 }
 
-var currentDay;
+function displayCalendarInformation(year, month, day) {
+    let content = '';
 
-// function displayCalendarInformation(year, month, day) {
-//     let content = '';
+    let date = new Date(year, month, day);
+    let formattedDate = `${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
 
-//     if (currentDay == day) {
-//         currentDay = '';
-//         hideInformation('calendarInformation');
-//     }
+    if (currentDay == day) {
+        currentDay = '';
+        hideInformation('calendarInformation');
+    }
 
-//     else {
+    else {
+        currentDay = day;
 
-//         currentDay = day;
-//         revealInformation('calendarInformation');
+        document.getElementById('calendarInformationDate').innerHTML = `${formattedDate}`; 
 
-//         for (let i = 0; i < tasks.length; i++) {
-//             let currentDate = new Date(year, month, day, 0, 0, 0);
-//             let taskDueDate = tasks[i].getDueDate(); 
+        for (let i = 0; i < tasks.length; i++) {
+            let taskDueDate = tasks[i].getDueDate();
+            
+            if (taskDueDate.toDateString() == date.toDateString()) {
+                content += `<div class="interface__container">`;
+                content += `    <div>`;
+                content += `        <p> ${tasks[i].getName()} </p>`;
+                content += `        <span class="interface__subtitle">`;
+                content += `            <div class="interface__color" style="background-color: ${tasks[i].getPlannerColor()}"> </div>`;
+                content += `            <p> ${tasks[i].getPlannerName()} </p>`;
+                content += `        </span>`;            
+                content += `    </div>`;
+                content += `    <button class="interface__button" value="${i}" onclick="deleteTask(this)"> </button>`;
+                content += `</div>`;
+            }
+        }
 
-//             if (taskDueDate.toDateString() == currentDate.toDateString()) {
-//                 content += createTaskDisplay(i);
-//             }    
-//         }
+        if (content == '') {
+            content += `<div class="interface__container"> There are no tasks related to this date. :( </div>`;
+        }
 
-//         document.getElementById('calendarInformation').innerHTML = '';
-//         document.getElementById('calendarInformation').innerHTML = content;
-//     }
-// }
+        document.getElementById('calendarInformationTasks').innerHTML = content;
+        revealInformation('calendarInformation');
+    }
+}
 
 function revealInformation(container) {
     document.getElementById(container).setAttribute('class', 'main__information main__information--reveal');

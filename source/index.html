@@ -19,12 +19,12 @@
 
             <div class="sidebar__mode"> 
                 <label> 
-                    <input type="radio" name="Mode" value="Planner" onchange="toggleMode()" checked>
+                    <input type="radio" name="Mode" value="Planner" onchange="toggleMode()">
                     <span class="material-symbols-outlined mode__button"> inventory_2 </span> 
                 </label>   
 
                 <label> 
-                    <input type="radio" name="Mode" value="Task" onchange="toggleMode()">
+                    <input type="radio" name="Mode" value="Task" onchange="toggleMode()" checked>
                     <span class="material-symbols-outlined mode__button" > check_box </span>                    
                 </label>
                 
@@ -56,33 +56,37 @@
 
             <aside id="taskInformation" class="main__information main__information--hide"> 
                 <div> 
-                    <h1 class="information__title"> Details </h1>
-    
-                    <div class="information__container"> 
-                        <h2 class="container__title"> Task Name </h2>
-                        <input id="taskInformationTextInput" class="container__text">
+                    <h2> Task Details </h2>
+
+                    <div class="information__container">
+                        <h3> Name: </h3>
+                        <input id="taskInformationName" class="information__text">
                     </div>
-    
-                    <div class="information__container"> 
-                        <h2 class="container__title"> Planner </h2>
-                        <select id="taskInformationPlannerInput" class="container__select">
-                            <option> planner 1</option>
-                            <option> planner 1</option>
-                            <option> planner 1</option>
+
+                    <div class="information__container">
+                        <h3> Date: </h3>
+                        <input id="taskInformationDate" type="date" class="information__date" onclick="this.showPicker()">
+                    </div>
+
+                    <div class="information__container">
+                        <h3> Planner: </h3>
+                        <select id="taskInformationSelect"  class="information__select"> 
+                            <option> planner </option>
+                            <option> planner </option>
+                            <option> planner </option>
                         </select>
                     </div>
-    
-                    <div class="information__container"> 
-                        <h2 class="container__title"> Date </h2>
-                        <input id="taskInformationDateInput" type="date" class="container_date">
-                    </div>
                 </div>
-    
-                <div class="information__exit">
-                    <button class="exit_button" type="button" onclick="test()"> 
-                        <span class="material-symbols-outlined"> close </span>                
-                    </button>    
-                </div>    
+
+                <div class="information__buttons">
+                    <button class="information__button" onclick="hideInformation('taskInformation')"> 
+                        <span class="material-symbols-outlined"> close </span> 
+                    </button>
+
+                    <button id="taskEdit" class="information__button"> 
+                        <span class="material-symbols-outlined"> edit </span> 
+                    </button>
+                </div>
             </aside>
         </section>
         
@@ -103,18 +107,22 @@
                 </div>
             </main>
 
-            <aside id="plannerInformation" class="main__information main__information--reveal"> 
+            <aside id="plannerInformation" class="main__information main__information--hide"> 
                 <div>
                     <h2> Planner Details </h2>
 
                     <div class="information__container">
                         <h3> Name: </h3>
-                        <p id="plannerInformationName"> </p>
+                        <input id="plannerInformationName" class="information__text">
                     </div>
         
                     <div class="information__container">
                         <h3> Color: </h3>
-                        <span class="information__subtitle" id="plannerInformationColor"> </span>
+
+                        <div class="information__color"> 
+                            <input id="plannerInformationColor" type="color" class="color__input"> 
+                            <p id="plannerInformationColorText" class="color__text"> </p>
+                        </div>
                     </div>
         
                     <div class="information__container"> 
@@ -128,7 +136,7 @@
                         <span class="material-symbols-outlined"> close </span> 
                     </button>
 
-                    <button id="plannerInformationEdit" class="information__button"> 
+                    <button id="plannerEdit" class="information__button"> 
                         <span class="material-symbols-outlined"> edit </span> 
                     </button>
                 </div>
@@ -156,7 +164,26 @@
                 <div id="calendarInterface" class="main__calendar">  <!-- Calendar appears here -->  </div>
             </main>
 
-            <aside id="calendarInformation" class="main__information main__information--hide">      
+            <aside id="calendarInformation" class="main__information main__information--hide">    
+                <div>
+                    <h2> Date Details </h2>
+
+                    <div class="information__container">
+                        <h3> Date: </h3>
+                        <p id="calendarInformationDate"> </p>
+                    </div>
+
+                    <div class="information__container"> 
+                        <h3> Tasks: </h3>
+                        <div class="information__interface" id="calendarInformationTasks"> </div>
+                    </div>  
+                </div>
+
+                <div class="information__buttons">
+                    <button class="information__button" onclick="hideInformation('calendarInformation')"> 
+                        <span class="material-symbols-outlined"> close </span> 
+                    </button>
+                </div>
             </aside>
 
         </section>
@@ -164,7 +191,8 @@
 </html>
 
 
-<script src="script/storage.js"> </script>
+<script src="script/script.js"> </script>
+<!-- <script src="script/storage.js"> </script> -->
 <script src="script/planners.js"> </script>
 <script src="script/tasks.js"> </script>
 <script src="script/calendar.js"> </script>
