@@ -1,53 +1,189 @@
+<!DOCTYPE html>
+
 <html>
     <head>
         <title> Clover. </title>
-
         <link rel="icon" href="files/icon.png" type="image/x-icon">
         <link rel="stylesheet" href="styles/style.css">
-        <link rel="stylesheet" href="styles/input.css">
-
-        <script src="script/script.js"> </script>
-        <script src="script/storage.js"> </script>
-        <script src="script/eventListener.js"> </script>      
     </head>
 
-    <body class="flex">
+    <body>
         <section class="sidebar"> 
-            <h1 class="sidebar_title"> Clover. </h1>
+            <h1 class="sidebar__title"> Clover. </h1>
 
-            <article class="planners">
-                <h1 class="planners_title"> Planner. </h1>
+            <div>
+                <h2> Planners. </h2>
 
-                <form id="plannerList"> </form>
-            </article>
+                <div class="sidebar__planners" id="sidebarPlanner"> <!-- Planners appear here --> </div>
+            </div>
+
+            <div class="sidebar__mode"> 
+                <label> 
+                    <input type="radio" name="Mode" value="Planner" onchange="toggleMode()">
+                    <span class="material-symbols-outlined mode__button"> inventory_2 </span> 
+                </label>   
+
+                <label> 
+                    <input type="radio" name="Mode" value="Task" onchange="toggleMode()" checked>
+                    <span class="material-symbols-outlined mode__button" > check_box </span>                    
+                </label>
+                
+                <label> 
+                    <input type="radio" name="Mode" value="Calendar" onchange="toggleMode()">
+                    <span class="material-symbols-outlined mode__button"> calendar_month </span> 
+                </label>   
+            </div>
         </section>
+        
+        <section id="taskContainer" class="main main--reveal">
+            <main class="main__section">
+                <h1 class="main__title"> Task List </h1>
 
-        <section class="main">
-            <h2 class="main_title" id="title"> Task List </h2>
+                <div id="taskInterface" class="main__tasks"> <!-- Tasks appear here --> </div>
 
-            <article id="taskList" class="task"> </article>
+                <div class="main__inputs">
+                    <input id="taskTextInput" type="text" placeholder="Add a new task." class="inputs__text"> 
 
-            <nav class="inputs"> 
-                <div class="flex" id="input"> 
-                    <input type="text" id="textInput" class="inputs_text input" placeholder="Add a new task."> 
-                    <input type="color" id="colorInput" class="inputs_color color">
-                    <select id="plannerInput" class="inputs_select select"> </select>
-                    <input type="button" id="buttonAdd" value="+" class="inputs_add button"> 
-                    <div class="inputs_error flex" id="error"> </div> 
+                    <input id="taskDateInput" type="date" class="inputs_date" >
+
+                    <select id="taskPlannerInput" class="inputs_select"> <!-- Planners appear here --> </select>
+
+                    <button id="taskAddInput" type="button" class="inputs__button"> 
+                        <span class="material-symbols-outlined"> add </span>                
+                    </button>
+                </div>
+            </main>
+
+            <aside id="taskInformation" class="main__information main__information--hide"> 
+                <div> 
+                    <h2> Task Details </h2>
+
+                    <div class="information__container">
+                        <h3> Name: </h3>
+                        <input id="taskInformationName" class="information__text">
+                    </div>
+
+                    <div class="information__container">
+                        <h3> Date: </h3>
+                        <input id="taskInformationDate" type="date" class="information__date" onclick="this.showPicker()">
+                    </div>
+
+                    <div class="information__container">
+                        <h3> Planner: </h3>
+                        <select id="taskInformationSelect"  class="information__select"> 
+                            <option> planner </option>
+                            <option> planner </option>
+                            <option> planner </option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="mode flex">
-                    <label class="mode_label"> 
-                        <input type="radio" name="Mode" value="Task" onchange="toggleMode()" checked>
-                        <span class="material-symbols-outlined mode_radio"> check_box </span>                    
-                    </label>
+                <div class="information__buttons">
+                    <button class="information__button" onclick="hideInformation('taskInformation')"> 
+                        <span class="material-symbols-outlined"> close </span> 
+                    </button>
+
+                    <button id="taskEdit" class="information__button"> 
+                        <span class="material-symbols-outlined"> edit </span> 
+                    </button>
+                </div>
+            </aside>
+        </section>
+        
+        <section id="plannerContainer" class="main main--hide">
+            <main class="main__section"> 
+                <h1 class="main__title"> Planner List </h1>
+
+                <div class="main__planners" id="plannerInterface"> <!-- Planners appear here --> </div>
+
+                <div class="main__inputs">
+                    <input id="plannerTextInput" type="text" placeholder="Add a new planner." class="inputs__text"> 
                     
-                    <label class="mode_label"> 
-                        <input type="radio" name="Mode" value="Planner" onchange="toggleMode()">
-                        <span class="material-symbols-outlined mode_radio"> inventory_2 </span> 
-                    </label>   
+                    <input id="plannerColorInput" type="color" class="inputs__color">
+
+                    <button id="plannerAddInput" type="button" class="inputs__button"> 
+                        <span class="material-symbols-outlined"> add </span>                
+                    </button>
                 </div>
-            </nav>
+            </main>
+
+            <aside id="plannerInformation" class="main__information main__information--hide"> 
+                <div>
+                    <h2> Planner Details </h2>
+
+                    <div class="information__container">
+                        <h3> Name: </h3>
+                        <input id="plannerInformationName" class="information__text">
+                    </div>
+        
+                    <div class="information__container">
+                        <h3> Color: </h3>
+                        <input id="plannerInformationColor" type="color" class="information__color"> 
+                    </div>
+        
+                    <div class="information__container"> 
+                        <h3> Tasks: </h3>
+                        <div class="information__interface" id="plannerInformationTasks"> </div>
+                    </div>        
+                </div>
+                
+                <div class="information__buttons">
+                    <button class="information__button" onclick="hideInformation('plannerInformation')"> 
+                        <span class="material-symbols-outlined"> close </span> 
+                    </button>
+
+                    <button id="plannerEdit" class="information__button"> 
+                        <span class="material-symbols-outlined"> edit </span> 
+                    </button>
+                </div>
+            </aside>
+
         </section>
-    </body> 
+
+        <section id="calendarContainer" class="main main--hide">
+            <main class="main__section"> 
+                <div class="main__dates"> 
+                    <h1 class="main__title" id="calendarTitle"> Calendar </h1>
+                    
+                    <div>
+                        <button id="calendarAddInput" onclick="goToPreviousMonth()" type="button" class="inputs__month"> 
+                            <span class="material-symbols-outlined"> arrow_back </span>                
+                        </button>
+
+                        <button id="calendarAddInput" onclick="goToFollowingMonth()" type="button" class="inputs__month"> 
+                            <span class="material-symbols-outlined"> arrow_forward </span>                
+                        </button>
+                    </div>
+
+                </div>
+
+                <div id="calendarInterface" class="main__calendar">  <!-- Calendar appears here -->  </div>
+            </main>
+
+            <aside id="calendarInformation" class="main__information main__information--hide">    
+                <div>
+                    <h2> Date Details </h2>
+
+                    <div class="information__container">
+                        <h3> Date: </h3>
+                        <p id="calendarInformationDate"> </p>
+                    </div>
+
+                    <div class="information__container"> 
+                        <h3> Tasks: </h3>
+                        <div class="information__interface" id="calendarInformationTasks"> </div>
+                    </div>  
+                </div>
+
+                <div class="information__buttons">
+                    <button class="information__button" onclick="hideInformation('calendarInformation')"> 
+                        <span class="material-symbols-outlined"> close </span> 
+                    </button>
+                </div>
+            </aside>
+
+        </section>
+    </body>
+
+    <script src="script/script.js"> </script>
 </html>

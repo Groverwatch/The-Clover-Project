@@ -1,197 +1,617 @@
-/* Importing fonts and logos from Google.  */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Lusitana:wght@400;700&family=Merriweather:wght@300;400;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+/* These links import icons and fonts from Google Icons. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Lusitana:wght@400;700&family=Merriweather:wght@300;400;900&display=swap');  
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
 
-/* Setting Variables */
-:root {
-    --text: black;
-    --sidebar: white;
-    --main: #e2e7cd;
-    --secondary: white;
-    --error: #eebdbd;
-}
-
-/* General Properties */
+/*  */
 * {
-    margin: 0;
+    margin: 0px;
+    padding: 0px;
 }
 
-body {
-    color: var(--text);
-    background-color: var(--sidebar);    
-    font-weight: 400;
-    font-family: 'Lusitana', serif;
+html {
     height: 100%;
 }
 
-.flex {
-    display: flex;
+:root {
+    /* Primary colors the website. */
+    --primary: #F9EAEF;
+    --onPrimary: #444141;
+    --hoverOnPrimary: #ebd7d7;
+
+    --primaryContainer: #e0d0d5;
+    --hoverOnPrimaryContainer: #cfc3c7;
+    --selectOnPrimaryContainer: #e9c5d1;
+
+    /* Secondary colors of the website. */
+    --secondary: #FFF8F8;
+    --onSecondary: #2e2c2c;
+    --hoverOnSecondary: #F8EBEB;
+
+    --secondaryContainer: #eed0d0;
+    --onSecondaryContainer: #2e2c2c;
+    --placeholderOnSecondaryContainer: #474545;
+    --hoverOnSecondaryContainer: brightness(92%);
+    --selectOnSecondaryContainer: brightness(90%);
+
+    /* Teritary colors of the website */
+    --teritary: #F9EAEF;
+    --teritaryContainer: #F9EAEF;
 }
 
-/* Sidebar Styling */
-.sidebar {
-    padding: 20px 20px 20px 20px;
-    background-color: var(--sidebar);  
+body {
+    background-color: var(--primary);
+    color: var(--onPrimary);
     display: flex;
-    justify-content: space-between;  
+    height: 100%;
+    font-family: 'Lusitana', serif;
+}
+
+/* This section belongs to the sidebar that stores the planners and mode buttons. */
+.sidebar {
+    display: flex;
     flex-direction: column;
     flex: 1;
-}   
-
-.sidebar_title {
-    font-size: 40px;
-    color: var(--text);
-}
-
-/* Planner Styling */
-.planners {
-    height: 60%;
-}
-
-.planners_title {
-    font-size: 28px;
-    padding: 0px 0px 10px 0px;
-    color: var(--text);
-}
-
-.planners_checkbox {
-    width: 20px;
-    height: 20px;
-    margin: 0px 10px 10px 2px;
-    background-color: black;
-}
-
-.planners_name {
-    font-size: 18px;
-    color: var(--text);
-}
-
-/* Main Styling */
-.main {
-    background-color: var(--main);
-    color: var(--text);
-    padding: 30px 30px 30px 30px;
-    border-radius: 40px 0px 0px 40px;
-    display: flex;
-    flex: 3;
     justify-content: space-between;
-    flex-direction: column;
+    padding: 1.5rem;
 }
 
-.main_title {
-    padding: 10px 10px 10px 12px;
-    color: var(--text);
-    font-family: Inter;
+.sidebar__title {
+    font-size: 2.5em;
 }
 
-/* Task Styling */
-.task {
+/* This part stores the planner toggle buttons */
+.sidebar__planners {
+    height: 24em;
     overflow-y: scroll;
-    height: clamp(65%, 100%, 85%);
-}
-
-.task_container {
     display: flex;
-    justify-content: space-between;
-    padding: 10px 10px 10px 14px;
-    border-radius: 20px 20px 20px 20px;
+    flex-direction: column;
+    margin-left: -0.5em;
 }
 
-.task_subtitle {
-    display: inline-flex;
+.planners__container {
+    display: flex;
     align-items: center;
-    color: var(--text);
+    border-radius: 1em;
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+    padding: 0.3em;
 }
 
-.task_container:hover {
-    background-color: var(--main);
-    filter:brightness(95%);
+.planners__subtitle {
+    font-size: 1.1em;
 }
 
-.task_colour {
-    display: inline-block;
-    height: 10px;
-    width: 10px;
+.planners__container:hover {
+    background-color: var(--hoverOnPrimary);
+    transition: 0.3s;
+}
+
+.planners__checkbox {
+    height: 1.5em;
+    width: 1.5em;
+    accent-color: var(--onPrimary);
+    margin-right: 0.5rem;
+    margin-left: 0.2rem;
+}
+
+/* This part is about the buttons that changes mode for the website. */
+.sidebar__mode {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2em;
+}
+
+.mode__button {
+    background-color: var(--primaryContainer);
+    height: 1.5em;
+    width: 4.5em;
+    border-radius: 3em; 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.mode__button:hover {
+    background-color: var(--hoverOnPrimaryContainer);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+input[name="Mode"] {
+    display: none;
+}
+
+input[name="Mode"]:checked + .mode__button {
+    background-color: var(--selectOnPrimaryContainer);
+    transition: 0.3s;
+}
+
+/* This section belongs to the space holding all of the tasks, planners and calendar information. */
+.main {
+    flex: 4;
+    flex-direction: row;
+    border-radius: 3em;
+}
+
+.main--reveal {
+    transition: all 0.3s;
+    opacity: 100;
+    display: flex;
+}
+
+.main--hide {
+    transition: all 0.3s;
+    display: none;
+    opacity: 0;
+}
+
+.main__section {
     background-color: var(--secondary);
-    border-radius: 8px 8px 8px 8px;
-    margin: 0px 5px 0px 2px;
+    color: var(--onSecondary);
+    flex: 4;
+    padding: 2rem;
+    margin: 1em;
+    border-radius: 3em;
 }
 
-.task_button {
-    width: 40px;
-    height: 40px;
-    border-radius: 40px 40px 40px 40px;
+.main__title {
+    font-size: 1.5em;
+    font-family: 'Inter', sans-serif;
+    padding-left: 0.6em;
+}
+
+/* This section belongs to the single task / planner that is displayed across the task's interface */
+.main__tasks, .main__planners {
+    flex: 5;
+    height: 87%;
+    overflow-y: scroll;
+    margin-bottom: 1.5em;
+}
+
+.task__container, .planner__container {
     background-color: var(--secondary);
-}
-
-
-/* Inputs Styling */
-.inputs {
+    color: var(--onSecondary);
     display: flex;
     justify-content: space-between;
-    padding: 10px 10px 15px 10px;
-    margin: 5px 5px 5px 5px;
+    align-items: center;
+    padding: 0.5rem;
+    padding-left: 1em;
+    margin: 0.5em;
+    margin-left: 0em;
+    border-radius: 2rem;
 }
 
-.inputs_mode {
-    width: 80px;
-    height: 40px;
-    border-radius: 40px 0px 0px 40px;
-    background-color: var(--sidebar);
-    color: var(--text);
+.task__container:hover, .planner__container:hover{
+    background-color: var(--hoverOnSecondary);
+    transition: 0.3s;
+    cursor: pointer;
 }
 
-.inputs_text {
-    height: 40px;
-    width: 500px;
-    border-radius: 40px 0px 0px 40px;
-    background-color: var(--sidebar);
-    color: var(--text);
+.task__title, .planner__title {
+    font-size: 1.3em;
 }
 
-.inputs_color {
-    display: none;
-    width: 120px;
-    height: 40px;
-    padding: 5px 30px 5px 30px;
+.task__subtitle, .planner__subtitle, .information__subtitle, .interface__subtitle {
+    display: flex; 
+}
+
+.task__color, .planner__color, .information__color, .interface__color {
+    background-color: var(--onSecondary);
+    height: 1.1em; 
+    width: 1.1em;
+    border-radius: 1em;
+    margin-right: 0.3em;
+}
+
+.task__button, .planner__button {
+    background-color: var(--secondaryContainer);
+    height: 3em;
+    width: 3em;
+    border-radius: 3em; 
+    margin-left: 0.5em;
+    margin-right: 0.5em;
     border: none;
-    background-color: var(--sidebar);
-    color: var(--text);
+}
+
+.task__button:hover, .planner__button:hover {
+    filter: var(--hoverOnSecondaryContainer);
+    transition: 0.3s;
+}
+
+.task__button:active, .planner__button:active {
+    filter: var(--selectOnSecondaryContainer);
+    transition: 0.3s;
+}
+
+/* This section belongs to the calendar's interface. */
+.main__calendar {
+    height: 90%;
+    display: grid;
+    grid-gap: 0.3em;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 0.2fr repeat(6, 1fr);
+    margin-top: 1em;
+    margin-left: 0.6em;
+    background-color: var(--main);
+}
+
+.main__dates {
+    display: flex; 
+    justify-content: space-between;
+}
+
+.calendar__other, .calendar__date, .calendar__current {
+    text-align: left;
+    padding: 0.8rem;
+    border-radius: 1.5em;
+}
+
+.calendar__days {
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 1.5em;
+    background-color: var(--secondary);   
+}
+
+.calendar__other {
+    background-color: var(--teritary);
+}
+
+.calendar__date {
+    background-color: var(--secondaryContainer);
+    font-weight: 800;
+}
+
+.calendar__current {
+    background-color: var(--selectOnPrimaryContainer);
+    font-weight: 800;
+}
+
+.calendar__task {
+    height: 4em;
+}
+
+.calendar__name {
+    font-weight: normal;
+    font-size: 0.8em;
+    margin-top: 0.2em;
+    border-radius: 0.5em;
+    padding: 0.2em;
+    white-space: nowrap;
+}
+
+/* The information section that shows details about tasks, planners or days */
+.main__information {
+    background-color: var(--secondary);
+    color: var(--onSecondary);
+    overflow: hidden;
+    border-radius: 3em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.main__information--reveal {
+    transition: all 0.3s;
+    flex: 1;
+    opacity: 100;
+    padding: 2rem;
+    margin: 1em;
+    margin-left: 0em;
+}
+
+.main__information--hide {
+    transition: all 0.3s;
+    flex: 0;
+    opacity: 0;
+    padding: 0rem;
+    margin: 0em;
+}
+
+.information__buttons {
+    text-align: center;
+}
+
+.information__button {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+.information__container {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.information__interface {
+    height: 33em;
+    overflow-y: scroll;
+    margin-left: -0.5em 
+}
+
+.interface__container {
+    background-color: var(--secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 0.5em;
+    margin-bottom: 0.5em;
+    padding: 0.5em;
+    border-radius: 1.5em; 
+}
+
+.interface__container:hover {
+    background-color: var(--hoverOnSecondary);
+    transition: 0.3s;
+}
+
+.information__text {
+    background-color: var(--secondary);
+    font-family: 'Lusitana', serif;
+    border: none;
+    font-size: 1em;
+    width: 100%;
+}
+
+.information__text:focus-visible {
+    border: none;
+    outline: none;
+}
+
+.information__date {
+    background-color: var(--secondary);
+    font-family: 'Lusitana', serif;
+    border: none;
+    font-size: 1em;
+}
+
+.information__date::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
+.information__date:focus-visible {
+    border: none;
+    outline: none;
+}
+
+.information__select {
+    background-color: var(--secondary);
+    font-family: 'Lusitana', serif;
+    border: none;
+    font-size: 1em;
+    margin-left: -0.2em;
+    width: 100%;
+}
+   
+.information__color {
+    background-color: var(--secondary);
+    outline: none;
+    border: none;
+    width: 8em;    
+}
+
+.information__color::-webkit-color-swatch {
+    height: 1.5em;
+    width: 8em;    
+    border-radius: 1.5em;
+    outline: none;
+    border: none;
+}
+
+.information__color:hover {
+    filter: var(--hoverOnSecondaryContainer);
+    transition: 0.3s;
+    cursor: pointer;
+    border-radius: 2em;
+}
+
+.information__color:active {
+    filter: var(--selectOnSecondaryContainer);
+    transition: 0.3s;
+}
+
+.interface__button {
+    background-color: var(--secondaryContainer);
+    height: 2.5em;
+    width: 2.5em;
+    border-radius: 3em; 
+    border: none;
+}
+
+.task__button:hover, .planner__button:hover {
+    filter: var(--hoverOnSecondaryContainer);
+    transition: 0.3s;
+}
+
+.task__button:active, .planner__button:active {
+    filter: var(--selectOnSecondaryContainer);
+    transition: 0.3s;
+}
+
+
+/* This section belongs to the inputs that are under each mode.  */
+.main__inputs {
+    display: flex;
+    width: 50em;
+}
+
+.inputs__text {
+    width: 25em;
+    border-radius: 3em 3em 3em 3em;
+    background-color: var(--secondaryContainer);
+    padding-left: 1em;
+    margin-left: 0.7em;
+    font-family: 'Lusitana', serif;
+    font-size: 1em;
+    outline: none;
+    border: none;
+}
+
+.inputs__text::placeholder {
+    color: var(--placeholderOnSecondaryContainer);
+}
+
+.inputs__text:focus-visible {
+    filter: var(--selectOnSecondaryContainer);
+    transition: 0.3s;
+    outline: none;
+    border: none;
+}
+
+.inputs_date {
+    background-color: var(--secondaryContainer);
+    margin-left: 1em;
+    padding: 0.5em;
+    border-radius: 3em;
+    border: none;
+    outline: none;
+    width: 9em;
+    font-family: 'Lusitana', serif;
+    font-size: 0.9em;
+}
+
+.inputs_date:hover {
+    filter: var(--hoverOnSecondaryContainer);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.inputs_date:focus-visible {
+    filter: var(--selectOnSecondaryContainer);
+    transition: 0.3s;
 }
 
 .inputs_select {
-    height: 40px;
-    width: 120px;
+    background-color: var(--secondaryContainer);
+    margin-left: 0.8em;
+    margin-right: 0.8em;
+    padding: 0.5em;
+    border-radius: 3em;
+    border: none;
+    outline: none;
+    width: 9em;
+    font-family: 'Lusitana', serif;
+    font-size: 1em;
 }
 
-.inputs_add {
-    height: 40px;
-    width: 50px;
-    border-radius: 0px 40px 40px 0px;
-    background-color: var(--sidebar);
-    color: var(--text);
-    font-size: 18px;
+.inputs_select:hover {
+    filter: var(--hoverOnSecondaryContainer);
+    transition: 0.3s;
+    cursor: pointer;
 }
 
-.inputs_error {
-    height: 40px;
-    width: 340px;
-    justify-content: left;
-    align-items: center;
-    border-radius: 40px 40px 40px 40px;
-    margin: 0px 0px 0px 20px;
-    padding: 0px 0px 0px 15px;
-    background-color: var(--error);
-    color: var(--text);
-    display: none;
+.inputs__button, .information__button {
+    background-color: var(--secondaryContainer);
+    height: 3em;
+    width: 3em;
+    border-radius: 3em; 
+    border: none;
 }
 
-.mode {
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: white;
-    color: var(--sidebar);
+.inputs__button:hover, .information__button:hover {
+    filter: var(--hoverOnSecondaryContainer);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.inputs__button:focus-visible, .exit_button:focus-visible {
+    filter: var(--selectOnSecondaryContainer);
+    transition: 0.3s;
+}
+
+.inputs__button:active, .exit_button:active {
+    filter: var(--selectOnSecondaryContainer);
+    transition: 0.3s;
+}
+
+.inputs__color {
+    background-color: var(--secondaryContainer);
     height: 40px;
-    width: 90px;
+    width: 9em;
+    margin-left: 0.8em;
+    margin-right: 0.8em;
+    padding: 0.5em;
+    border-radius: 3em;
+    outline: none;
+    border: none;
+}
+
+.inputs__color::-webkit-color-swatch {
     border-radius: 40px;
+    border: none;
 }
+
+.inputs__color:hover {
+    filter: var(--hoverOnSecondaryContainer);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.inputs__color:active {
+    filter: var(--selectOnSecondaryContainer);
+    transition: 0.3s;
+}
+
+.inputs__month {
+    background-color: var(--secondaryContainer);
+    height: 2.5em;
+    width: 2.5em;
+    border-radius: 3em; 
+    border: none;
+    margin-left: 0.7em;
+    padding-top: 0.2em;
+}
+
+.inputs__month:hover {
+    filter: var(--hoverOnSecondaryContainer);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.inputs__month:active {
+    filter: var(--selectOnSecondaryContainer);
+    transition: 0.3s;
+}
+
+.input__day {
+    width: 25em;
+    border-radius: 3em;
+    background-color: var(--secondaryContainer);
+    margin-left: 0.7em;
+    padding-top: 0.6em;
+    font-family: 'Lusitana', serif;
+    font-size: 1em;
+    text-align: center;
+}
+
+.inputs__color:hover {
+    filter: var(--hoverOnSecondaryContainer);
+    transition: 0.3s;
+}
+
+.inputs__color:active {
+    filter: var(--selectOnSecondaryContainer);
+    transition: 0.3s;
+}
+
+/* This styling relates to the scrollbar on the side of the page. */
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: var(--primary); 
+}
+   
+::-webkit-scrollbar-thumb {
+    background: var(--primaryContainer); 
+    border-radius: 10px;
+}
+  
+::-webkit-scrollbar-thumb:hover {
+    background: var(--hoverOnPrimaryContainer); 
+}
+  
