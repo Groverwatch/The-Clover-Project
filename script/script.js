@@ -107,20 +107,14 @@ function loadFromStorage() {
     // If a planner does exist in the localStorage, then the website will gather the data from the storage and recreate it for the current session,
     if (storedPlanners != undefined) {
         for (let i = 0; i < storedPlanners.length; i++) {
-            let plannerName = storedPlanners[i].name;
-            let plannerColor = storedPlanners[i].color;
-
-            let newPlanner = new Planner(plannerName, plannerColor);
+            let newPlanner = new Planner(storedPlanners[i].name, storedPlanners[i].color);
             planners.push(newPlanner); 
         }
     }
 
     // If a planner does not exist, then create a new planner. 
     else {
-        let plannerName = `Example Planner`;
-        let plannerColor = `#00d5ff`;
-
-        let newPlanner = new Planner(plannerName, plannerColor);
+        let newPlanner = new Planner(`Example Planner`, `#00d5ff`);
         planners.push(newPlanner); 
     }
 
@@ -236,6 +230,7 @@ function addTask() {
     
     // The localStorage is refreshed with newest version of the tasks array. The display is updated and the storage is refreshed. 
     document.getElementById(`taskTextInput`).value = ``;
+    document.getElementById(`taskPlannerInput`).value = plannerName; 
     refreshStorage();
     toggleMode();
 }
@@ -454,8 +449,19 @@ function togglePlanner(checkbox) {
 // PLANNERS: This function deletes a planner based on the position of the task.
 function deletePlanner(plannerPosition) {
     let deleteAudio = new Audio('files/delete.mp3');
+
+    // If there is less than 0 planners after a planner is deleted, then the planner won't be deleted. 
+    if (planners.length - 1 <= 0) {
+        alert(`You must have at least one planner.`); 
+        return;
+    }
+
     deleteAudio.play();
 
+    // Filters the array to only have tasks without the current planner that is being deleted.
+    tasks = tasks.filter(task => !(task.getPlannerName() == planners[plannerPosition].getName())) 
+
+    // Deletes the planners from the array. 
     planners.splice(plannerPosition, 1);
 
     // The display is updated and the storage is refreshed.
@@ -589,6 +595,7 @@ function createTasksInPlannerInformation(task) {
 function displayCalendarOnMain(year, month) {
     let content = ``;
     totalDaysOnCalendar = 42;
+    
     // This function creates the days in the week such as 'Monday'.
     content = createDaysInWeek();
 
